@@ -4,9 +4,8 @@
              x:Class="cleanTable_Mobile.Views.BookingPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Home?" />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
