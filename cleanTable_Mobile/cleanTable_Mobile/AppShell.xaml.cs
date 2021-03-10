@@ -11,8 +11,9 @@ namespace cleanTable_Mobile
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            //Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
+            //Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            Shell.SetTabBarIsVisible(this, false);
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
