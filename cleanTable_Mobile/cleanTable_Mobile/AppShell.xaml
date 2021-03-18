@@ -19,13 +19,9 @@
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+              
             </Style>
-            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
-            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+         
 
             <!--
             Default Styles for all Flyout Items
@@ -80,10 +76,9 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Bookings" Icon="tab_booking.png" Route="BookingsPage" ContentTemplate="{DataTemplate local:BookingPage}" />
-        <ShellContent Title="About" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Help" Icon="tab_help.png" ContentTemplate="{DataTemplate local:HelpPage}" />
-        <ShellContent Title="Help" Icon="tab_help.png" ContentTemplate="{DataTemplate local:HelpPage}" />
+        <ShellContent Title="Bookings"  Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}" />
+        <ShellContent Title="About"  Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Help" Route="HelpPage" ContentTemplate="{DataTemplate local:HelpPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
