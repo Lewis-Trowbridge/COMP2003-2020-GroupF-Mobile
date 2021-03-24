@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using cleanTable_Mobile.Views;
-using cleanTable_Mobile.Models;
+using cleanTable_Mobile.Models.Requests;
 using Xamarin.Essentials;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -23,12 +23,10 @@ namespace cleanTable_Mobile.ViewModels
         private TimeSpan selectedTime;
         private int numberOfPeople;
 
+       
         public BookingViewModel()
         {
 
-            
-            
-           
             Title = "Bookings";
             client = new HttpClient();
 
@@ -37,10 +35,12 @@ namespace cleanTable_Mobile.ViewModels
             {
                 
                 //Set booking object
-                BookingModel booking = new BookingModel();
-                booking.setBookingSize(numberOfPeople);
-               // booking.setBoookingTime(selectedTime);
-                booking.setBookingDate(SelectedDate.Date.Add(selectedTime)); //adds time to datetime 
+                CreateBookingRequest booking = new CreateBookingRequest();
+                booking.BookingSize = numberOfPeople;
+   
+                booking.BookingDateTime = SelectedDate.Date.Add(selectedTime); //adds time to datetime 
+                booking.CustomerId = 24; //hardcoded
+                booking.VenueTableId = 1;
 
 
 
@@ -50,40 +50,18 @@ namespace cleanTable_Mobile.ViewModels
                 UriBuilder uri = new UriBuilder();
 
                 uri.Host = "web.socem.plymouth.ac.uk";
-                uri.Scheme = "https://";
-                uri.Path = "api/api/venue/booktable";
-                var request = new HttpRequestMessage(HttpMethod.Post, JsonData);
+                uri.Scheme = "http";
+                uri.Path = "/COMP2003/COMP2003_F/api/api/venues/booktable";
+              
 
-                HttpResponseMessage response = await client.GetAsync(uri.Uri);
+                HttpResponseMessage response = await client.PostAsync(uri.Uri, content);
 
-                response.EnsureSuccessStatusCode();
                
-
                 Console.WriteLine(response.Headers.Location);
-
-
-                //response = null;
-                
-                //    response = await client.PostAsync("/api/api", content);
-             
-
-                
-
-              
-
-                Debug.WriteLine(response.ToString());
-                
-
-                
                
 
-                //Debug.WriteLine(SelectedDate.ToString());
-                //Debug.WriteLine(SelectedTime.ToString());
-                //Debug.WriteLine(numberOfPeople.ToString());
 
-                    
-              
-              
+
             });
         }
        

@@ -48,6 +48,7 @@ namespace cleanTable_Mobile.Views
             {
                 lblTableNumb.Text = (string)picker.ItemsSource[selectedIndex];
             }
+            
         }
         //async void ButtonClicked(object sender, EventArgs e)
         //{
