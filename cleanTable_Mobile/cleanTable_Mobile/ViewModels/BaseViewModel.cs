@@ -26,6 +26,7 @@ namespace cleanTable_Mobile.ViewModels
             get { return title; }
             set { SetProperty(ref title, value); }
         }
+        
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",

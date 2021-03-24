@@ -30,6 +30,7 @@ namespace cleanTable_Mobile.Views
 
             InitializeComponent();
             this.BindingContext = new BookingViewModel();
+            
         }
         void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
         {
@@ -48,12 +49,20 @@ namespace cleanTable_Mobile.Views
                 lblTableNumb.Text = (string)picker.ItemsSource[selectedIndex];
             }
         }
-        async void ButtonClicked(object sender, EventArgs e)
-        {
-            // await Navigation.PushAsync(new VenuePage());
-            await Shell.Current.GoToAsync("AboutPage");
-            //Shell.Current.CurrentItem.CurrentItem.Items.Add(new VenuePage());
-            //Shell.Current.CurrentItem.CurrentItem.Items.RemoveAt(0);
-        }
+        //async void ButtonClicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new VenuePage());
+        //    await Shell.Current.GoToAsync("AboutPage");
+        //    Shell.Current.CurrentItem.CurrentItem.Items.Add(new VenuePage());
+        //    Shell.Current.CurrentItem.CurrentItem.Items.RemoveAt(0);
+        //}
+
+        //private void Button_Clicked(object sender, EventArgs e)
+        //{
+          
+        //}
+
+       
+       
     }
 }

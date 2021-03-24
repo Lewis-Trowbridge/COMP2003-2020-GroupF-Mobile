@@ -6,9 +6,10 @@ namespace cleanTable_Mobile.Models
 {
     class BookingModel
     {
-        private int BookingId;
-        private DateTime BookingTime;
-        private int BookingSize;
+      public int BookingId;
+        ////public TimeSpan BookingTime;
+        public int BookingSize;
+        public DateTime BookingDate;
 
         //getters
         public int getBookingID()
@@ -16,11 +17,15 @@ namespace cleanTable_Mobile.Models
             return BookingId;
         }
 
-        public DateTime getBookingTime()
-        {
-            return BookingTime;
-        }
+        //public TimeSpan getBookingTime()
+        //{
+        //    return BookingTime;
+        //}
 
+        public DateTime getBooingDate()
+        {
+            return BookingDate;
+        }
         public int getBookingSize()
         {
             return BookingSize;
@@ -33,14 +38,19 @@ namespace cleanTable_Mobile.Models
             BookingId = BookId;
         }
 
-        public void setBoookingTime(DateTime BookTime)
-        {
-            BookingTime = BookTime;
-        }
+        //public void setBoookingTime(TimeSpan BookTime)
+        //{
+        //    BookingTime = BookTime;
+        //}
 
         public void setBookingSize(int BookSize)
         {
             BookingSize = BookSize;
+        }
+        
+        public void setBookingDate(DateTime BookDate)
+        {
+            BookingDate = BookDate;
         }
 
         
