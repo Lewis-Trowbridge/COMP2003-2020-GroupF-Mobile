@@ -34,19 +34,11 @@
                Text="Table Number: " HorizontalOptions="Center" FontAttributes="Bold"
                FontSize="14"
                TextColor="Black"/>
-        <Picker Title="Choose a Table" TextColor="Black">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String >Please choose a table</x:String>
-                    <x:String>Baboon</x:String>
-                    <x:String>Capuchin Monkey</x:String>
-                    <x:String>Blue Monkey</x:String>
-                    <x:String>Squirrel Monkey</x:String>
-                    <x:String>Golden Lion Tamarin</x:String>
-                    <x:String>Howler Monkey</x:String>
-                    <x:String>Japanese Macaque</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
+        <Picker Title="Choose a Table" TextColor="Black"
+                ItemsSource="{Binding TableList}"
+                ItemDisplayBinding="{Binding TableNumber}"
+                SelectedItem="{Binding SelectedIndexTable, Mode=TwoWay}">
+            
         </Picker>
         <Button x:Name="btnSend"
                 Text="Send" HorizontalOptions="Center"

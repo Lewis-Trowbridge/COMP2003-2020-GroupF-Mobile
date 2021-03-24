@@ -1,50 +1,90 @@
-﻿using System;
-using System.Net;
+﻿using cleanTable_Mobile.Models.Requests;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using cleanTable_Mobile.Views;
-using cleanTable_Mobile.Models.Requests;
-using Xamarin.Essentials;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
-
-using System.Diagnostics;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace cleanTable_Mobile.ViewModels
 {
     class BookingViewModel : BaseViewModel
     {
-        private HttpClient client;
-        private TimeSpan selectedTime;
-        private int numberOfPeople;
+        private HttpClient _client;
+        private TimeSpan _selectedTime;
+        private int _numberOfPeople;
+        private int _tableChosen;
 
-       
+        public DateTime SelectedDate { get; set; }
+        private Tables _selectedIndexTable { get; set; }
+        public List<Tables> TableList { get; set; }
+        public List<Tables> GetTables()
+        {
+            var Tables = new List<Tables>()
+            {
+                new Tables(){TableId = 1, TableNumber = 1, TableCapacity = 2},
+                new Tables(){TableId = 2, TableNumber = 2, TableCapacity = 4},
+                new Tables(){TableId = 3, TableNumber = 5, TableCapacity = 6}
+            };
+            return Tables;
+        }
+
+        public Tables SelectedIndexTable
+        {
+            get { return _selectedIndexTable; }
+            set
+            {
+                if (_selectedIndexTable != value)
+                {
+                    _selectedIndexTable = value;
+                    _tableChosen = value.TableId;
+
+                }
+            }
+        }
+
+        public int TableChosen
+        {
+            get
+            {
+                return _tableChosen;
+            }
+            set
+            {
+                if (_tableChosen != value)
+                {
+                    _tableChosen = value;
+                    OnPropertyChanged("tableChosen");
+                }
+            }
+        }
+
         public BookingViewModel()
         {
-
             Title = "Bookings";
-            client = new HttpClient();
 
-           
+            TableList = GetTables().OrderBy(t => t.TableNumber).ToList();
+
+            _client = new HttpClient();
+
             SendRequest = new Command(async () =>
             {
-                
+
                 //Set booking object
                 CreateBookingRequest booking = new CreateBookingRequest();
-                booking.BookingSize = numberOfPeople;
-   
-                booking.BookingDateTime = SelectedDate.Date.Add(selectedTime); //adds time to datetime 
+                booking.BookingSize = _numberOfPeople;
+
+                booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
                 booking.CustomerId = 24; //hardcoded
-                booking.VenueTableId = 1;
+                booking.VenueTableId = _tableChosen;
 
 
 
-                
+
                 string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
                 StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
                 UriBuilder uri = new UriBuilder();
@@ -52,30 +92,29 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Host = "web.socem.plymouth.ac.uk";
                 uri.Scheme = "http";
                 uri.Path = "/COMP2003/COMP2003_F/api/api/venues/booktable";
-              
 
-                HttpResponseMessage response = await client.PostAsync(uri.Uri, content);
 
-               
+                HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
+
+
                 Console.WriteLine(response.Headers.Location);
-               
+
 
 
 
             });
         }
-       
-        public DateTime SelectedDate { get; set; }
+
 
         public TimeSpan SelectedTime
         {
             get
             {
-                return this.selectedTime;
+                return this._selectedTime;
             }
             set
             {
-                this.selectedTime = value;
+                this._selectedTime = value;
                 OnPropertyChanged("SelectedTime");
             }
         }
@@ -84,18 +123,23 @@ namespace cleanTable_Mobile.ViewModels
         {
             get
             {
-                return this.numberOfPeople;
+                return (int)this._numberOfPeople;
             }
             set
             {
-                this.numberOfPeople = value;
+                this._numberOfPeople = value;
                 OnPropertyChanged("NumberOfPeople");
             }
         }
+        public class Tables
+        {
+            public int TableId { get; set; }
+            public int TableNumber { get; set; }
+            public int TableCapacity { get; set; }
+
+        }
 
         public ICommand SendRequest { private set; get; }
+
     }
-
-
 }
-
