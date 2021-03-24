@@ -12,7 +12,7 @@ namespace cleanTable_Mobile.ViewModels
         {
             Title = "Help";
         }
-        public ICommand OpenWebCommand { get; }
+       
     }
 
 }

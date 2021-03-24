@@ -10,9 +10,8 @@ namespace cleanTable_Mobile.ViewModels
         public AboutViewModel()
         {
             Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamain-quickstart"));
+
         }
 
-        public ICommand OpenWebCommand { get; }
     }
 }

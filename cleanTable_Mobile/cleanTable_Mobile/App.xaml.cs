@@ -1,8 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using cleanTable_Mobile.Services;
-using cleanTable_Mobile.Views;
+﻿using Xamarin.Forms;
 
 namespace cleanTable_Mobile
 {
@@ -13,7 +9,7 @@ namespace cleanTable_Mobile
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            
             MainPage = new AppShell();
         }
 
