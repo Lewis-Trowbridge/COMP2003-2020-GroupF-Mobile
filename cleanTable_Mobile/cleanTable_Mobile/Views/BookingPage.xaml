@@ -2,14 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="cleanTable_Mobile.Views.BookingPage"
-             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels" xmlns:sys="clr-namespace:System;assembly=netstandard" x:DataType="vm:BookingViewModel"
+             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels" xmlns:sys="clr-namespace:System;assembly=netstandard"
              Title="{Binding Title}">
-
+    
+    <ContentPage.BindingContext>
+        <vm:BookingViewModel />
+    </ContentPage.BindingContext>
+    
+           
     <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10" IsClippedToBounds="True">
 
         <Label Text="Booking for Subway" FontSize="16" Padding="0,0,0,0" FontAttributes="Bold" TextColor="Black"/>
 
-         
         <DatePicker MinimumDate="{x:Static sys:DateTime.Now}" 
                     MaximumDate="12/31/2021" 
                     Format="dd/MM/yyyy" 
@@ -25,6 +29,7 @@
         <Label x:Name="displayLabel"
                Text="Party Size: " HorizontalOptions="Center" FontAttributes="Bold"
                FontSize="14" TextColor="Black"/>
+        
         <Slider Minimum="0" Maximum="6" 
                 MinimumTrackColor="Black" MaximumTrackColor="Black"
                     ValueChanged="OnSliderValueChanged" 
@@ -34,12 +39,12 @@
                Text="Table Number: " HorizontalOptions="Center" FontAttributes="Bold"
                FontSize="14"
                TextColor="Black"/>
+
         <Picker Title="Choose a Table" TextColor="Black"
                 ItemsSource="{Binding TableList}"
                 ItemDisplayBinding="{Binding TableNumber}"
-                SelectedItem="{Binding SelectedIndexTable, Mode=TwoWay}">
-            
-        </Picker>
+                SelectedItem="{Binding SelectedIndexTable, Mode=TwoWay}" />
+        
         <Button x:Name="btnSend"
                 Text="Send" HorizontalOptions="Center"
                 FontSize="14"
@@ -47,6 +52,6 @@
                 Command="{Binding SendRequest}">
         </Button>
     </StackLayout>
-
-
+           
+       
 </ContentPage>

@@ -10,7 +10,6 @@
     
         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
-
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -19,9 +18,9 @@
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-              
+
             </Style>
-         
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
 
             <!--
             Default Styles for all Flyout Items
@@ -76,10 +75,12 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Bookings"  Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}" />
-        <ShellContent Title="About"  Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Help" Route="HelpPage" ContentTemplate="{DataTemplate local:HelpPage}" />
+        <ShellContent Title="Home" Route="Homepage" ContentTemplate="{DataTemplate local:Homepage}" />
+        <ShellContent Title="Bookings" Route="BookingsPage" ContentTemplate="{DataTemplate local:BookingPage}" />
+        <ShellContent Title="About" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Help" ContentTemplate="{DataTemplate local:HelpPage}" />
     </FlyoutItem>
+
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">

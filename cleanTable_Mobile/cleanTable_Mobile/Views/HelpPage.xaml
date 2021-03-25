@@ -7,10 +7,9 @@
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Label Text="fucking hell" FontSize="Large"/>
+            
+            <Label Text="FUCK" />
         </StackLayout>
     </ContentPage.Content>
-    <ContentView>
-        
-    </ContentView>
+
 </ContentPage>

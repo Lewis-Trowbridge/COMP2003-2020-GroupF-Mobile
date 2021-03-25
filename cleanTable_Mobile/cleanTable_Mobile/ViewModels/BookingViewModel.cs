@@ -42,7 +42,7 @@ namespace cleanTable_Mobile.ViewModels
                 {
                     _selectedIndexTable = value;
                     _tableChosen = value.TableId;
-
+                    
                 }
             }
         }
@@ -103,6 +103,7 @@ namespace cleanTable_Mobile.ViewModels
 
 
             });
+          
         }
 
 

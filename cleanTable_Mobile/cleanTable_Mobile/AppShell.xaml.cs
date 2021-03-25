@@ -11,6 +11,9 @@ namespace cleanTable_Mobile
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(Homepage), typeof(Homepage));
+            Routing.RegisterRoute(nameof(VenuePage), typeof(VenuePage));
+            Routing.RegisterRoute(nameof(BookingPage), typeof(BookingPage));
             Shell.SetTabBarIsVisible(this, false);
             Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
 

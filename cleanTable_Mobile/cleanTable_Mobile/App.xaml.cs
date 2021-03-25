@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using cleanTable_Mobile.Views;
 
@@ -11,8 +10,6 @@ namespace cleanTable_Mobile
         public App()
         {
             InitializeComponent();
-
-
             MainPage = new AppShell();
         }
 

@@ -29,15 +29,16 @@ namespace cleanTable_Mobile.Views
             picker.ItemsSource = TableList;
 
             InitializeComponent();
-            this.BindingContext = new BookingViewModel();
             
         }
+
         void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
         {
             double value = args.NewValue;
             value = Convert.ToInt32(value);
             displayLabel.Text = String.Format("Party Size: {0}", value);
         }
+
         void OnPickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
@@ -50,20 +51,10 @@ namespace cleanTable_Mobile.Views
             }
             
         }
-        //async void ButtonClicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new VenuePage());
-        //    await Shell.Current.GoToAsync("AboutPage");
-        //    Shell.Current.CurrentItem.CurrentItem.Items.Add(new VenuePage());
-        //    Shell.Current.CurrentItem.CurrentItem.Items.RemoveAt(0);
-        //}
 
-        //private void Button_Clicked(object sender, EventArgs e)
-        //{
-          
-        //}
-
-       
-       
+         async void ButtonCancel(object sender, EventArgs e)
+        {
+            await Navigation.PopToRootAsync();
+        }
     }
 }
