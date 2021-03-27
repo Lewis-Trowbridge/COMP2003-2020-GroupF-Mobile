@@ -19,7 +19,8 @@ namespace cleanTable_Mobile.Views
         }
         async void ButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new BookingPage());
+            //  await Shell.Current.GoToAsync($"{nameof(BookingPage)}");
+            await ((Shell)Application.Current.MainPage).GoToAsync($"//Homepage/VenuePage/BookingPage");
         }
         async void ButtonCancel(object sender, EventArgs e)
         {

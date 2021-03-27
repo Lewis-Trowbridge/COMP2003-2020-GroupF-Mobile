@@ -18,7 +18,8 @@ namespace cleanTable_Mobile.Views
         }
         async void ButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"{nameof(VenuePage)}");
+           // await Shell.Current.GoToAsync($"{nameof(VenuePage)}");
+            await ((Shell)Application.Current.MainPage).GoToAsync($"//Homepage/VenuePage");
 
         }
     }
