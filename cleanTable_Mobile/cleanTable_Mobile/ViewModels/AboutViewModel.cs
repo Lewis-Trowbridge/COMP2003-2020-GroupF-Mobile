@@ -5,14 +5,13 @@ using Xamarin.Forms;
 
 namespace cleanTable_Mobile.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class AboutViewModel: BaseViewModel
     {
         public AboutViewModel()
         {
-            Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamain-quickstart"));
+           Title = "About";
+           OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamain-quickstart"));
         }
-
         public ICommand OpenWebCommand { get; }
     }
 }

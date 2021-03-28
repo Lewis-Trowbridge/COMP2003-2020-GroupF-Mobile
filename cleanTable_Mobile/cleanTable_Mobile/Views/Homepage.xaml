@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="cleanTable_Mobile.Views.Homepage"
+             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:HomepageViewModel />
+    </ContentPage.BindingContext>
+
+
+    <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+
+        <Label Text="Please see venues below to start your booking!" FontSize="16" Padding="0,0,0,0"/>
+
+        <Button Margin="0,10,0,0" Text="Subway"
+                     Clicked="ButtonClicked"
+                     BackgroundColor="{StaticResource Primary}"
+                     TextColor="White" />
+
+    </StackLayout>
+    
+</ContentPage>

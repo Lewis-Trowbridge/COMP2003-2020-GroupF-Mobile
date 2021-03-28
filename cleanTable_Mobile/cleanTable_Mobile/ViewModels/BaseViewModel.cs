@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Xamarin.Forms;
-
-using cleanTable_Mobile.Models;
-using cleanTable_Mobile.Services;
-
 namespace cleanTable_Mobile.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+
 
         bool isBusy = false;
         public bool IsBusy
@@ -22,11 +17,15 @@ namespace cleanTable_Mobile.ViewModels
         }
 
         string title = string.Empty;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string Title
         {
             get { return title; }
             set { SetProperty(ref title, value); }
         }
+        
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",
@@ -41,16 +40,9 @@ namespace cleanTable_Mobile.ViewModels
             return true;
         }
 
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
     }
 }

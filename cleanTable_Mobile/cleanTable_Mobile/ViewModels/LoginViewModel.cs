@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace cleanTable_Mobile.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel
     {
         public Command LoginCommand { get; }
 

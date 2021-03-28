@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="cleanTable_Mobile.Views.VenuePage"
+             Title="{Binding Title}">
+    <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+
+        <Label Text="Subway" FontSize="18" Padding="0,0,0,0" HorizontalOptions="Center" FontAttributes="Bold"/>
+        <Label Text="Armada Way, Plymouth, PL1 1LB" FontSize="18" Padding="0,0,0,0" HorizontalOptions="Center" FontAttributes="Bold"/>
+        <!--map goes here- when ready-->
+        <Button Margin="0,10,0,0" Text="Book Here"
+                     Clicked="ButtonClicked"
+                     BackgroundColor="{StaticResource Primary}"
+                     TextColor="White" />
+       
+        <Button Margin="0,10,0,0" Text="Cancel"
+                     Clicked="ButtonCancel"
+                     BackgroundColor="{StaticResource Primary}"
+                     TextColor="White" />
+    </StackLayout>
+</ContentPage>
