@@ -1,4 +1,5 @@
 ﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -98,6 +99,9 @@ namespace cleanTable_Mobile.ViewModels
 
 
                 Console.WriteLine(response.Headers.Location);
+
+
+              
 
 
 

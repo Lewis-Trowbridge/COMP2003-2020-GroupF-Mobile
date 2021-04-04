@@ -29,7 +29,7 @@ namespace cleanTable_Mobile.ViewModels
             CreateRequest = new Command(async () =>
             {
 
-                //Set booking object
+                //Set Account object
                 CreateAccountRequest createAccount = new CreateAccountRequest();
                 
                 createAccount.CustomerName = _firstName + " " +_lastName;

@@ -11,7 +11,6 @@ namespace cleanTable_Mobile
         {
             InitializeComponent();
             MainPage = new AppShell();
-            
         }
 
 

@@ -16,21 +16,11 @@ namespace cleanTable_Mobile
             Routing.RegisterRoute(nameof(BookingPage), typeof(BookingPage));
             Shell.SetTabBarIsVisible(this, false);
             Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
-
-
-
-
-            
-           
-
-
-
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
-         
+            await Shell.Current.GoToAsync("//LoginPage");         
         }
     }
 }
