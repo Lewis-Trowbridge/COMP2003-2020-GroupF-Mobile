@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
+             x:Class="cleanTable_Mobile.Views.BookingView" Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:BookingPageViewModel />
+    </ContentPage.BindingContext>
+
+
+    <Grid Padding="15,0,15,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        
+        <Label Text="Venue Name: " Grid.Row="0" Grid.Column="0" FontAttributes="Bold"
+               FontSize="14"
+               TextColor="Black"/>
+        <Label Text="{Binding VenueName}" Grid.Row="0" Grid.Column="1" 
+               FontSize="14"
+               TextColor="Black"/>
+        
+        <Label Text="Address: " Grid.Row="1" Grid.Column="0" FontAttributes="Bold"
+               FontSize="14"
+               TextColor="Black"/>
+        <Label Text="{Binding VenueAddress}" Grid.Row="1" Grid.Column="1"
+               FontSize="14"
+               TextColor="Black"/>
+        
+        <Label Text="Date and Time: " Grid.Row="2" Grid.Column="0" FontAttributes="Bold"
+               FontSize="14"
+               TextColor="Black"/>
+        <Label Text="{Binding BookDateTime}" Grid.Row="2" Grid.Column="1"
+               FontSize="14"
+               TextColor="Black"/>
+        
+        <Label Text="Party Size: " Grid.Row="3" Grid.Column="0" FontAttributes="Bold"
+               FontSize="14"
+               TextColor="Black"/>
+        <Label Text="{Binding BookPartySize}"  Grid.Row="3" Grid.Column="1" 
+               FontSize="14"
+               TextColor="Black"/>
+        
+        <Label Text="Table Number: "  Grid.Row="4" Grid.Column="0"  FontAttributes="Bold"
+               FontSize="14"
+               TextColor="Black"/>
+        <Label Text="5 "  Grid.Row="4" Grid.Column="1" 
+               FontSize="14"
+               TextColor="Black"/>
+
+
+        <Button Margin="0,10,0,0" Text="Homepage"
+                Clicked="ButtonCancel"
+                Grid.Row="5" 
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White" />
+    </Grid>
+
+</ContentPage>

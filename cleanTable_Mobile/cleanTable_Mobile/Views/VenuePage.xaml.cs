@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,7 +15,8 @@ namespace cleanTable_Mobile.Views
         async void ButtonClicked(object sender, EventArgs e)
         {
             //  await Shell.Current.GoToAsync($"{nameof(BookingPage)}");
-            await ((Shell)Application.Current.MainPage).GoToAsync($"//Homepage/VenuePage/BookingPage");
+           // await ((Shell)Application.Current.MainPage).GoToAsync($"//Homepage/VenuePage/BookingPage");
+            await Navigation.PushAsync(new BookingPage());
         }
         async void ButtonCancel(object sender, EventArgs e)
         {
