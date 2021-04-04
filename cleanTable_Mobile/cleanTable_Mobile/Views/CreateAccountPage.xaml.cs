@@ -10,18 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Homepage : ContentPage
+    public partial class CreateAccountPage : ContentPage
     {
-        public Homepage()
+        public CreateAccountPage()
         {
             InitializeComponent();
-        }
-        async void ButtonClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync($"{nameof(VenuePage)}");
-
-            
-
         }
     }
 }

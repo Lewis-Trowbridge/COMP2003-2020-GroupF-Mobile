@@ -19,6 +19,12 @@ namespace cleanTable_Mobile
 
 
 
+
+            
+           
+
+
+
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
