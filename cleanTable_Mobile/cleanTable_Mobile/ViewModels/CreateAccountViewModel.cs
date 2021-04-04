@@ -18,8 +18,6 @@ namespace cleanTable_Mobile.ViewModels
         private string _username;
         private string _password;
 
-       
-
         public CreateAccountViewModel()
         {
             Title = "Create Account";
@@ -37,9 +35,6 @@ namespace cleanTable_Mobile.ViewModels
                 createAccount.CustomerUserName = _username;
                 createAccount.CustomerPassword = _password;
             
-
-
-
                 string JsonData = JsonConvert.SerializeObject(createAccount); //converts booking object to Json format
                 StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
                 UriBuilder uri = new UriBuilder();
@@ -48,16 +43,9 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Scheme = "http";
                 uri.Path = "/COMP2003/COMP2003_F/api/api/customers/create";
 
-
                 HttpResponseMessage response = await _clientC.PostAsync(uri.Uri, content);
 
-
                 Console.WriteLine(response.Headers.Location);
-
-                
-
-
-
 
             });
         }

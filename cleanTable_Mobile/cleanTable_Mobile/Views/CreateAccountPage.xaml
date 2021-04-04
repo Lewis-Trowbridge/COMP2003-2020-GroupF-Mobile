@@ -85,9 +85,6 @@
                 TextColor="Black"
                 Command="{Binding CreateRequest}">
             </Button>
-
-
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
