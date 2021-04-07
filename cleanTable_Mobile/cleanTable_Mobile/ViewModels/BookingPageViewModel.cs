@@ -37,7 +37,7 @@ namespace cleanTable_Mobile.ViewModels
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
             
             GetBookingView book = JsonConvert.DeserializeObject<GetBookingView>(await message.Content.ReadAsStringAsync());
-
+          
             VenueName = book.VenueName;
             VenueAddress = book.AddLineOne + "\n"
                          + book.AddLineTwo + "\n"

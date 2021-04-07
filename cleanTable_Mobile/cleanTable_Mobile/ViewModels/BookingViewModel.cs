@@ -75,19 +75,15 @@ namespace cleanTable_Mobile.ViewModels
 
             SendRequest = new Command(async () =>
             {
-
-
                 bool answer = await App.Current.MainPage.DisplayAlert("Question?", "Please Confirm your Booking" + "\n"
                     + "Venue : Subway" + "\n"
                     + "Date & Time: " + SelectedDate.Date.Add(_selectedTime).ToString() + "\n"
                     + "Party Size : " + NumberOfPeople.ToString() + "\n"
                     + "Table Chosen : " + TableChosen.ToString(),
                     "Confirm", "Cancel");
-                Debug.WriteLine("Answer: " + answer);
-
+                
                 if (answer == true)
                 {
-                    Debug.WriteLine("IT WORKED");
                     //Set booking object
                     CreateBookingRequest booking = new CreateBookingRequest();
                     booking.BookingSize = _numberOfPeople;
@@ -115,7 +111,6 @@ namespace cleanTable_Mobile.ViewModels
             });
 
         }
-
 
         public TimeSpan SelectedTime
         {

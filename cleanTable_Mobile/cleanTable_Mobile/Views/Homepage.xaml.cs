@@ -22,5 +22,9 @@ namespace cleanTable_Mobile.Views
             await ((Shell)Application.Current.MainPage).GoToAsync($"//Homepage/VenuePage");
 
         }
+        async void DeleteClicked(object sender, EventArgs e)
+        {
+            await ((Shell)Application.Current.MainPage).GoToAsync($"//Homepage/CustomerDelete");
+        }
     }
 }

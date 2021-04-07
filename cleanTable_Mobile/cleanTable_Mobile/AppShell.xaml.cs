@@ -16,6 +16,7 @@ namespace cleanTable_Mobile
             Routing.RegisterRoute(nameof(BookingPage), typeof(BookingPage));
             Routing.RegisterRoute(nameof(BookingView), typeof(BookingView));
             Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
+            Routing.RegisterRoute(nameof(CustomerDelete), typeof(CustomerDelete));
             Shell.SetTabBarIsVisible(this, false);
 
 
