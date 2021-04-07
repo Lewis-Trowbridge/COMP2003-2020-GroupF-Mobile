@@ -1,4 +1,5 @@
 ﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -83,8 +84,6 @@ namespace cleanTable_Mobile.ViewModels
                 booking.VenueTableId = _tableChosen;
 
 
-
-
                 string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
                 StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
                 UriBuilder uri = new UriBuilder();
@@ -93,15 +92,9 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Scheme = "http";
                 uri.Path = "/COMP2003/COMP2003_F/api/api/venues/booktable";
 
-
                 HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
-
                 Console.WriteLine(response.Headers.Location);
-
-
-
-
             });
           
         }
