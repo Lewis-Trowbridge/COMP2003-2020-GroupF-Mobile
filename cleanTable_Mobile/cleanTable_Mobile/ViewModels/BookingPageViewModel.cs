@@ -24,7 +24,7 @@ namespace cleanTable_Mobile.ViewModels
 
             _client = new HttpClient();
 
-            GetBooking(34); //hard coded for now
+            GetBooking(54); //hard coded for now
 
         }           
         public async void GetBooking(int BookingID)
@@ -37,7 +37,7 @@ namespace cleanTable_Mobile.ViewModels
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
             
             GetBookingView book = JsonConvert.DeserializeObject<GetBookingView>(await message.Content.ReadAsStringAsync());
-          
+            Debug.WriteLine(await message.Content.ReadAsStringAsync());
             VenueName = book.VenueName;
             VenueAddress = book.AddLineOne + "\n"
                          + book.AddLineTwo + "\n"
@@ -46,7 +46,7 @@ namespace cleanTable_Mobile.ViewModels
                          + book.VenuePostcode;
             BookDateTime = book.BookingTime;
             BookPartySize = book.BookingSize;
-            BookTable = book.BookingTable;
+            BookTable = book.VenueTableNum;
         }
 
         public string VenueName
