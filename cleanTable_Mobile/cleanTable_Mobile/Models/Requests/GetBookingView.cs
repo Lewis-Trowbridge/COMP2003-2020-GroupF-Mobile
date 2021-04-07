@@ -9,6 +9,7 @@ namespace cleanTable_Mobile.Models.Requests
         public int BookingID { get; set; }
         public DateTime BookingTime { get; set; }
         public int BookingSize { get; set; }
+        public int BookingTable { get; set; }
         public bool BookingAttended { get; set; }
         public int CustomerID { get; set; }
         public int VenueID { get; set; }

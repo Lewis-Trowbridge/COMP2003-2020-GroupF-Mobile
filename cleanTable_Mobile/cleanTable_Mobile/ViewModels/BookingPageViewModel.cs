@@ -16,6 +16,7 @@ namespace cleanTable_Mobile.ViewModels
         private string _venueAddress;
         private DateTime _bookDateTime;
         private int _bookPartySize;
+        private int _bookTable;
 
         public BookingPageViewModel()
         {
@@ -45,6 +46,7 @@ namespace cleanTable_Mobile.ViewModels
                          + book.VenuePostcode;
             BookDateTime = book.BookingTime;
             BookPartySize = book.BookingSize;
+            BookTable = book.BookingTable;
         }
 
         public string VenueName
@@ -93,6 +95,18 @@ namespace cleanTable_Mobile.ViewModels
             {
                 _bookPartySize = value;
                 OnPropertyChanged("BookPartySize");
+            }
+        }
+        public int BookTable
+        {
+            get
+            {
+                return _bookTable;
+            }
+            set
+            {
+                _bookTable = value;
+                OnPropertyChanged("BookTable");
             }
         }
     }

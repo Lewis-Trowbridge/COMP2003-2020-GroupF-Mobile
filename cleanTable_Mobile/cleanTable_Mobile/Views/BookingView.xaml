@@ -50,7 +50,7 @@
         <Label Text="Table Number: "  Grid.Row="4" Grid.Column="0"  FontAttributes="Bold"
                FontSize="14"
                TextColor="Black"/>
-        <Label Text="5 "  Grid.Row="4" Grid.Column="1" 
+        <Label Text="{Binding BookTable}"  Grid.Row="4" Grid.Column="1" 
                FontSize="14"
                TextColor="Black"/>
 
