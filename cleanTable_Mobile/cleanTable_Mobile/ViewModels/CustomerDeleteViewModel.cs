@@ -26,7 +26,7 @@ namespace cleanTable_Mobile.ViewModels
                 "Confirm", "Cancel");
                 if (answer == true)
                 {
-                    GetCustomer(_customerID);
+                    DeleteCustomer(_customerID);
                 }
                 else
                 {
@@ -34,7 +34,7 @@ namespace cleanTable_Mobile.ViewModels
                 }
             });
         }
-        public async void GetCustomer(int customerID)
+        private async void DeleteCustomer(int customerID)
         {
             UriBuilder uri = new UriBuilder();
             uri.Host = "web.socem.plymouth.ac.uk";
