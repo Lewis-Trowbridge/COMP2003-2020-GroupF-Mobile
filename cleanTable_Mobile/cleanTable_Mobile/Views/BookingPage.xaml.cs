@@ -28,8 +28,8 @@ namespace cleanTable_Mobile.Views
         
 
          async void ButtonCancel(object sender, EventArgs e)
-         {
-            await Navigation.PopToRootAsync();
-         }
+        {
+            await Shell.Current.GoToAsync("..Homepage/VenuePage/");
+        }
     }
 }
