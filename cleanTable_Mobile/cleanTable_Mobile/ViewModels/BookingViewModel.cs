@@ -1,4 +1,6 @@
-﻿using cleanTable_Mobile.Models.Requests;
+﻿using Android.Content.Res;
+using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Views;
 using cleanTable_Mobile.Models;
 using Newtonsoft.Json;
 using System;
@@ -43,7 +45,7 @@ namespace cleanTable_Mobile.ViewModels
                 {
                     _selectedIndexTable = value;
                     _tableChosen = value.TableId;
-                    
+
                 }
             }
         }
@@ -74,31 +76,42 @@ namespace cleanTable_Mobile.ViewModels
 
             SendRequest = new Command(async () =>
             {
+                bool answer = await App.Current.MainPage.DisplayAlert("Question?", "Please Confirm your Booking" + "\n"
+                    + "Venue : Subway" + "\n"
+                    + "Date & Time: " + SelectedDate.Date.Add(_selectedTime).ToString() + "\n"
+                    + "Party Size : " + NumberOfPeople.ToString() + "\n"
+                    + "Table Chosen : " + TableChosen.ToString(),
+                    "Confirm", "Cancel");
+                
+                if (answer == true)
+                {
+                    //Set booking object
+                    CreateBookingRequest booking = new CreateBookingRequest();
+                    booking.BookingSize = _numberOfPeople;
 
-                //Set booking object
-                CreateBookingRequest booking = new CreateBookingRequest();
-                booking.BookingSize = _numberOfPeople;
+                    booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
+                    booking.CustomerId = 24; //hardcoded
+                    booking.VenueTableId = _tableChosen;
 
-                booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
-                booking.CustomerId = 24; //hardcoded
-                booking.VenueTableId = _tableChosen;
+                    string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
+                    StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
+                    UriBuilder uri = new UriBuilder();
 
+                    uri.Host = "web.socem.plymouth.ac.uk";
+                    uri.Scheme = "http";
+                    uri.Path = "/COMP2003/COMP2003_F/api/api/venues/booktable";
 
-                string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
-                StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
-                UriBuilder uri = new UriBuilder();
+                    HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
-                uri.Host = "web.socem.plymouth.ac.uk";
-                uri.Scheme = "http";
-                uri.Path = "/COMP2003/COMP2003_F/api/api/venues/booktable";
-
-                HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
-
-                Console.WriteLine(response.Headers.Location);
+                    await Application.Current.MainPage.Navigation.PushAsync(new BookingView());
+                }
+                else
+                {
+                    return;
+                }
             });
-          
-        }
 
+        }
 
         public TimeSpan SelectedTime
         {

@@ -14,13 +14,17 @@ namespace cleanTable_Mobile
             Routing.RegisterRoute(nameof(Homepage), typeof(Homepage));
             Routing.RegisterRoute(nameof(VenuePage), typeof(VenuePage));
             Routing.RegisterRoute(nameof(BookingPage), typeof(BookingPage));
-            Shell.SetTabBarIsVisible(this, false);
+            Routing.RegisterRoute(nameof(BookingView), typeof(BookingView));
             Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
+            
+            Routing.RegisterRoute(nameof(CustomerDelete), typeof(CustomerDelete));
+            Shell.SetTabBarIsVisible(this, false);
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");         
+            await Navigation.PopAsync();
+
         }
     }
 }
