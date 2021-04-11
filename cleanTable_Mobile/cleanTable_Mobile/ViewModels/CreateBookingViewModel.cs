@@ -106,7 +106,7 @@ namespace cleanTable_Mobile.ViewModels
                     Debug.WriteLine(await response.Content.ReadAsStringAsync());
                     
 
-                    //await Application.Current.MainPage.Navigation.PushAsync(new BookingView());
+                    await Application.Current.MainPage.Navigation.PushAsync(new BookingView());
                 }
                 else
                 {
