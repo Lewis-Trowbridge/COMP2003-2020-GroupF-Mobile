@@ -1,6 +1,7 @@
 ﻿using Android.Content.Res;
 using cleanTable_Mobile.Models.Requests;
 using cleanTable_Mobile.Views;
+using cleanTable_Mobile.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

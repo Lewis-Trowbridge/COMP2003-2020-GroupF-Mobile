@@ -16,15 +16,15 @@ namespace cleanTable_Mobile
             Routing.RegisterRoute(nameof(BookingPage), typeof(BookingPage));
             Routing.RegisterRoute(nameof(BookingView), typeof(BookingView));
             Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
+            
             Routing.RegisterRoute(nameof(CustomerDelete), typeof(CustomerDelete));
             Shell.SetTabBarIsVisible(this, false);
-
-
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
+
         }
     }
 }
