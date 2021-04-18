@@ -15,7 +15,7 @@ using Xamarin.Forms;
 
 namespace cleanTable_Mobile.ViewModels
 {
-    class BookingViewModel : BaseViewModel
+    class CreateBookingViewModel : BaseViewModel
     {
         private HttpClient _client;
         private TimeSpan _selectedTime;
@@ -66,7 +66,7 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
-        public BookingViewModel()
+        public CreateBookingViewModel()
         {
             Title = "Bookings";
 
@@ -102,6 +102,9 @@ namespace cleanTable_Mobile.ViewModels
                     uri.Path = "/COMP2003/COMP2003_F/api/api/venues/booktable";
 
                     HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
+
+                    Debug.WriteLine(await response.Content.ReadAsStringAsync());
+                    
 
                     await Application.Current.MainPage.Navigation.PushAsync(new BookingView());
                 }
