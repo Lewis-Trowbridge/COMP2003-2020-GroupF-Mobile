@@ -13,9 +13,10 @@ namespace cleanTable_Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookingPage : ContentPage
     {
-        public BookingPage()
+        public BookingPage(int VenueId)
         {
-            InitializeComponent();   
+            InitializeComponent();
+            BindingContext = new CreateBookingViewModel(VenueId);
         }
 
         void OnSliderValueChanged(object sender, ValueChangedEventArgs args)

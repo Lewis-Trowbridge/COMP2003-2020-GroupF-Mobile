@@ -5,10 +5,6 @@
              xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels" xmlns:sys="clr-namespace:System;assembly=netstandard"
              Title="{Binding Title}">
     
-    <ContentPage.BindingContext>
-        <vm:CreateBookingViewModel />
-    </ContentPage.BindingContext>
-    
            
     <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10" IsClippedToBounds="True">
 
@@ -35,20 +31,22 @@
                     ValueChanged="OnSliderValueChanged" 
                 Value="{Binding NumberOfPeople, Mode=TwoWay}"/>
 
-        <Label x:Name="lblTableNumb"
-               Text="Table Number: " HorizontalOptions="Center" FontAttributes="Bold"
-               FontSize="14"
-               TextColor="Black"/>
-
-        <Picker Title="Choose a Table" TextColor="Black"
+        <Button Text="Choose Table" HorizontalOptions="Center"
+                FontSize="14"
+                TextColor="White"
+                Command="{Binding TableRequest}"/>
+        
+        <Picker Title="Choose a Table" TitleColor="Black" TextColor="Black"
                 ItemsSource="{Binding TableList}"
-                ItemDisplayBinding="{Binding TableNumber}"
-                SelectedItem="{Binding SelectedIndexTable, Mode=TwoWay}" />
+                ItemDisplayBinding="{Binding VenueTableNumber}"
+                SelectedItem="{Binding SelectedIndexTable, Mode=TwoWay}" 
+                
+                 />
         
         <Button x:Name="btnSend"
-                Text="Send" HorizontalOptions="Center"
+                Text="Complete Booking" HorizontalOptions="Center"
                 FontSize="14"
-                TextColor="Black"
+                TextColor="White"
                 Command="{Binding SendRequest}">
         </Button>
         <Button x:Name="btnCancel"

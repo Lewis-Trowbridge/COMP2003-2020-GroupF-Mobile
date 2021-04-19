@@ -23,20 +23,20 @@ namespace cleanTable_Mobile.ViewModels
         private int _tableChosen;
 
         public DateTime SelectedDate { get; set; }
-        private Tables _selectedIndexTable { get; set; }
-        public List<Tables> TableList { get; set; }
-        public List<Tables> GetTables()
+        private TablesAvailable _selectedIndexTable { get; set; }
+        public List<TablesAvailable> TableList { get; set; }
+        public List<TablesAvailable> GetTables()
         {
-            var Tables = new List<Tables>()
+            var Tables = new List<TablesAvailable>()
             {
-                new Tables(){TableId = 1, TableNumber = 1, TableCapacity = 2},
-                new Tables(){TableId = 2, TableNumber = 2, TableCapacity = 4},
-                new Tables(){TableId = 3, TableNumber = 5, TableCapacity = 6}
+                new TablesAvailable(){TableId = 1, VenueTableNumber = 1, NumberOfSeats = 2},
+                new TablesAvailable(){TableId = 2, VenueTableNumber = 2, NumberOfSeats = 4},
+                new TablesAvailable(){TableId = 3, VenueTableNumber = 5, NumberOfSeats = 6}
             };
             return Tables;
         }
 
-        public Tables SelectedIndexTable
+        public TablesAvailable SelectedIndexTable
         {
             get { return _selectedIndexTable; }
             set
@@ -66,11 +66,11 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
-        public CreateBookingViewModel()
+        public CreateBookingViewModel(int VenID)
         {
             Title = "Bookings";
 
-            TableList = GetTables().OrderBy(t => t.TableNumber).ToList();
+            TableList = GetTables().OrderBy(t => t.VenueTableNumber).ToList();
 
             _client = new HttpClient();
 
@@ -141,13 +141,7 @@ namespace cleanTable_Mobile.ViewModels
                 OnPropertyChanged("NumberOfPeople");
             }
         }
-        public class Tables
-        {
-            public int TableId { get; set; }
-            public int TableNumber { get; set; }
-            public int TableCapacity { get; set; }
 
-        }
 
         public ICommand SendRequest { private set; get; }
 

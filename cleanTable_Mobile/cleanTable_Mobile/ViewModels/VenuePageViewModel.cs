@@ -1,10 +1,13 @@
 ﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace cleanTable_Mobile.ViewModels
 {
@@ -14,14 +17,33 @@ namespace cleanTable_Mobile.ViewModels
         private string _venueName;
         private string _venueAddress;
         private int _totalCapacity;
-
-        public VenuePageViewModel()
+        private int _venueId;
+        public int id
+        {
+            get
+            {
+                return _venueId;
+            }
+            set
+            {
+                _venueId = value;
+                OnPropertyChanged("id");
+            }
+        }
+        public VenuePageViewModel(int VenID)
         {
             Title = "Venue Page";
-
+            id = VenID;
             _client = new HttpClient();
+            Debug.WriteLine(id);
+            GetVenue(id);
 
-            GetVenue(1); //hard coding will change
+
+            SendRequest = new Command(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new BookingPage(id));
+            });
+
         }
         public async void GetVenue(int VenueID)
         {
@@ -33,7 +55,7 @@ namespace cleanTable_Mobile.ViewModels
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
             GetVenueView venue = JsonConvert.DeserializeObject<GetVenueView>(await message.Content.ReadAsStringAsync());
-            Debug.WriteLine(await message.Content.ReadAsStringAsync());
+            
             VenueName = venue.VenueName;
             VenueAddress = venue.AddLineOne + "\n"
                         + venue.AddLineTwo + "\n"
@@ -42,6 +64,8 @@ namespace cleanTable_Mobile.ViewModels
                         + venue.VenuePostcode;
             TotalCapacity = venue.TotalCapacity;
         }
+
+
         public string VenueName
         {
             get
@@ -79,5 +103,7 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
+        public ICommand SendRequest { private set; get; }
+        public int VenID { get; }
     }
 }
