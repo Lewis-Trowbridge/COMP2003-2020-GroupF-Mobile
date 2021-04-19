@@ -9,6 +9,8 @@ namespace cleanTable_Mobile.ViewModels
     {
 
 
+        public static int CustomerId { get; set; }
+
         bool isBusy = false;
         public bool IsBusy
         {
