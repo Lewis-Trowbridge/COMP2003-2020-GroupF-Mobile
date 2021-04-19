@@ -2,10 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
              x:Class="cleanTable_Mobile.Views.BookingView" Title="{Binding Title}">
-    
-    <ContentPage.BindingContext>
-        <vm:BookingPageViewModel />
-    </ContentPage.BindingContext>
 
 
     <Grid Padding="15,0,15,0">

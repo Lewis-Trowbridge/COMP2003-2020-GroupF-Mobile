@@ -18,13 +18,13 @@ namespace cleanTable_Mobile.ViewModels
         private int _bookPartySize;
         private int _bookTable;
 
-        public BookingPageViewModel()
+        public BookingPageViewModel(int bookingId)
         {
             Title = "Booking View";
 
             _client = new HttpClient();
 
-            GetBooking(54); //hard coded for now
+            GetBooking(bookingId); //hard coded for now
 
         }           
         public async void GetBooking(int BookingID)
@@ -33,7 +33,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";            
             uri.Path = "COMP2003/COMP2003_F/api/api/bookings/view";            
-            uri.Query = "bookingId=" + BookingID + "&customerId=" + 24; //will change when login sorted
+            uri.Query = "bookingId=" + BookingID + "&customerId=" + CustomerId; //will change when login sorted
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
             
             GetBookingView book = JsonConvert.DeserializeObject<GetBookingView>(await message.Content.ReadAsStringAsync());

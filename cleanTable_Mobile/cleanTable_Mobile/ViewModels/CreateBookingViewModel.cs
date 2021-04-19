@@ -1,5 +1,6 @@
 ﻿using Android.Content.Res;
 using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Models.Responses;
 using cleanTable_Mobile.Views;
 using cleanTable_Mobile.Models;
 using Newtonsoft.Json;
@@ -90,7 +91,7 @@ namespace cleanTable_Mobile.ViewModels
                     booking.BookingSize = _numberOfPeople;
 
                     booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
-                    booking.CustomerId = 24; //hardcoded
+                    booking.CustomerId = CustomerId; //hardcoded
                     booking.VenueTableId = _tableChosen;
 
                     string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
@@ -104,9 +105,10 @@ namespace cleanTable_Mobile.ViewModels
                     HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
                     Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                    
 
-                    await Application.Current.MainPage.Navigation.PushAsync(new BookingView());
+                    CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+
+                    await Application.Current.MainPage.Navigation.PushAsync(new BookingView(result.Id));
                 }
                 else
                 {
