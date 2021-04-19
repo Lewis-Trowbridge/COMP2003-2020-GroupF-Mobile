@@ -21,20 +21,22 @@ namespace cleanTable_Mobile.ViewModels
         private TimeSpan _selectedTime;
         private int _numberOfPeople;
         private int _tableChosen;
+        private bool _doneIsAvailable;
+
+        private ObservableCollection<TablesAvailable> _tables;
+        public ObservableCollection<TablesAvailable> Tables
+        {
+            get { return _tables; }
+            set
+            {
+                _tables = value;
+            }
+        }
 
         public DateTime SelectedDate { get; set; }
         private TablesAvailable _selectedIndexTable { get; set; }
-        public List<TablesAvailable> TableList { get; set; }
-        public List<TablesAvailable> GetTables()
-        {
-            var Tables = new List<TablesAvailable>()
-            {
-                new TablesAvailable(){TableId = 1, VenueTableNumber = 1, NumberOfSeats = 2},
-                new TablesAvailable(){TableId = 2, VenueTableNumber = 2, NumberOfSeats = 4},
-                new TablesAvailable(){TableId = 3, VenueTableNumber = 5, NumberOfSeats = 6}
-            };
-            return Tables;
-        }
+        private List<TablesAvailable> TableList = new List<TablesAvailable>();
+        
 
         public TablesAvailable SelectedIndexTable
         {
@@ -66,13 +68,46 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
+        public bool DoneIsAvailable
+        {
+            get
+            {
+                return _doneIsAvailable;
+            }
+            set
+            {
+                _doneIsAvailable = value;
+                OnPropertyChanged("DoneIsAvailable");
+            }
+        }
+
         public CreateBookingViewModel(int VenID)
         {
             Title = "Bookings";
 
-            TableList = GetTables().OrderBy(t => t.VenueTableNumber).ToList();
-
             _client = new HttpClient();
+            _tables = new ObservableCollection<TablesAvailable>();
+            _doneIsAvailable = false;
+            TableRequest = new Command(async () =>
+            {
+                UriBuilder uri = new UriBuilder();
+                uri.Host = "web.socem.plymouth.ac.uk";
+                uri.Scheme = "http";
+                uri.Path = "COMP2003/COMP2003_F/api/api/venues/tablesAvailable";
+                uri.Query = "venueId=" + VenID + "&partySize=" + NumberOfPeople
+                + "&bookingTime=" + SelectedDate.Date.Add(_selectedTime).ToString("O");
+                Debug.WriteLine(uri.Uri);
+                HttpResponseMessage message = await _client.GetAsync(uri.Uri);
+                Debug.WriteLine(await message.Content.ReadAsStringAsync());
+                TableList = JsonConvert.DeserializeObject<List<TablesAvailable>>(await message.Content.ReadAsStringAsync());
+                
+                foreach (TablesAvailable tables in TableList)
+                {
+                    Tables.Add(tables);
+                };
+                DoneIsAvailable = true;
+            });
+            
 
             SendRequest = new Command(async () =>
             {
@@ -142,7 +177,7 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
-
+        public ICommand TableRequest { private set; get; }
         public ICommand SendRequest { private set; get; }
 
     }

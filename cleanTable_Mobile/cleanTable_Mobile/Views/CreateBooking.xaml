@@ -37,18 +37,18 @@
                 Command="{Binding TableRequest}"/>
         
         <Picker Title="Choose a Table" TitleColor="Black" TextColor="Black"
-                ItemsSource="{Binding TableList}"
+                ItemsSource="{Binding Tables}"
                 ItemDisplayBinding="{Binding VenueTableNumber}"
                 SelectedItem="{Binding SelectedIndexTable, Mode=TwoWay}" 
-                
-                 />
-        
+                IsVisible="{Binding DoneIsAvailable, Mode=TwoWay}" />
+
         <Button x:Name="btnSend"
                 Text="Complete Booking" HorizontalOptions="Center"
                 FontSize="14"
                 TextColor="White"
-                Command="{Binding SendRequest}">
-        </Button>
+                Command="{Binding SendRequest}"
+                IsVisible="{Binding DoneIsAvailable, Mode=TwoWay}"/>
+
         <Button x:Name="btnCancel"
                 Text="Cancel" HorizontalOptions="Center"
                 FontSize="14"

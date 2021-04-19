@@ -20,6 +20,7 @@ namespace cleanTable_Mobile.ViewModels
         private GetTopVenues _selectedItem;
         private List<GetTopVenues> venue = new List<GetTopVenues>();
         private ObservableCollection<GetTopVenues> _venues;
+
         private int _venueChosen;
 
         public GetTopVenues SelectedVenue
