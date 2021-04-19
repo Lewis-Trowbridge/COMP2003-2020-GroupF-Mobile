@@ -33,9 +33,8 @@
                 <Frame VerticalOptions="FillAndExpand" Margin="10" BackgroundColor="Transparent" Padding="5" >
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="more Fuck" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="You now have the option to save your money offline, by your using a device."></Label>
-                        <Button Text="Register" BackgroundColor="LawnGreen" Margin="5"  BorderWidth="50" TextColor="White" VerticalOptions="End" ></Button>
+                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Lorem ipsum" ></Label>
+                       
                     </StackLayout>
                 </Frame>
             </ScrollView>

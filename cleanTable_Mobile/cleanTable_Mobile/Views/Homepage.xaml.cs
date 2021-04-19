@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using cleanTable_Mobile.ViewModels;
 
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Homepage : ContentPage
     {
+        HomepageViewModel data = new HomepageViewModel();
         public Homepage()
         {
             InitializeComponent();
@@ -19,6 +21,13 @@ namespace cleanTable_Mobile.Views
         async void ButtonClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"{nameof(VenuePage)}");
+        }
+
+        private void AddButton(object sender, EventArgs e)
+        {
+            Button venueName = new Button();
+            
+            
         }
     }
 }

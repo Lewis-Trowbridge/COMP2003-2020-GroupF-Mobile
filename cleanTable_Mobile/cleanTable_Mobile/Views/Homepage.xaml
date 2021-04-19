@@ -9,16 +9,48 @@
         <vm:HomepageViewModel />
     </ContentPage.BindingContext>
 
+    <Grid Padding="10,0,10,0" x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-    <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Editor Placeholder="Search" PlaceholderColor="Gray" TextColor="Black" Grid.Column="2" Grid.Row="0" AutoSize="TextChanges" Text="{Binding SearchVenue, Mode=TwoWay}"/>
+        <Button x:Name="SearchBtn" Text="Search" TextColor="Black" Grid.Column="3" Grid.Row="0"  Command="{Binding SearchRequest, Mode=TwoWay}"/>
+       
+        <ListView x:Name="SearchList"
+                 ItemsSource="{Binding Venues, Mode=TwoWay}"
+                 SeparatorVisibility="Default"
+                 SeparatorColor="#EE6429"
+                 RowHeight="75"
+                 IsPullToRefreshEnabled="True"
+                 SelectedItem="{Binding selectSearch, Mode=TwoWay}"
+                 >
+            <ListView.Header>
+                <StackLayout>
+                    <Label Text="Search Results"
+                           TextColor="Black"
+                           FontSize="14"/>
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding venueName}"
+                              DetailColor="Black"
+                              Detail="{Binding venuePostcode}" TextColor="Black"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+       
 
-        <Label Text="Please see venues below to start your booking!" FontSize="16" Padding="0,0,0,0"/>
+    </Grid>
 
-        <Button Margin="0,10,0,0" Text="Subway"
-                     Clicked="ButtonClicked"
-                     BackgroundColor="{StaticResource Primary}"
-                     TextColor="White" />
-
-    </StackLayout>
-    
 </ContentPage>
