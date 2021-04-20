@@ -2,55 +2,58 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="cleanTable_Mobile.Views.Homepage"
-             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
+             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels" 
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
         <vm:HomepageViewModel />
     </ContentPage.BindingContext>
 
-    <Grid Padding="10,0,10,0" x:Name="MainGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <ListView x:Name="VenueHomepage" 
+             ItemsSource="{Binding Venues}"
+              SeparatorVisibility="Default"
+              SeparatorColor="#EE6429"
+              RowHeight="65" 
+              IsPullToRefreshEnabled="True"
+              SelectedItem="{Binding SelectedVenue}">
+              
+        <ListView.Header>
+            <Grid RowSpacing="0"
+          ColumnSpacing="0"  Margin="0,0,0,-40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Editor Placeholder="Search" PlaceholderColor="Gray" TextColor="Black" Grid.Column="2" Grid.Row="0" AutoSize="TextChanges" Text="{Binding SearchVenue, Mode=TwoWay}"/>
-        <Button x:Name="SearchBtn" Text="Search" TextColor="Black" Grid.Column="3" Grid.Row="0"  Command="{Binding SearchRequest, Mode=TwoWay}"/>
-       
-        <ListView x:Name="SearchList"
-                 ItemsSource="{Binding Venues, Mode=TwoWay}"
-                 SeparatorVisibility="Default"
-                 SeparatorColor="#EE6429"
-                 RowHeight="75"
-                 IsPullToRefreshEnabled="True"
-                 SelectedItem="{Binding selectSearch, Mode=TwoWay}"
-                 >
-            <ListView.Header>
-                <StackLayout>
-                    <Label Text="Search Results"
-                           TextColor="Black"
-                           FontSize="14"/>
-                </StackLayout>
-            </ListView.Header>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding venueName}"
-                              DetailColor="Black"
-                              Detail="{Binding venuePostcode}" TextColor="Black"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-       
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Frame OutlineColor="#EE6429">
+                <Entry Grid.Row="0" Grid.Column="0" TextColor="Black" 
+                    HorizontalOptions="Center" 
+                    Placeholder="Search here" 
+                    PlaceholderColor="Gray"/>
+                </Frame>
+                
+                <Button Text="Search" Grid.Row="0" Grid.Column="1" TextColor="White"/>
+                
+                <Label Text="Select a Venue" Grid.Row="1" Grid.ColumnSpan="2" 
+                       TextColor="Black" FontSize="Large" 
+                       HorizontalTextAlignment="Center"
+                       Margin="0,10,0,0"/>
+            </Grid>
+        </ListView.Header>
+        
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                
+                    <TextCell Text="{Binding VenueName}" DetailColor="Black"
+                              Detail="{Binding VenuePostcode}" TextColor="Black" Height="1"/>
 
-    </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
 
+    </ListView>
+    
 </ContentPage>

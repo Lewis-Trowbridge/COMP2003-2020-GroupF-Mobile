@@ -80,6 +80,7 @@
         <ShellContent Title="Bookings" Route="BookingsPage" ContentTemplate="{DataTemplate local:ViewBookingsPage}" />
         <ShellContent Title="About" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
         <ShellContent Title="Help" ContentTemplate="{DataTemplate local:HelpPage}" />
+        <ShellContent Title="Login" ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
 
 

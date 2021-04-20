@@ -1,22 +1,23 @@
 ﻿using cleanTable_Mobile.ViewModels;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VenuePage : ContentPage
+    public partial class BookingDelete : ContentPage
     {
-        
-        public VenuePage(int VenueId)
-        { 
+        public BookingDelete(int bookingId)
+        {
             InitializeComponent();
-            BindingContext = new VenuePageViewModel(VenueId);
-            
+            BindingContext = new BookingDeleteViewModel(bookingId);
         }
-
         async void ButtonCancel(object sender, EventArgs e)
         {
             await Navigation.PopToRootAsync();

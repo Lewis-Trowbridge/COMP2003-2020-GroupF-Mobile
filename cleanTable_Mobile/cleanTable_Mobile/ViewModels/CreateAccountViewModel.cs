@@ -11,7 +11,7 @@ namespace cleanTable_Mobile.ViewModels
 {
     class CreateAccountViewModel: BaseViewModel
     {
-        private HttpClient _clientC;
+        private HttpClient _client;
         private string _firstName;
         private string _lastName;
         private string _contactNumber;
@@ -22,11 +22,10 @@ namespace cleanTable_Mobile.ViewModels
         {
             Title = "Create Account";
 
-            _clientC = new HttpClient();
+            _client = new HttpClient();
 
             CreateRequest = new Command(async () =>
             {
-
                 //Set Account object
                 CreateAccountRequest createAccount = new CreateAccountRequest();
                 
@@ -43,7 +42,7 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Scheme = "http";
                 uri.Path = "/COMP2003/COMP2003_F/api/api/customers/create";
 
-                HttpResponseMessage response = await _clientC.PostAsync(uri.Uri, content);
+                HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
                 Console.WriteLine(response.Headers.Location);
 
