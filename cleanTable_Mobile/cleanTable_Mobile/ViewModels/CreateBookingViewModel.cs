@@ -22,63 +22,25 @@ namespace cleanTable_Mobile.ViewModels
         private TimeSpan _selectedTime;
         private int _numberOfPeople;
         private int _tableChosen;
-        private bool _doneIsAvailable;
-
+        private bool _completeBooking;
+        private bool _bookTable;
         private ObservableCollection<TablesAvailable> _tables;
-        public ObservableCollection<TablesAvailable> Tables
-        {
-            get { return _tables; }
-            set
-            {
-                _tables = value;
-            }
-        }
-
-        public DateTime SelectedDate { get; set; }
         private TablesAvailable _selectedIndexTable { get; set; }
         private List<TablesAvailable> TableList = new List<TablesAvailable>();
         
+        public DateTime SelectedDate { get; set; }
 
-        public TablesAvailable SelectedIndexTable
+        public async void UserLogin()
         {
-            get { return _selectedIndexTable; }
-            set
+            string result = await Application.Current.MainPage.DisplayPromptAsync("Login", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
+            
+            if (result != null)
             {
-                if (_selectedIndexTable != value)
-                {
-                    _selectedIndexTable = value;
-                    _tableChosen = value.TableId;
-
-                }
+                CustomerId = Convert.ToInt32(result);
             }
-        }
-
-        public int TableChosen
-        {
-            get
+            else
             {
-                return _tableChosen;
-            }
-            set
-            {
-                if (_tableChosen != value)
-                {
-                    _tableChosen = value;
-                    OnPropertyChanged("tableChosen");
-                }
-            }
-        }
-
-        public bool DoneIsAvailable
-        {
-            get
-            {
-                return _doneIsAvailable;
-            }
-            set
-            {
-                _doneIsAvailable = value;
-                OnPropertyChanged("DoneIsAvailable");
+               await Application.Current.MainPage.DisplayPromptAsync("Login Failed", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
             }
         }
 
@@ -88,7 +50,14 @@ namespace cleanTable_Mobile.ViewModels
 
             _client = new HttpClient();
             _tables = new ObservableCollection<TablesAvailable>();
-            _doneIsAvailable = false;
+            _completeBooking = false;
+            _bookTable = true;
+
+            if (CustomerId == 0)
+            {
+                UserLogin();
+            }
+
             TableRequest = new Command(async () =>
             {
                 UriBuilder uri = new UriBuilder();
@@ -106,10 +75,10 @@ namespace cleanTable_Mobile.ViewModels
                 {
                     Tables.Add(tables);
                 };
-                DoneIsAvailable = true;
+                CompleteBooking = true;
+                BookTable = false;
             });
             
-
             SendRequest = new Command(async () =>
             {
                 bool answer = await App.Current.MainPage.DisplayAlert("Question?", "Please Confirm your Booking" + "\n"
@@ -152,6 +121,14 @@ namespace cleanTable_Mobile.ViewModels
             });
 
         }
+        public ObservableCollection<TablesAvailable> Tables
+        {
+            get { return _tables; }
+            set
+            {
+                _tables = value;
+            }
+        }
 
         public TimeSpan SelectedTime
         {
@@ -179,6 +156,59 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
+        public TablesAvailable SelectedIndexTable
+        {
+            get { return _selectedIndexTable; }
+            set
+            {
+                if (_selectedIndexTable != value)
+                {
+                    _selectedIndexTable = value;
+                    _tableChosen = value.TableId;
+
+                }
+            }
+        }
+
+        public int TableChosen
+        {
+            get
+            {
+                return _tableChosen;
+            }
+            set
+            {
+                if (_tableChosen != value)
+                {
+                    _tableChosen = value;
+                    OnPropertyChanged("tableChosen");
+                }
+            }
+        }
+        public bool CompleteBooking
+        {
+            get
+            {
+                return _completeBooking;
+            }
+            set
+            {
+                _completeBooking = value;
+                OnPropertyChanged("CompleteBooking");
+            }
+        }
+        public bool BookTable
+        {
+            get
+            {
+                return _bookTable;
+            }
+            set
+            {
+                _bookTable = value;
+                OnPropertyChanged("BookTable");
+            }
+        }
         public ICommand TableRequest { private set; get; }
         public ICommand SendRequest { private set; get; }
 

@@ -12,7 +12,7 @@
     
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Entry Keyboard="Numeric" Text="{Binding EnteredId}"></Entry>
+            <Entry Keyboard="Numeric" Text="{Binding EnteredId}" TextColor="Black"></Entry>
             <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>
