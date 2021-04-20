@@ -31,12 +31,13 @@
                 </Grid.ColumnDefinitions>
                 <Frame OutlineColor="#EE6429">
                 <Entry Grid.Row="0" Grid.Column="0" TextColor="Black" 
-                    HorizontalOptions="Center" 
-                    Placeholder="Search here" 
-                    PlaceholderColor="Gray"/>
+                        HorizontalOptions="Center" 
+                        Placeholder="Search here" 
+                        PlaceholderColor="Gray"
+                       Text="{Binding SearchVenue, Mode=TwoWay}"/>
                 </Frame>
                 
-                <Button Text="Search" Grid.Row="0" Grid.Column="1" TextColor="White"/>
+                <Button Text="Search" Grid.Row="0" Grid.Column="1" TextColor="White" Command="{Binding SearchRequest, Mode=TwoWay}"/>
                 
                 <Label Text="Select a Venue" Grid.Row="1" Grid.ColumnSpan="2" 
                        TextColor="Black" FontSize="Large" 

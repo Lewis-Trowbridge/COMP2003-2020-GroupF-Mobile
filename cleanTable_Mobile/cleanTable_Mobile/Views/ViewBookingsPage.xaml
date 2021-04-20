@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="cleanTable_Mobile.Views.ViewBookingsPage"
+              xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:GetBookingsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid Padding="10,0,10,0" x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Upcoming bookings" BackgroundColor="#EE6429" TextColor="White" Grid.Column="2" Grid.Row="0" Command="{Binding GetUpcomingBookings, Mode=TwoWay}"/>
+            <Button Text="Historical bookings" BackgroundColor="#EE6429" TextColor="White" Grid.Column="3" Grid.Row="0"  Command="{Binding GetHistoryBookings, Mode=TwoWay}"/>
+            <ListView x:Name="SearchList"
+                      Grid.ColumnSpan="3"
+                      Grid.Row="1"
+                 ItemsSource="{Binding GetBookings, Mode=TwoWay}"
+                 SeparatorVisibility="Default"
+                 SeparatorColor="#EE6429"
+                 RowHeight="75"
+                 IsPullToRefreshEnabled="True"
+                 SelectedItem="{Binding selectBooking, Mode=TwoWay}"
+                 >
+            <ListView.Header>
+                <StackLayout>
+                    <Label Text="Bookings"
+                           TextColor="Black"
+                           FontSize="14"/>
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding venueName}"
+                              DetailColor="Black"
+                              Detail="{Binding bookingDateTime}" TextColor="Black"
+                              />
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

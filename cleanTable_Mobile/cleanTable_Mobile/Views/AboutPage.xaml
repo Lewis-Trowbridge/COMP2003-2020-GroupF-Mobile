@@ -33,28 +33,8 @@
                 <Frame VerticalOptions="FillAndExpand" Margin="10" BackgroundColor="Transparent" Padding="5" >
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Change to professional stuff" ></Label>
-                   
+                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Lorem ipsum" ></Label>
+                       
                     </StackLayout>
                 </Frame>
             </ScrollView>
