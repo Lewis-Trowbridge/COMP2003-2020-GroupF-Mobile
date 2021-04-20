@@ -4,11 +4,8 @@
              x:Class="cleanTable_Mobile.Views.HelpPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            
-            <Label Text="FUCK" />
+           
+            <Label Text="something helpful" TextColor="HotPink" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 

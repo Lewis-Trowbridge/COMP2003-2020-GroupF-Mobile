@@ -4,9 +4,6 @@
              x:Class="cleanTable_Mobile.Views.BookingDelete" xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
              Title="{Binding Title}">
 
-    <ContentPage.BindingContext>
-        <vm:BookingDeleteViewModel />
-    </ContentPage.BindingContext>
 
     <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
         <Label Text="{Binding DeleteCheck}" 

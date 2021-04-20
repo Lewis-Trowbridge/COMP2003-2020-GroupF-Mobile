@@ -12,12 +12,12 @@ namespace cleanTable_Mobile.ViewModels
         private HttpClient _client;
         private string _deleteCheck;
         private int _bookingID;
-        public BookingDeleteViewModel()
+        public BookingDeleteViewModel(int bookingId)
         {
 
             Title = "Delete Booking";
             _client = new HttpClient();
-            _bookingID = 45; //will be changed when account is logged in/created
+            _bookingID = bookingId; //will be changed when account is logged in/created
 
             DeleteAccount = new Command(async () =>
             {

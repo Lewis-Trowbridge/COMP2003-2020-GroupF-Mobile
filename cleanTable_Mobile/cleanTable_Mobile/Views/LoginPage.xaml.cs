@@ -15,7 +15,11 @@ namespace cleanTable_Mobile.Views
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+        }
+        async void NewAccount(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync($"//{nameof(CreateAccountPage)}");
+
         }
     }
 }

@@ -2,27 +2,58 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="cleanTable_Mobile.Views.Homepage"
-             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
+             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels" 
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
         <vm:HomepageViewModel />
     </ContentPage.BindingContext>
 
+    <ListView x:Name="VenueHomepage" 
+             ItemsSource="{Binding Venues}"
+              SeparatorVisibility="Default"
+              SeparatorColor="#EE6429"
+              RowHeight="65" 
+              IsPullToRefreshEnabled="True"
+              SelectedItem="{Binding SelectedVenue}">
+              
+        <ListView.Header>
+            <Grid RowSpacing="0"
+          ColumnSpacing="0"  Margin="0,0,0,-40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-    <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Frame OutlineColor="#EE6429">
+                <Entry Grid.Row="0" Grid.Column="0" TextColor="Black" 
+                    HorizontalOptions="Center" 
+                    Placeholder="Search here" 
+                    PlaceholderColor="Gray"/>
+                </Frame>
+                
+                <Button Text="Search" Grid.Row="0" Grid.Column="1" TextColor="White"/>
+                
+                <Label Text="Select a Venue" Grid.Row="1" Grid.ColumnSpan="2" 
+                       TextColor="Black" FontSize="Large" 
+                       HorizontalTextAlignment="Center"
+                       Margin="0,10,0,0"/>
+            </Grid>
+        </ListView.Header>
+        
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                
+                    <TextCell Text="{Binding VenueName}" DetailColor="Black"
+                              Detail="{Binding VenuePostcode}" TextColor="Black" Height="1"/>
 
-        <Label Text="Please see venues below to start your booking!" FontSize="16" Padding="0,0,0,0"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
 
-        <Button Margin="0,10,0,0" Text="Subway"
-                     Clicked="ButtonClicked"
-                     BackgroundColor="{StaticResource Primary}"
-                     TextColor="White" />
-
-        <Button Margin="0,10,0,0" Text="Delete"
-                     Clicked="DeleteClicked"
-                     BackgroundColor="{StaticResource Primary}"
-                     TextColor="White" />
-    </StackLayout>
+    </ListView>
     
 </ContentPage>

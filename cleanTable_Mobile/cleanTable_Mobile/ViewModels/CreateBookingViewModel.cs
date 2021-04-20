@@ -1,5 +1,6 @@
 ﻿using Android.Content.Res;
 using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Models.Responses;
 using cleanTable_Mobile.Views;
 using cleanTable_Mobile.Models;
 using Newtonsoft.Json;
@@ -21,59 +22,63 @@ namespace cleanTable_Mobile.ViewModels
         private TimeSpan _selectedTime;
         private int _numberOfPeople;
         private int _tableChosen;
-
+        private bool _completeBooking;
+        private bool _bookTable;
+        private ObservableCollection<TablesAvailable> _tables;
+        private TablesAvailable _selectedIndexTable { get; set; }
+        private List<TablesAvailable> TableList = new List<TablesAvailable>();
+        
         public DateTime SelectedDate { get; set; }
-        private Tables _selectedIndexTable { get; set; }
-        public List<Tables> TableList { get; set; }
-        public List<Tables> GetTables()
-        {
-            var Tables = new List<Tables>()
-            {
-                new Tables(){TableId = 1, TableNumber = 1, TableCapacity = 2},
-                new Tables(){TableId = 2, TableNumber = 2, TableCapacity = 4},
-                new Tables(){TableId = 3, TableNumber = 5, TableCapacity = 6}
-            };
-            return Tables;
-        }
 
-        public Tables SelectedIndexTable
+        public async void UserLogin()
         {
-            get { return _selectedIndexTable; }
-            set
+            string result = await Application.Current.MainPage.DisplayPromptAsync("Login", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
+            
+            if (result != null)
             {
-                if (_selectedIndexTable != value)
-                {
-                    _selectedIndexTable = value;
-                    _tableChosen = value.TableId;
-
-                }
+                CustomerId = Convert.ToInt32(result);
+            }
+            else
+            {
+               await Application.Current.MainPage.DisplayPromptAsync("Login Failed", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
             }
         }
 
-        public int TableChosen
-        {
-            get
-            {
-                return _tableChosen;
-            }
-            set
-            {
-                if (_tableChosen != value)
-                {
-                    _tableChosen = value;
-                    OnPropertyChanged("tableChosen");
-                }
-            }
-        }
-
-        public CreateBookingViewModel()
+        public CreateBookingViewModel(int VenID)
         {
             Title = "Bookings";
 
-            TableList = GetTables().OrderBy(t => t.TableNumber).ToList();
-
             _client = new HttpClient();
+            _tables = new ObservableCollection<TablesAvailable>();
+            _completeBooking = false;
+            _bookTable = true;
 
+            if (CustomerId == 0)
+            {
+                UserLogin();
+            }
+
+            TableRequest = new Command(async () =>
+            {
+                UriBuilder uri = new UriBuilder();
+                uri.Host = "web.socem.plymouth.ac.uk";
+                uri.Scheme = "http";
+                uri.Path = "COMP2003/COMP2003_F/api/api/venues/tablesAvailable";
+                uri.Query = "venueId=" + VenID + "&partySize=" + NumberOfPeople
+                + "&bookingTime=" + SelectedDate.Date.Add(_selectedTime).ToString("O");
+                Debug.WriteLine(uri.Uri);
+                HttpResponseMessage message = await _client.GetAsync(uri.Uri);
+                Debug.WriteLine(await message.Content.ReadAsStringAsync());
+                TableList = JsonConvert.DeserializeObject<List<TablesAvailable>>(await message.Content.ReadAsStringAsync());
+                
+                foreach (TablesAvailable tables in TableList)
+                {
+                    Tables.Add(tables);
+                };
+                CompleteBooking = true;
+                BookTable = false;
+            });
+            
             SendRequest = new Command(async () =>
             {
                 bool answer = await App.Current.MainPage.DisplayAlert("Question?", "Please Confirm your Booking" + "\n"
@@ -90,7 +95,7 @@ namespace cleanTable_Mobile.ViewModels
                     booking.BookingSize = _numberOfPeople;
 
                     booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
-                    booking.CustomerId = 24; //hardcoded
+                    booking.CustomerId = CustomerId; 
                     booking.VenueTableId = _tableChosen;
 
                     string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
@@ -104,9 +109,10 @@ namespace cleanTable_Mobile.ViewModels
                     HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
                     Debug.WriteLine(await response.Content.ReadAsStringAsync());
-                    
 
-                    await Application.Current.MainPage.Navigation.PushAsync(new BookingView());
+                    CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+
+                    await Application.Current.MainPage.Navigation.PushAsync(new BookingView(result.Id));
                 }
                 else
                 {
@@ -114,6 +120,14 @@ namespace cleanTable_Mobile.ViewModels
                 }
             });
 
+        }
+        public ObservableCollection<TablesAvailable> Tables
+        {
+            get { return _tables; }
+            set
+            {
+                _tables = value;
+            }
         }
 
         public TimeSpan SelectedTime
@@ -141,14 +155,61 @@ namespace cleanTable_Mobile.ViewModels
                 OnPropertyChanged("NumberOfPeople");
             }
         }
-        public class Tables
-        {
-            public int TableId { get; set; }
-            public int TableNumber { get; set; }
-            public int TableCapacity { get; set; }
 
+        public TablesAvailable SelectedIndexTable
+        {
+            get { return _selectedIndexTable; }
+            set
+            {
+                if (_selectedIndexTable != value)
+                {
+                    _selectedIndexTable = value;
+                    _tableChosen = value.TableId;
+                    OnPropertyChanged("SelectedIndexTable");
+                }
+            }
         }
 
+        public int TableChosen
+        {
+            get
+            {
+                return _tableChosen;
+            }
+            set
+            {
+                if (_tableChosen != value)
+                {
+                    _tableChosen = value;
+                    OnPropertyChanged("tableChosen");
+                }
+            }
+        }
+        public bool CompleteBooking
+        {
+            get
+            {
+                return _completeBooking;
+            }
+            set
+            {
+                _completeBooking = value;
+                OnPropertyChanged("CompleteBooking");
+            }
+        }
+        public bool BookTable
+        {
+            get
+            {
+                return _bookTable;
+            }
+            set
+            {
+                _bookTable = value;
+                OnPropertyChanged("BookTable");
+            }
+        }
+        public ICommand TableRequest { private set; get; }
         public ICommand SendRequest { private set; get; }
 
     }
