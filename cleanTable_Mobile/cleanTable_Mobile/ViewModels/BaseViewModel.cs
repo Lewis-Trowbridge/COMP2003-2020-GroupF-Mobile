@@ -7,7 +7,7 @@ namespace cleanTable_Mobile.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-
+        public static int CustomerId { get; set; }
 
         bool isBusy = false;
         public bool IsBusy

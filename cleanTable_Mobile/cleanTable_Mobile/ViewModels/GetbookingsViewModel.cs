@@ -21,16 +21,15 @@ namespace cleanTable_Mobile.ViewModels
         {
             _histBookings = new ObservableCollection<GetBookings>();
             _client = new HttpClient();
-            // hardcoded for now until merge with daisy's branch
             Title = "Your Bookings";
-            UpcomingBookings(81);
+            UpcomingBookings(CustomerId);
             GetHistoryBookings = new Command(async () =>
             {
-                HistoricBookings(81);
+                HistoricBookings(CustomerId);
             });
             GetUpcomingBookings = new Command(async () =>
             {
-                UpcomingBookings(81);
+                UpcomingBookings(CustomerId);
             });
         }
         public async void HistoricBookings(int customerid)

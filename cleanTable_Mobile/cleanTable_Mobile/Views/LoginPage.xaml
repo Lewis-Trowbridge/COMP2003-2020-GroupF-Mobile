@@ -5,10 +5,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="cleanTable_Mobile.Views.LoginPage"
-             Shell.NavBarIsVisible="False">
+             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+        <StackLayout Padding="15,15,15,0">
+            <Label Text="Login Below" TextColor="Black" FontSize="Large" Padding="15"/>
+            <Frame OutlineColor="#EE6429" >
+                <Entry Keyboard="Numeric" Text="{Binding EnteredId}" 
+                   Placeholder="Enter Login Number Here" PlaceholderColor="Gray"
+                   TextColor="Black"/></Frame>
+            <Grid Padding="15">
+            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}" 
+                    Grid.Column="0" TextColor="White" Padding="15"/>
+            <Button Text="Create Account" Grid.Column="1" Clicked="NewAccount" TextColor="White"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="cleanTable_Mobile.Views.BookingDelete" xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
+             Title="{Binding Title}">
+
+
+    <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+        <Label Text="{Binding DeleteCheck}" 
+               FontSize="14"
+               TextColor="Black"/>
+
+        <Button Margin="0,10,0,0" Text="Cancel"
+                Clicked="ButtonCancel"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White" />
+        <Button Margin="0,10,0,0" Text="Delete"
+                Command="{Binding DeleteAccount}"
+                BackgroundColor="Red"
+                TextColor="White" />
+    </StackLayout>
+
+</ContentPage>

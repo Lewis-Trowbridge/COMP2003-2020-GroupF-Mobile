@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using cleanTable_Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using cleanTable_Mobile.ViewModels;
 
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class BookingView : ContentPage
     {
-        public LoginPage()
+        public BookingView(int bookingId)
         {
             InitializeComponent();
+            BindingContext = new BookingPageViewModel(bookingId);
         }
-        async void NewAccount(object sender, EventArgs e)
+        async void ButtonCancel(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(CreateAccountPage)}");
-
+            await Navigation.PopToRootAsync();
         }
     }
 }
