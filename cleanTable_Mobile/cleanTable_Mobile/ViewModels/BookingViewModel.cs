@@ -19,6 +19,7 @@ namespace cleanTable_Mobile.ViewModels
         private TimeSpan _selectedTime;
         private int _numberOfPeople;
         private int _tableChosen;
+       
 
         public DateTime SelectedDate { get; set; }
         private Tables _selectedIndexTable { get; set; }
@@ -66,12 +67,13 @@ namespace cleanTable_Mobile.ViewModels
 
         public BookingViewModel()
         {
-            Title = "Bookings";
+         
+            Title = "Create a Booking";
 
             TableList = GetTables().OrderBy(t => t.TableNumber).ToList();
 
             _client = new HttpClient();
-
+           
             SendRequest = new Command(async () =>
             {
 
@@ -99,7 +101,7 @@ namespace cleanTable_Mobile.ViewModels
           
         }
 
-
+       
         public TimeSpan SelectedTime
         {
             get
