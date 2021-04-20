@@ -16,75 +16,82 @@
                    HorizontalOptions="Center" 
                    TextColor="Black" 
                    FontSize="20" 
-                   Padding="20"/>
-            
-            <Label  Text="First Name:" 
+                   Margin="15,15,15,-10"/>
+
+            <Grid Padding="20">
+                <Label  Text="First Name:" Grid.Column="0" Grid.Row="0"
                     HorizontalOptions="Center" 
                     TextColor="Black" 
-                    FontSize="16"/>
-            
-            <Entry  TextColor="Black" 
+                    FontSize="16"
+                        Margin="25"/>
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="0"
                     HorizontalOptions="Center"  
                     Placeholder="First Name" 
                     PlaceholderColor="Gray"  
-                    Text="{Binding FirstName, Mode=TwoWay}"/>
-            
-            <Label Text="Last Name" 
+                    Text="{Binding FirstName, Mode=TwoWay}" />
+
+                <Label Text="Last Name: " Grid.Column="0" Grid.Row="1"
                    HorizontalOptions="Center" 
                    TextColor="Black" 
-                   FontSize="16" 
-                   Padding="10"/>
-            
-            <Entry  TextColor="Black" 
+                   FontSize="16"  Margin="25"
+                  />
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="1"
                     HorizontalOptions="Center" 
                     Placeholder="Last Name" 
                     PlaceholderColor="Gray" 
                     Text="{Binding LastName, Mode=TwoWay}"/>
-            
-            <Label Text="Contact Number" 
+
+                <Label Text="Contact Number: " Grid.Column="0" Grid.Row="2"
                    HorizontalOptions="Center" 
                    TextColor="Black" 
-                   FontSize="16" 
-                   Padding="10"/>
-            
-            <Entry  TextColor="Black" 
+                   FontSize="16" Margin="23"
+                  />
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="2"
                     HorizontalOptions="Center" 
                     Placeholder="Contact Number"
                     PlaceholderColor="Gray" 
                     MaxLength="11" 
                     Text="{Binding ContactNumber, Mode=TwoWay}"/>
-            
-            <Label Text="Username" 
+
+                <Label Text="Username: " Grid.Column="0" Grid.Row="3"
                    HorizontalOptions="Center" 
                    TextColor="Black" 
-                   FontSize="16" 
-                   Padding="10"/>
-            
-            <Entry  TextColor="Black" 
+                   FontSize="16" Margin="23"
+                   />
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="3"
                     HorizontalOptions="Center" 
                     Placeholder="Username" 
                     PlaceholderColor="Gray" 
                     Text="{Binding UserName, Mode=TwoWay}"/>
-            
-            <Label Text="Password" 
+
+                <Label Text="Password: " Grid.Column="0" Grid.Row="4"
                    HorizontalOptions="Center" 
                    TextColor="Black"
-                   FontSize="16" 
-                   Padding="10"/>
-            
-            <Entry  TextColor="Black" 
+                   FontSize="16" Margin="25"
+                   />
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="4"
                     HorizontalOptions="Center" 
                     Placeholder="Password" 
                     PlaceholderColor="Gray"
                     IsPassword="True" 
                     Text="{Binding Password, Mode=TwoWay}"/>
 
-            <Button x:Name="btnSend"
+                <Button  Grid.Column="0" Grid.Row="5"
                 Text="Create Account" HorizontalOptions="Center"
                 FontSize="14"
-                TextColor="Black"
-                Command="{Binding CreateRequest}">
-            </Button>
+                TextColor="White"
+                Command="{Binding CreateRequest}" Margin="10"/>
+                <Button  Grid.Column="1" Grid.Row="5" BackgroundColor="Red"
+                Text="Cancel" HorizontalOptions="Center"
+                FontSize="14"
+                TextColor="White"
+                 Margin="10"/>
+</Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

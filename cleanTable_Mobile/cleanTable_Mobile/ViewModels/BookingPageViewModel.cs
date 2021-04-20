@@ -1,4 +1,5 @@
 ﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Views;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -6,6 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace cleanTable_Mobile.ViewModels
 {
@@ -24,7 +27,12 @@ namespace cleanTable_Mobile.ViewModels
 
             _client = new HttpClient();
 
-            GetBooking(bookingId); //hard coded for now
+            GetBooking(bookingId);
+
+            SendRequest = new Command(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new BookingDelete(bookingId));
+            });
 
         }           
         public async void GetBooking(int BookingID)
@@ -33,7 +41,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";            
             uri.Path = "COMP2003/COMP2003_F/api/api/bookings/view";            
-            uri.Query = "bookingId=" + BookingID + "&customerId=" + CustomerId; //will change when login sorted
+            uri.Query = "bookingId=" + BookingID + "&customerId=" + CustomerId;
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
             
             GetBookingView book = JsonConvert.DeserializeObject<GetBookingView>(await message.Content.ReadAsStringAsync());
@@ -109,5 +117,7 @@ namespace cleanTable_Mobile.ViewModels
                 OnPropertyChanged("BookTable");
             }
         }
+        public ICommand SendRequest { private set; get; }
     }
+
 }

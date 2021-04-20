@@ -15,6 +15,7 @@ namespace cleanTable_Mobile.ViewModels
         public LoginViewModel()
         {
             LoginCommand = new Command(OnLoginClicked);
+            Title = "Login";
         }
 
         private async void OnLoginClicked(object obj)

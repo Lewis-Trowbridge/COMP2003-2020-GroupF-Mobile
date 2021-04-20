@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cleanTable_Mobile.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,10 @@ namespace cleanTable_Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BookingDelete : ContentPage
     {
-        public BookingDelete()
+        public BookingDelete(int bookingId)
         {
             InitializeComponent();
+            BindingContext = new BookingDeleteViewModel(bookingId);
         }
         async void ButtonCancel(object sender, EventArgs e)
         {

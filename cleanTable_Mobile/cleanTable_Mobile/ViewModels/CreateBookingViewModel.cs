@@ -95,7 +95,7 @@ namespace cleanTable_Mobile.ViewModels
                     booking.BookingSize = _numberOfPeople;
 
                     booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
-                    booking.CustomerId = CustomerId; //hardcoded
+                    booking.CustomerId = CustomerId; 
                     booking.VenueTableId = _tableChosen;
 
                     string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
@@ -165,7 +165,7 @@ namespace cleanTable_Mobile.ViewModels
                 {
                     _selectedIndexTable = value;
                     _tableChosen = value.TableId;
-
+                    OnPropertyChanged("SelectedIndexTable");
                 }
             }
         }
