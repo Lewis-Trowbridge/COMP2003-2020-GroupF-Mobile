@@ -100,6 +100,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/venues/top";
+            venue = JsonConvert.DeserializeObject<List<GetTopVenues>>(await message.Content.ReadAsStringAsync());
 
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
