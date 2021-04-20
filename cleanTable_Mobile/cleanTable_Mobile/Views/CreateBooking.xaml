@@ -43,7 +43,7 @@
                 Value="{Binding NumberOfPeople, Mode=TwoWay}"/>
 
             <Label  Grid.ColumnSpan="2" Grid.Row="2" Padding="0,30,0,0"
-               Text="Chooes a Table: " HorizontalOptions="Center" FontAttributes="Bold"
+               Text="Choose a Table: " HorizontalOptions="Center" FontAttributes="Bold"
                FontSize="14" TextColor="Black"  IsVisible="{Binding CompleteBooking, Mode=TwoWay}"/>
 
             <Picker Title="Choose a Table" TitleColor="Black" TextColor="Black" Grid.ColumnSpan="2" Grid.Row="3" 
