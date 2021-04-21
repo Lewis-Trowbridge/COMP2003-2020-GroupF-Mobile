@@ -15,6 +15,8 @@
               SeparatorColor="#EE6429"
               RowHeight="65" 
               IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding LoadHomepage}"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
               SelectedItem="{Binding SelectedVenue}">
               
         <ListView.Header>
