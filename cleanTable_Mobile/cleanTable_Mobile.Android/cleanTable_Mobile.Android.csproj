@@ -105,10 +105,13 @@
       <Name>cleanTable_Mobile</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cleantable_logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptioncleanTable_MobileAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptioncleanTable_MobileAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
