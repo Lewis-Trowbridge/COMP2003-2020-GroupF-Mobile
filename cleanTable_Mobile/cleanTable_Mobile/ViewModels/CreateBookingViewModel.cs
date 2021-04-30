@@ -44,7 +44,7 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
-        public CreateBookingViewModel(int VenID)
+        public CreateBookingViewModel(int VenueID)
         {
             Title = "Bookings";
 
@@ -64,11 +64,11 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Host = "web.socem.plymouth.ac.uk";
                 uri.Scheme = "http";
                 uri.Path = "COMP2003/COMP2003_F/api/api/venues/tablesAvailable";
-                uri.Query = "venueId=" + VenID + "&partySize=" + NumberOfPeople
+                uri.Query = "venueId=" + VenueID + "&partySize=" + NumberOfPeople
                 + "&bookingTime=" + SelectedDate.Date.Add(_selectedTime).ToString("O");
-                Debug.WriteLine(uri.Uri);
+                // Debug.WriteLine(uri.Uri);
                 HttpResponseMessage message = await _client.GetAsync(uri.Uri);
-                Debug.WriteLine(await message.Content.ReadAsStringAsync());
+                //Debug.WriteLine(await message.Content.ReadAsStringAsync());
                 TableList = JsonConvert.DeserializeObject<List<TablesAvailable>>(await message.Content.ReadAsStringAsync());
                 
                 foreach (TablesAvailable tables in TableList)
@@ -104,7 +104,7 @@ namespace cleanTable_Mobile.ViewModels
 
                     uri.Host = "web.socem.plymouth.ac.uk";
                     uri.Scheme = "http";
-                    uri.Path = "/COMP2003/COMP2003_F/api/api/venues/booktable";
+                    uri.Path = "/COMP2003/COMP2003_F/api/api/bookings/create/";
 
                     HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 

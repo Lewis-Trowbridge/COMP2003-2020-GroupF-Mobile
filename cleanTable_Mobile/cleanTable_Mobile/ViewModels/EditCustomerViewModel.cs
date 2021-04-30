@@ -1,15 +1,18 @@
-﻿using System;
+﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Models.Responses;
+using cleanTable_Mobile.Views;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
-using cleanTable_Mobile.Models.Requests;
-using Newtonsoft.Json;
 
 namespace cleanTable_Mobile.ViewModels
 {
-    class CreateAccountViewModel: BaseViewModel
+    class EditCustomerViewModel : BaseViewModel
     {
         private HttpClient _client;
         private string _firstName;
@@ -17,36 +20,63 @@ namespace cleanTable_Mobile.ViewModels
         private string _contactNumber;
         private string _username;
         private string _password;
-
-        public CreateAccountViewModel()
+        private string _errorCheck;
+        public EditCustomerViewModel()
         {
             Title = "Create Account";
 
             _client = new HttpClient();
 
-            CreateRequest = new Command(async () =>
+            CreateRequest = new Command(EditCustomer);
+
+        }
+        public async void EditCustomer()
+        {
+            EditCustomers customer = new EditCustomers();
+            customer.CustomerId = CustomerId;
+            customer.CustomerName = _firstName + " " + _lastName;
+            customer.CustomerContactNumber = _contactNumber;
+            customer.CustomerUserName = _username;
+            customer.CustomerPassword = _password;
+
+            string JsonData = JsonConvert.SerializeObject(customer); //converts booking object to Json format
+            StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
+            UriBuilder uri = new UriBuilder();
+
+            uri.Host = "web.socem.plymouth.ac.uk";
+            uri.Scheme = "http";
+            uri.Path = "/COMP2003/COMP2003_F/api/api/customers/edit";
+
+            HttpResponseMessage response = await _client.PutAsync(uri.Uri, content);
+
+            CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+
+            await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(result.Id));
+
+            if (response.IsSuccessStatusCode)
             {
-                //Set Account object
-                CreateAccountRequest createAccount = new CreateAccountRequest();
-                
-                createAccount.CustomerName = _firstName + " " +_lastName;
-                createAccount.CustomerContactNumber = _contactNumber;
-                createAccount.CustomerUserName = _username;
-                createAccount.CustomerPassword = _password;
-            
-                string JsonData = JsonConvert.SerializeObject(createAccount); //converts booking object to Json format
-                StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
-                UriBuilder uri = new UriBuilder();
+                await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(CustomerId));
+            }
+            else
+            {
+                ErrorCheck = "Error - Please Try Again"; 
+            }
 
-                uri.Host = "web.socem.plymouth.ac.uk";
-                uri.Scheme = "http";
-                uri.Path = "/COMP2003/COMP2003_F/api/api/customers/create";
+        }
 
-                HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
+        public bool IsSuccessStatusCode { get; }
 
-                Console.WriteLine(response.Headers.Location);
-
-            });
+        public string ErrorCheck
+        {
+            get
+            {
+                return _errorCheck;
+            }
+            set
+            {
+                _errorCheck = value;
+                OnPropertyChanged("ErrorCheck");
+            }
         }
         public string FirstName
         {
@@ -126,8 +156,5 @@ namespace cleanTable_Mobile.ViewModels
         }
         public ICommand CreateRequest { private set; get; }
 
-
     }
-
-
 }

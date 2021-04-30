@@ -4,7 +4,7 @@ using System.Text;
 
 namespace cleanTable_Mobile.Models.Requests
 {
-    class CreateAccountRequest
+    class CreateCustomerRequest
     {
         public string CustomerName { get; set; }
         public string CustomerContactNumber { get; set; }
