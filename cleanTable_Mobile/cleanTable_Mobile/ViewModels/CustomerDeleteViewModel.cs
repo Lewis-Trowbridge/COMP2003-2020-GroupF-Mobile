@@ -45,11 +45,11 @@ namespace cleanTable_Mobile.ViewModels
 
             if (message.IsSuccessStatusCode)
             {
-                DeleteCheck = "worked";
+                DeleteCheck = "Your Account has now been deleted";
             }
             else
             {
-                DeleteCheck = "nah";
+                DeleteCheck = "Your Account has not been deleted ";
             }
        
         }

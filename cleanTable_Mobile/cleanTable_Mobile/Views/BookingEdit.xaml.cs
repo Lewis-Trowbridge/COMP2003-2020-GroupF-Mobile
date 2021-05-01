@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using cleanTable_Mobile.ViewModels;
@@ -10,16 +11,18 @@ using cleanTable_Mobile.ViewModels;
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class BookingView : ContentPage
+    public partial class BookingEdit : ContentPage
     {
-        public BookingView(int bookingId)
+        public BookingEdit(int venueId, int bookingId)
         {
             InitializeComponent();
-            BindingContext = new BookingPageViewModel(bookingId);
+            BindingContext = new EditBookingViewModel(venueId,bookingId);
         }
-        async void ButtonEdit(object sender, EventArgs e)
+        void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
         {
-            await Navigation.PopToRootAsync();
+            double value = args.NewValue;
+            value = Convert.ToInt32(value);
+            displayLabel.Text = String.Format("Party Size: {0}", value);
         }
         async void ButtonCancel(object sender, EventArgs e)
         {

@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace cleanTable_Mobile.ViewModels
 {
-    class CreateBookingViewModel : BaseViewModel
+    class EditBookingViewModel : BaseViewModel
     {
         private HttpClient _client;
         private TimeSpan _selectedTime;
@@ -24,39 +24,22 @@ namespace cleanTable_Mobile.ViewModels
         private int _tableChosen;
         private bool _completeBooking;
         private bool _bookTable;
+        private string _editCheck;
         private ObservableCollection<TablesAvailable> _tables;
         private TablesAvailable _selectedIndexTable { get; set; }
         private List<TablesAvailable> TableList = new List<TablesAvailable>();
-        
+
         public DateTime SelectedDate { get; set; }
 
-        public async void UserLogin()
+        public EditBookingViewModel(int VenueID, int BookingID)
         {
-            string result = await Application.Current.MainPage.DisplayPromptAsync("Login", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
-            
-            if (result != null)
-            {
-                CustomerId = Convert.ToInt32(result);
-            }
-            else
-            {
-               await Application.Current.MainPage.DisplayPromptAsync("Login Failed", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
-            }
-        }
-
-        public CreateBookingViewModel(int VenID)
-        {
-            Title = "Bookings";
+        
+            Title = "Edit Booking";
 
             _client = new HttpClient();
             _tables = new ObservableCollection<TablesAvailable>();
             _completeBooking = false;
             _bookTable = true;
-
-            if (CustomerId == 0)
-            {
-                UserLogin();
-            }
 
             TableRequest = new Command(async () =>
             {
@@ -64,13 +47,13 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Host = "web.socem.plymouth.ac.uk";
                 uri.Scheme = "http";
                 uri.Path = "COMP2003/COMP2003_F/api/api/venues/tablesAvailable";
-                uri.Query = "venueId=" + VenID + "&partySize=" + NumberOfPeople
+                uri.Query = "venueId=" + VenueID + "&partySize=" + NumberOfPeople
                 + "&bookingTime=" + SelectedDate.Date.Add(_selectedTime).ToString("O");
                 Debug.WriteLine(uri.Uri);
                 HttpResponseMessage message = await _client.GetAsync(uri.Uri);
                 Debug.WriteLine(await message.Content.ReadAsStringAsync());
                 TableList = JsonConvert.DeserializeObject<List<TablesAvailable>>(await message.Content.ReadAsStringAsync());
-                
+
                 foreach (TablesAvailable tables in TableList)
                 {
                     Tables.Add(tables);
@@ -78,25 +61,16 @@ namespace cleanTable_Mobile.ViewModels
                 CompleteBooking = true;
                 BookTable = false;
             });
-            
+
             SendRequest = new Command(async () =>
             {
-                bool answer = await App.Current.MainPage.DisplayAlert("Question?", "Please Confirm your Booking" + "\n"
-                    + "Venue : Subway" + "\n"
-                    + "Date & Time: " + SelectedDate.Date.Add(_selectedTime).ToString() + "\n"
-                    + "Party Size : " + NumberOfPeople.ToString() + "\n"
-                    + "Table Chosen : " + TableChosen.ToString(),
-                    "Confirm", "Cancel");
-                
-                if (answer == true)
-                {
+              
                     //Set booking object
-                    CreateBookingRequest booking = new CreateBookingRequest();
-                    booking.BookingSize = _numberOfPeople;
-
-                    booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
-                    booking.CustomerId = CustomerId; 
-                    booking.VenueTableId = _tableChosen;
+                    EditBooking booking = new EditBooking();
+                    booking.bookingId = BookingID;
+                    booking.bookingTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
+                    booking.bookingSize = _numberOfPeople;
+                    booking.venueTableId = _tableChosen;
 
                     string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
                     StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
@@ -104,20 +78,22 @@ namespace cleanTable_Mobile.ViewModels
 
                     uri.Host = "web.socem.plymouth.ac.uk";
                     uri.Scheme = "http";
-                    uri.Path = "/COMP2003/COMP2003_F/api/api/bookings/create/";
+                    uri.Path = "/COMP2003/COMP2003_F/api/api/bookings/edit";
 
-                    HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
+                    HttpResponseMessage response = await _client.PutAsync(uri.Uri, content);
 
                     Debug.WriteLine(await response.Content.ReadAsStringAsync());
 
-                    CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
-
-                    await Application.Current.MainPage.Navigation.PushAsync(new BookingView(result.Id));
-                }
-                else
-                {
-                    return;
-                }
+                                      
+                    if (response.IsSuccessStatusCode)
+                    {
+                    await Application.Current.MainPage.Navigation.PushAsync(new BookingView(BookingID));
+                    }
+                    else
+                    {
+                         EditCheck = "Your Booking has not been changed ";
+                    }
+                
             });
 
         }
@@ -207,6 +183,19 @@ namespace cleanTable_Mobile.ViewModels
             {
                 _bookTable = value;
                 OnPropertyChanged("BookTable");
+            }
+        }
+         public bool IsSuccessStatusCode { get; }
+        public string EditCheck
+        {
+            get
+            {
+                return _editCheck;
+            }
+            set
+            {
+                _editCheck = value;
+                OnPropertyChanged("EditCheck");
             }
         }
         public ICommand TableRequest { private set; get; }
