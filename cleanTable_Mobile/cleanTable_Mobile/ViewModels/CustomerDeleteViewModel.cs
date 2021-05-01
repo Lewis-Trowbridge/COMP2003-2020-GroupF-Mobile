@@ -46,7 +46,7 @@ namespace cleanTable_Mobile.ViewModels
 
             if (message.IsSuccessStatusCode)
             {
-                DeleteCheck = "This Customer has been DELETED";
+                DeleteCheck = "Your Account has now been deleted";
             }
             else
             {
