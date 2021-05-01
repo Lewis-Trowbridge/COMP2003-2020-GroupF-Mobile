@@ -50,7 +50,7 @@ namespace cleanTable_Mobile.ViewModels
             }
             else
             {
-                DeleteCheck = "Error - Please Try Again";
+                DeleteCheck = "Your Account has not been deleted ";
             }
        
         }

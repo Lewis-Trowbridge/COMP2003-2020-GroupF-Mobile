@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using cleanTable_Mobile.Views;
 
 namespace cleanTable_Mobile.ViewModels
 {
@@ -16,10 +17,12 @@ namespace cleanTable_Mobile.ViewModels
     {
         public ObservableCollection<GetBookings> _histBookings;
         HttpClient _client;
-        
 
+        private  GetBookings _selectedItem;
+        private int _bookingChosen;
         public GetBookingsViewModel()
         {
+
             _histBookings = new ObservableCollection<GetBookings>();
             _client = new HttpClient();
             Title = "Your Bookings";
@@ -43,6 +46,7 @@ namespace cleanTable_Mobile.ViewModels
                 UpcomingBookings();
             });
         }
+
         public async void UserLogin()
         {
             bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
@@ -106,5 +110,38 @@ namespace cleanTable_Mobile.ViewModels
         }
         public ICommand GetHistoryBookings { private set; get; }
         public ICommand GetUpcomingBookings { private set; get; }
+        public GetBookings selectedBooking
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                if(_selectedItem !=value)
+                {
+                    _selectedItem = value;
+                    _bookingChosen = value.bookingId;
+                    NextPage();
+                }
+            }
+        }
+        public int BookingChosen
+        {
+            get
+            {
+                return _bookingChosen;
+            }
+            set
+            {
+                if (_bookingChosen!= value)
+                {
+                    _bookingChosen = value;
+                    OnPropertyChanged("BookingChosen");
+
+                }
+            }
+        }
+
     }
 }

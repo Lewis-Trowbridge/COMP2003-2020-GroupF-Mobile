@@ -15,6 +15,7 @@ namespace cleanTable_Mobile.Views
         public EditCustomer()
         {
             InitializeComponent();
+
         }
     }
 }

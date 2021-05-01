@@ -78,8 +78,6 @@ namespace cleanTable_Mobile.ViewModels
             {
                 VenueSearch();
             });
-
-
         }
         public ObservableCollection<GetTopVenues> Venues
         {
