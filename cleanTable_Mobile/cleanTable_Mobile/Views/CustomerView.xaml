@@ -4,7 +4,7 @@
              x:Class="cleanTable_Mobile.Views.CustomerView">
     <StackLayout>
 
-        <Label Text="View Booking" 
+        <Label Text="View Account Details" 
                    HorizontalOptions="Center" 
                    TextColor="Black" 
                    FontSize="20" 

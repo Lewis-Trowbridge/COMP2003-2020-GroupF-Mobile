@@ -25,6 +25,7 @@ namespace cleanTable_Mobile.ViewModels
         private bool _completeBooking;
         private bool _bookTable;
         private ObservableCollection<TablesAvailable> _tables;
+        private int _tableNum;
         private TablesAvailable _selectedIndexTable { get; set; }
         private List<TablesAvailable> TableList = new List<TablesAvailable>();
         
@@ -73,12 +74,11 @@ namespace cleanTable_Mobile.ViewModels
                     + "Venue : Subway" + "\n"
                     + "Date & Time: " + SelectedDate.Date.Add(_selectedTime).ToString() + "\n"
                     + "Party Size : " + NumberOfPeople.ToString() + "\n"
-                    + "Table Chosen : " + TableChosen.ToString(),
+                    + "Table Chosen : " + _tableNum.ToString(),
                     "Confirm", "Cancel");
                 
                 if (answer == true)
                 {
-                    //Set booking object
                     CreateBookingRequest booking = new CreateBookingRequest();
                     booking.BookingSize = _numberOfPeople;
 
@@ -166,6 +166,7 @@ namespace cleanTable_Mobile.ViewModels
                 {
                     _selectedIndexTable = value;
                     _tableChosen = value.TableId;
+                    _tableNum = value.VenueTableNumber;
                     OnPropertyChanged("SelectedIndexTable");
                 }
             }
