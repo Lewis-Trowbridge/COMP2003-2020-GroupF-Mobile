@@ -86,13 +86,18 @@
                 FontSize="14"
                 TextColor="White"
                 Command="{Binding CreateRequest}" Margin="10"/>
-                <Button  Grid.Column="1" Grid.Row="5" BackgroundColor="Red"
+
+                <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="5"
                 Text="Cancel" HorizontalOptions="Center"
-                FontSize="14"
+                FontSize="14" Margin="10"
                 TextColor="White"
-                 Margin="10"/>
-                
+                BackgroundColor="Red"
+                Clicked="ButtonCancel"/>
+
             </Grid>
+            <Label Text="{Binding ErrorCheck}" 
+               FontSize="14"
+               TextColor="Red"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

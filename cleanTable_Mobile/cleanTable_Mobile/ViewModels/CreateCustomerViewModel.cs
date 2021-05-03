@@ -20,6 +20,7 @@ namespace cleanTable_Mobile.ViewModels
         private string _contactNumber;
         private string _username;
         private string _password;
+        private string _errorCheck;
 
         public CreateCustomerViewModel()
         {
@@ -27,33 +28,57 @@ namespace cleanTable_Mobile.ViewModels
 
             _client = new HttpClient();
 
-            CreateRequest = new Command(async () =>
+            CreateRequest = new Command(() =>
             {
-                //Set Account object
-                CreateCustomerRequest createAccount = new CreateCustomerRequest();
-                
-                createAccount.CustomerName = _firstName + " " +_lastName;
-                createAccount.CustomerContactNumber = _contactNumber;
-                createAccount.CustomerUserName = _username;
-                createAccount.CustomerPassword = _password;
-            
-                string JsonData = JsonConvert.SerializeObject(createAccount); //converts booking object to Json format
-                StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
-                UriBuilder uri = new UriBuilder();
-
-                uri.Host = "web.socem.plymouth.ac.uk";
-                uri.Scheme = "http";
-                uri.Path = "/COMP2003/COMP2003_F/api/api/customers/create";
-
-                HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
-
-                Debug.WriteLine(await response.Content.ReadAsStringAsync());
-
-                CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
-
-                await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(result.Id));
-
+                CreateAccount();
             });
+        }
+
+        public  async void CreateAccount()
+        {
+            CreateCustomerRequest createAccount = new CreateCustomerRequest();
+
+            createAccount.CustomerName = _firstName + " " + _lastName;
+            createAccount.CustomerContactNumber = _contactNumber;
+            createAccount.CustomerUserName = _username;
+            createAccount.CustomerPassword = _password;
+
+            string JsonData = JsonConvert.SerializeObject(createAccount); //converts booking object to Json format
+            StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
+            UriBuilder uri = new UriBuilder();
+
+            uri.Host = "web.socem.plymouth.ac.uk";
+            uri.Scheme = "http";
+            uri.Path = "/COMP2003/COMP2003_F/api/api/customers/create";
+
+            HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
+
+            Debug.WriteLine(await response.Content.ReadAsStringAsync());
+
+            CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+
+            if (response.IsSuccessStatusCode)
+            {
+               await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(result.Id));
+            }
+            else
+            {
+                ErrorCheck = "Error - Please Try Again";
+            }
+            
+        }
+        public bool IsSuccessStatusCode { get; }
+        public string ErrorCheck
+        {
+            get
+            {
+                return _errorCheck;
+            }
+            set
+            {
+                _errorCheck = value;
+                OnPropertyChanged("ErrorCheck");
+            }
         }
         public string FirstName
         {

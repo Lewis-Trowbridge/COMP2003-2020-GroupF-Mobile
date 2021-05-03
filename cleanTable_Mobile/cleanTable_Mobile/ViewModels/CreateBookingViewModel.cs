@@ -30,19 +30,7 @@ namespace cleanTable_Mobile.ViewModels
         
         public DateTime SelectedDate { get; set; }
 
-        public async void UserLogin()
-        {
-            string result = await Application.Current.MainPage.DisplayPromptAsync("Login", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
-            
-            if (result != null)
-            {
-                CustomerId = Convert.ToInt32(result);
-            }
-            else
-            {
-               await Application.Current.MainPage.DisplayPromptAsync("Login Failed", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
-            }
-        }
+
 
         public CreateBookingViewModel(int VenueID)
         {
@@ -120,6 +108,19 @@ namespace cleanTable_Mobile.ViewModels
                 }
             });
 
+        } 
+        public async void UserLogin()
+        {
+            bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
+
+            if (result == true)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+            }
         }
         public ObservableCollection<TablesAvailable> Tables
         {

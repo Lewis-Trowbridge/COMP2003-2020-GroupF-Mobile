@@ -23,7 +23,7 @@ namespace cleanTable_Mobile.ViewModels
         private string _errorCheck;
         public EditCustomerViewModel()
         {
-            Title = "Create Account";
+            Title = "Edit Account";
 
             _client = new HttpClient();
 
@@ -49,9 +49,7 @@ namespace cleanTable_Mobile.ViewModels
 
             HttpResponseMessage response = await _client.PutAsync(uri.Uri, content);
 
-            CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
-
-            await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(result.Id));
+           
 
             if (response.IsSuccessStatusCode)
             {

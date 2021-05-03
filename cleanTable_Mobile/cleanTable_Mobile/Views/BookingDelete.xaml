@@ -10,7 +10,10 @@
                FontSize="14"
                TextColor="Black"/>
 
-
+        <Label Text="{Binding DeleteCheck}" 
+               FontSize="14"
+               TextColor="Red"/>
+        
         <Button Margin="0,10,0,0" Text="Cancel"
                 Clicked="ButtonCancel"
                 BackgroundColor="{StaticResource Primary}"

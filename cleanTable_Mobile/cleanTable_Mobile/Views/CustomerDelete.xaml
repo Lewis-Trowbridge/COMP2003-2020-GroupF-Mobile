@@ -10,7 +10,7 @@
                TextColor="Black"/>
         <Label Text="{Binding DeleteCheck}" 
                FontSize="14"
-               TextColor="Black"/>
+               TextColor="Red"/>
 
         <Button Margin="0,10,0,0" Text="Cancel"
                 Clicked="ButtonCancel"
@@ -18,7 +18,7 @@
                 TextColor="White" />
         
         <Button Margin="0,10,0,0" Text="Delete"
-                Command="{Binding DeleteAccount}"  IsVisible="{Binding CompleteBooking, Mode=TwoWay}"
+                Command="{Binding DeleteAccount}"  IsVisible="{Binding CompleteDelete, Mode=TwoWay}"
                 BackgroundColor="Red"
                 TextColor="White" />
     </StackLayout>

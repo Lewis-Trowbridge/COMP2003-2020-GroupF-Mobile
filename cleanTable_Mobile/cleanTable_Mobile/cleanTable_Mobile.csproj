@@ -39,7 +39,7 @@
     <EmbeddedResource Update="Views\VenuePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ViewBookingsPage.xaml">
+    <EmbeddedResource Update="Views\UpcomingHistory.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -70,6 +70,9 @@
     </Compile>
     <Compile Update="Views\CreateBooking.xaml.cs">
       <DependentUpon>CreateBooking.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UpcomingHistory.xaml.cs">
+      <DependentUpon>UpcomingHistory.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

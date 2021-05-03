@@ -1,4 +1,5 @@
 ﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,16 @@ namespace cleanTable_Mobile.ViewModels
             _histBookings = new ObservableCollection<GetBookings>();
             _client = new HttpClient();
             Title = "Your Bookings";
-            UpcomingBookings();
+            
+
+            if (CustomerId == 0)
+            {
+                UserLogin();
+            }
+            else
+            {
+                UpcomingBookings();
+            }
 
             GetHistoryBookings = new Command(() =>
             {
@@ -32,6 +42,19 @@ namespace cleanTable_Mobile.ViewModels
             {
                 UpcomingBookings();
             });
+        }
+        public async void UserLogin()
+        {
+            bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
+
+            if (result == true)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+            }
         }
         public async void HistoricBookings()
         {

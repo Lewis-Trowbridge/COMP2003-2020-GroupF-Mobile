@@ -44,9 +44,9 @@ namespace cleanTable_Mobile.ViewModels
 
             GetCustomerView customer = JsonConvert.DeserializeObject<GetCustomerView>(await message.Content.ReadAsStringAsync());
             Debug.WriteLine(await message.Content.ReadAsStringAsync());
-            CustomerName = customer.customerName;
-            CustomerNumber = customer.customerContactNumber;
-            CustomerUsername = customer.customerUsername;
+            CustomerName = customer.CustomerName;
+            CustomerNumber = customer.CustomerContactNumber;
+            CustomerUsername = customer.CustomerUsername;
         }
 
         public string CustomerName

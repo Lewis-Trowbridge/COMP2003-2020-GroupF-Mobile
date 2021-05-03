@@ -17,7 +17,6 @@ namespace cleanTable_Mobile.Models.Requests
         public int VenueTableID { get; set; }
         public int VenueTableNum { get; set; }
         public int VenueTableCapcity { get; set; }
-
         public string AddLineOne { get; set; }
         public string AddLineTwo { get; set; }
         public string City { get; set; }

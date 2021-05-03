@@ -13,7 +13,7 @@ namespace cleanTable_Mobile.ViewModels
     {
         private HttpClient _client;
         private string _deleteCheck;
-        private bool _completeBooking;
+        private bool _completeDelete;
 
         public CustomerDeleteViewModel()
         {
@@ -71,12 +71,12 @@ namespace cleanTable_Mobile.ViewModels
         {
             get
             {
-                return _completeBooking;
+                return _completeDelete;
             }
             set
             {
-                _completeBooking = value;
-                OnPropertyChanged("CompleteBooking");
+                _completeDelete = value;
+                OnPropertyChanged("CompleteDelete");
             }
         }
         public ICommand DeleteAccount { private set; get; }

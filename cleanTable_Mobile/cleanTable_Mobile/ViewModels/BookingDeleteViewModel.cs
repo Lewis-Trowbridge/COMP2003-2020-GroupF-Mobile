@@ -44,11 +44,11 @@ namespace cleanTable_Mobile.ViewModels
 
             if (message.IsSuccessStatusCode)
             {
-                DeleteCheck = "worked";
+                DeleteCheck = "This Booking has been DELETED";
             }
             else
             {
-                DeleteCheck = "nah";
+                DeleteCheck = "Error - Please Try Again";
             }
 
         }
@@ -67,6 +67,7 @@ namespace cleanTable_Mobile.ViewModels
         }
         public ICommand DeleteAccount { private set; get; }
     }
+
 }
 
 
