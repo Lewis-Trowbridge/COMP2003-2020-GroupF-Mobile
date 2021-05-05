@@ -20,8 +20,6 @@ namespace cleanTable_Mobile.ViewModels
         private DateTime _bookDateTime;
         private int _bookPartySize;
         private int _bookTable;
-        private int _venueID;
-
 
         public BookingPageViewModel(int bookingId)
         {
@@ -34,10 +32,6 @@ namespace cleanTable_Mobile.ViewModels
             SendRequest = new Command(async () =>
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new BookingDelete(bookingId));
-            });
-            SendRequestEdit = new Command(async () =>
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new BookingEdit(VenueId,bookingId));
             });
 
         }           
@@ -52,7 +46,6 @@ namespace cleanTable_Mobile.ViewModels
             
             GetBookingView book = JsonConvert.DeserializeObject<GetBookingView>(await message.Content.ReadAsStringAsync());
             Debug.WriteLine(await message.Content.ReadAsStringAsync());
-            VenueId = book.VenueID;
             VenueName = book.VenueName;
             VenueAddress = book.AddLineOne + "\n"
                          + book.AddLineTwo + "\n"
@@ -62,20 +55,8 @@ namespace cleanTable_Mobile.ViewModels
             BookDateTime = book.BookingTime;
             BookPartySize = book.BookingSize;
             BookTable = book.VenueTableNum;
+        }
 
-        }
-        public int VenueId
-        {
-            get
-            {
-                return _venueID;
-            }
-            set
-            {
-                _venueID = value;
-                OnPropertyChanged("VenueId");
-            }
-        }
         public string VenueName
         {
             get
@@ -137,7 +118,6 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
         public ICommand SendRequest { private set; get; }
-        public ICommand SendRequestEdit { private set; get; }
     }
 
 }

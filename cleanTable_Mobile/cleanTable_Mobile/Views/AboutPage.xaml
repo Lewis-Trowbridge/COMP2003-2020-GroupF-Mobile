@@ -32,19 +32,9 @@
         <ScrollView Grid.Row="1">
                 <Frame VerticalOptions="FillAndExpand" Margin="10" BackgroundColor="Transparent" Padding="5" >
                     <StackLayout VerticalOptions="FillAndExpand">
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" Padding="5"  />
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="20,0,10,5" Text="We are a multi-disciplinary team of six students which is made up of the following degress -"/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="-Computing and Software Development"/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="-Cyber Security"/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="-Computer Science"/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHAT IS THE PROJECT" Padding="5"/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="20,0,10,5" Text="This project enables small businesses to manage bookings, venues and staff with the CleanTables website."/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="20,0,10,5" Text="However you as the customer would want an easy way of booking a table at these venues, of course abiding with the up to date governing rules and restrictions of Covid-19."/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="20,0,10,5" Text="So we have made a mobile app to do such things, you can search for venues in your area, book tables and see your previous and upcoming bookings."/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="MEET THE TEAM" Padding="5"/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="20,0,10,5" Text="API team: Lewis Trowbridge and Nathan Everrett"/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="20,0,10,5" Text="Mobile team: Daisy Hawkins and Melissa Wright"/>
-                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="20,0,10,5" Text="Website team: Jack Harrison and Telle Abbott"/>
+                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="Title" Text="WHO WE ARE" />
+                        <Label TextColor="Black" HorizontalOptions="CenterAndExpand" Text="Lorem ipsum" ></Label>
+                       
                     </StackLayout>
                 </Frame>
             </ScrollView>

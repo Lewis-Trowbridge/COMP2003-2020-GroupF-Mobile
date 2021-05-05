@@ -1,57 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="cleanTable_Mobile.Views.HelpPage"
-             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
-             Title="{Binding Title}">
-
-    <ContentPage.BindingContext>
-        <vm:HelpViewModel />
-    </ContentPage.BindingContext>
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="Accent">#96d1ff</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-    <ContentView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <StackLayout BackgroundColor="DarkOrange" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                    <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                        <Label Text="FAQ" FontSize="Title"/>
-
-                    </ContentView>
-                </StackLayout>
-            </StackLayout>
-            <ScrollView Grid.Row="1">
-                <Frame VerticalOptions="FillAndExpand" Margin="10" BackgroundColor="Transparent" Padding="5" >
-                    <StackLayout VerticalOptions="FillAndExpand">
-                        <Label FontSize="Title" Text="Booking" TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="10"/>
-                        <Label HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Gray" Text="How do I book a table?" Padding="20,0,10,5"/>
-                        <Label HorizontalOptions="CenterAndExpand" TextColor="Black" Padding="20,0,10,10" Text="Select a venue from the homepage and it will take you the venue details, it is here you press the book table button and complete your booking."/>
-                        <Label HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Gray" Text="Can I see my bookings?" Padding="20,0,10,5"/>
-                        <Label HorizontalOptions="CenterAndExpand" TextColor="Black" Padding="20,0,10,10" Text="Yes you can, from the flyout you can select bookings and depending if you are logged in, you will be able to see your bookings"/>
-                        <Label HorizontalOptions="CenterAndExpand"  FontSize="Subtitle" TextColor="Gray" Text="How do I see my historical bookings?" Padding="20,0,10,5"/>
-                        <Label HorizontalOptions="CenterAndExpand"  TextColor="Black" Padding="20,0,10,10" Text="On the bookings page, you can press the historical bookings button and your bookings dated earlier than the current date will appear."/>
-                        <Label HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Gray" Text="Can I edit/delete my booking once it has been confirmed?" Padding="20,0,10,5"/>
-                        <Label HorizontalOptions="CenterAndExpand" TextColor="Black" Padding="20,0,10,10" Text="Yes you can, select your booking from the upcoming bookings and either press the edit or delete button at the bottom of the screen."/>
-                        <Label FontSize="Title" Text="Account" TextColor="Black" HorizontalOptions="CenterAndExpand" Padding="10"/>
-                        <Label HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Gray" Text="How do I create an account?" Padding="20,0,10,5"/>
-                        <Label HorizontalOptions="CenterAndExpand" TextColor="Black" Padding="20,0,10,10" Text="From the flyout click either log in or account, and it will prompt you to either log in or create an account"/>
-                        <Label HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Gray" Text="If I dont want to use the app any more, can I delete my account?" Padding="20,0,10,5"/>
-                        <Label HorizontalOptions="CenterAndExpand"  TextColor="Black" Padding="20,0,10,10" Text="Yes you can delete your account, from the account page if you are logged in, you can simply click the delete button and your account will be deleted. If you are not logged in, you will need to log in first before you can delete your account. "/>
-                        <Label HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Gray" Text="If I were to change my mobile number, could I change my details?" Padding="20,0,10,5"/>
-                        <Label HorizontalOptions="CenterAndExpand" TextColor="Black" Padding="20,0,10,10" Text="You can change your details from the account page, simply click the edit button and change the details. "/>
-                    </StackLayout>
-                </Frame>
-            </ScrollView>
-        </Grid>
-    </ContentView>
+             x:Class="cleanTable_Mobile.Views.HelpPage">
+    <ContentPage.Content>
+        <StackLayout>
+           
+            <Label Text="something helpful" TextColor="HotPink" HorizontalOptions="Center"/>
+        </StackLayout>
+    </ContentPage.Content>
 
 </ContentPage>

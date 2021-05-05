@@ -10,7 +10,7 @@ namespace cleanTable_Mobile.ViewModels
     {
         public HelpViewModel()
         {
-            Title = "FAQ";
+            Title = "Help";
         }
        
     }

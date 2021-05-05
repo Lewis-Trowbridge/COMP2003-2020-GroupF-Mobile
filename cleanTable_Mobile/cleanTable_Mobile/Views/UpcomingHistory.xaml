@@ -28,7 +28,7 @@
                  SeparatorColor="#EE6429"
                  RowHeight="75"
                  IsPullToRefreshEnabled="True"
-                 SelectedItem="{Binding selectedBooking, Mode=TwoWay}"
+                 SelectedItem="{Binding selectBooking, Mode=TwoWay}"
                  >
             <ListView.Header>
                 <StackLayout>

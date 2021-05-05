@@ -17,10 +17,6 @@ namespace cleanTable_Mobile.Views
             InitializeComponent();
             BindingContext = new BookingPageViewModel(bookingId);
         }
-        async void ButtonEdit(object sender, EventArgs e)
-        {
-            await Navigation.PopToRootAsync();
-        }
         async void ButtonCancel(object sender, EventArgs e)
         {
             await Navigation.PopToRootAsync();
