@@ -17,6 +17,7 @@ namespace cleanTable_Mobile.Views
             InitializeComponent();
 
         }
+
         async void NewAccount(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"//{nameof(CreateCustomerPage)}");

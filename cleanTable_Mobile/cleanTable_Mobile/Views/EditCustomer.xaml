@@ -64,7 +64,7 @@
                     Text="{Binding Password, Mode=TwoWay}"/>
 
                 <Button  Grid.Column="0" Grid.Row="5"
-                Text="Create Account" HorizontalOptions="Center"
+                Text="Edit Account" HorizontalOptions="Center"
                 FontSize="14"
                 TextColor="White"
                 Command="{Binding CreateRequest}" Margin="10"/>
