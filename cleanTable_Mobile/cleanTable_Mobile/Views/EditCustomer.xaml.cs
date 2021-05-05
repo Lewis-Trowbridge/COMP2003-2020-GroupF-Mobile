@@ -16,5 +16,9 @@ namespace cleanTable_Mobile.Views
         {
             InitializeComponent();
         }
+        async void ButtonCancel(object sender, EventArgs e)
+        {
+            await Navigation.PopToRootAsync();
+        }
     }
 }
