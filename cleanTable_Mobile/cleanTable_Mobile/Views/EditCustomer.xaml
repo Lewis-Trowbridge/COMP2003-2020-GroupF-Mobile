@@ -16,65 +16,50 @@
                    Margin="15,15,15,-10"/>
 
             <Grid Padding="20">
-                <Label  Text="First Name:" Grid.Column="0" Grid.Row="0"
+                <Label  Text="Full Name:" Grid.Column="0" Grid.Row="0"
                     HorizontalOptions="Center" 
                     TextColor="Black" 
                     FontSize="16"
-                        Margin="25"/>
+                        Margin="25,25,30,25"/>
 
                 <Entry  TextColor="Black" Grid.Column="1" Grid.Row="0"
-                    HorizontalOptions="Center"  
-                    Placeholder="First Name" 
+                    Placeholder="First Name" Margin="0,0,0,0"
                     PlaceholderColor="Gray"  
-                    Text="{Binding FirstName, Mode=TwoWay}" />
+                    Text="{Binding FullName, Mode=TwoWay}" />
 
-                <Label Text="Last Name: " Grid.Column="0" Grid.Row="1"
-                   HorizontalOptions="Center" 
-                   TextColor="Black" 
-                   FontSize="16"  Margin="25"
-                  />
 
-                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="1"
-                    HorizontalOptions="Center" 
-                    Placeholder="Last Name" 
-                    PlaceholderColor="Gray" 
-                    Text="{Binding LastName, Mode=TwoWay}"/>
-
-                <Label Text="Contact Number: " Grid.Column="0" Grid.Row="2"
+                <Label Text="Contact Number: " Grid.Column="0" Grid.Row="1"
                    HorizontalOptions="Center" 
                    TextColor="Black" 
                    FontSize="16" Margin="23"
                   />
 
-                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="2"
-                    HorizontalOptions="Center" 
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="1"
                     Placeholder="Contact Number"
                     PlaceholderColor="Gray" 
                     MaxLength="11" 
                     Text="{Binding ContactNumber, Mode=TwoWay}"/>
 
-                <Label Text="Username: " Grid.Column="0" Grid.Row="3"
+                <Label Text="Username: " Grid.Column="0" Grid.Row="2"
                    HorizontalOptions="Center" 
                    TextColor="Black" 
                    FontSize="16" Margin="23"
                    />
 
-                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="3"
-                    HorizontalOptions="Center" 
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="2"
                     Placeholder="Username" 
-                    PlaceholderColor="Gray" 
+                    PlaceholderColor="Gray" Margin="0,0,0,0"
                     Text="{Binding UserName, Mode=TwoWay}"/>
 
-                <Label Text="Password: " Grid.Column="0" Grid.Row="4"
+                <Label Text="Password: " Grid.Column="0" Grid.Row="3"
                    HorizontalOptions="Center" 
                    TextColor="Black"
                    FontSize="16" Margin="25"
                    />
 
-                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="4"
-                    HorizontalOptions="Center" 
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="3"
                     Placeholder="Password" 
-                    PlaceholderColor="Gray"
+                    PlaceholderColor="Gray" Margin="0,0,45,0"
                     IsPassword="True" 
                     Text="{Binding Password, Mode=TwoWay}"/>
 
@@ -85,7 +70,7 @@
                 Command="{Binding CreateRequest}" Margin="10"/>
                 
                 <Button  Grid.Column="1" Grid.Row="5" BackgroundColor="Red"
-                Text="Cancel" HorizontalOptions="Center"
+                Text="Cancel" HorizontalOptions="Center" Clicked="ButtonCancel"
                 FontSize="14"
                 TextColor="White"
                  Margin="10"/>

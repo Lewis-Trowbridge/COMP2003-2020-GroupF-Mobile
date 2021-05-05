@@ -15,26 +15,44 @@ namespace cleanTable_Mobile.ViewModels
     class EditCustomerViewModel : BaseViewModel
     {
         private HttpClient _client;
-        private string _firstName;
+        private string _fullName;
         private string _lastName;
         private string _contactNumber;
         private string _username;
         private string _password;
         private string _errorCheck;
+        
         public EditCustomerViewModel()
         {
             Title = "Edit Account";
-
             _client = new HttpClient();
+
+
+            FillCustomerFields();
 
             CreateRequest = new Command(EditCustomer);
 
+        }
+        public async void FillCustomerFields()
+        {
+            UriBuilder uri = new UriBuilder();
+            uri.Host = "web.socem.plymouth.ac.uk";
+            uri.Scheme = "http";
+            uri.Path = "COMP2003/COMP2003_F/api/api/customers/view";
+            uri.Query = "customerId=" + CustomerId;
+            HttpResponseMessage message = await _client.GetAsync(uri.Uri);
+
+            GetCustomerView customer = JsonConvert.DeserializeObject<GetCustomerView>(await message.Content.ReadAsStringAsync());
+            Debug.WriteLine(await message.Content.ReadAsStringAsync());
+            FullName = customer.CustomerName; //need to change to one field not 2
+            ContactNumber = customer.CustomerContactNumber;
+            UserName = customer.CustomerUsername;
         }
         public async void EditCustomer()
         {
             EditCustomers customer = new EditCustomers();
             customer.CustomerId = CustomerId;
-            customer.CustomerName = _firstName + " " + _lastName;
+            customer.CustomerName = _fullName;
             customer.CustomerContactNumber = _contactNumber;
             customer.CustomerUserName = _username;
             customer.CustomerPassword = _password;
@@ -76,18 +94,18 @@ namespace cleanTable_Mobile.ViewModels
                 OnPropertyChanged("ErrorCheck");
             }
         }
-        public string FirstName
+        public string FullName
         {
             get
             {
-                return _firstName;
+                return _fullName;
             }
             set
             {
-                if (_firstName != value)
+                if (_fullName != value)
                 {
-                    _firstName = value;
-                    OnPropertyChanged("FirstName");
+                    _fullName = value;
+                    OnPropertyChanged("FullName");
                 }
             }
         }
