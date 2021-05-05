@@ -31,8 +31,6 @@ namespace cleanTable_Mobile.ViewModels
         
         public DateTime SelectedDate { get; set; }
 
-
-
         public CreateBookingViewModel(int VenueID)
         {
             Title = "Bookings";
@@ -119,7 +117,7 @@ namespace cleanTable_Mobile.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomer());
             }
         }
         public ObservableCollection<TablesAvailable> Tables

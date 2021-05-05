@@ -63,7 +63,7 @@ namespace cleanTable_Mobile.ViewModels
 
         public async void NextPage()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new VenuePage(_venueChosen));
+            await Application.Current.MainPage.Navigation.PushAsync(new VenueView(_venueChosen));
         }
 
         public HomepageViewModel()
