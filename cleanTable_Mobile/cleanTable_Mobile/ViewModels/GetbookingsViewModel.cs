@@ -16,7 +16,7 @@ namespace cleanTable_Mobile.ViewModels
     {
         public ObservableCollection<GetBookings> _histBookings;
         HttpClient _client;
-        
+
         private  GetBookings _selectedItem;
         private int _bookingChosen;
         public GetBookingsViewModel()

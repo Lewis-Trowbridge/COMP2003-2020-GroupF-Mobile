@@ -11,7 +11,7 @@ namespace cleanTable_Mobile.ViewModels
         public Command LoginCommand { get; }
 
         public string EnteredId { get; set; }
-        
+
         public LoginViewModel()
         {
             LoginCommand = new Command(OnLoginClicked);
