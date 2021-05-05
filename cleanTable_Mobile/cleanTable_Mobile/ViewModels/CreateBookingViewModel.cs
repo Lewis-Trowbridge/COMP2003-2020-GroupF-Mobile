@@ -25,26 +25,15 @@ namespace cleanTable_Mobile.ViewModels
         private bool _completeBooking;
         private bool _bookTable;
         private ObservableCollection<TablesAvailable> _tables;
+        private int _tableNum;
         private TablesAvailable _selectedIndexTable { get; set; }
         private List<TablesAvailable> TableList = new List<TablesAvailable>();
         
         public DateTime SelectedDate { get; set; }
 
-        public async void UserLogin()
-        {
-            string result = await Application.Current.MainPage.DisplayPromptAsync("Login", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
-            
-            if (result != null)
-            {
-                CustomerId = Convert.ToInt32(result);
-            }
-            else
-            {
-               await Application.Current.MainPage.DisplayPromptAsync("Login Failed", "Please Enter Login Number", "Login", "Cancel", "Login Number", -1, Keyboard.Numeric, "");
-            }
-        }
 
-        public CreateBookingViewModel(int VenID)
+
+        public CreateBookingViewModel(int VenueID)
         {
             Title = "Bookings";
 
@@ -64,11 +53,11 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Host = "web.socem.plymouth.ac.uk";
                 uri.Scheme = "http";
                 uri.Path = "COMP2003/COMP2003_F/api/api/venues/tablesAvailable";
-                uri.Query = "venueId=" + VenID + "&partySize=" + NumberOfPeople
+                uri.Query = "venueId=" + VenueID + "&partySize=" + NumberOfPeople
                 + "&bookingTime=" + SelectedDate.Date.Add(_selectedTime).ToString("O");
-                Debug.WriteLine(uri.Uri);
+                // Debug.WriteLine(uri.Uri);
                 HttpResponseMessage message = await _client.GetAsync(uri.Uri);
-                Debug.WriteLine(await message.Content.ReadAsStringAsync());
+                //Debug.WriteLine(await message.Content.ReadAsStringAsync());
                 TableList = JsonConvert.DeserializeObject<List<TablesAvailable>>(await message.Content.ReadAsStringAsync());
                 
                 foreach (TablesAvailable tables in TableList)
@@ -85,12 +74,11 @@ namespace cleanTable_Mobile.ViewModels
                     + "Venue : Subway" + "\n"
                     + "Date & Time: " + SelectedDate.Date.Add(_selectedTime).ToString() + "\n"
                     + "Party Size : " + NumberOfPeople.ToString() + "\n"
-                    + "Table Chosen : " + TableChosen.ToString(),
+                    + "Table Chosen : " + _tableNum.ToString(),
                     "Confirm", "Cancel");
                 
                 if (answer == true)
                 {
-                    //Set booking object
                     CreateBookingRequest booking = new CreateBookingRequest();
                     booking.BookingSize = _numberOfPeople;
 
@@ -120,6 +108,19 @@ namespace cleanTable_Mobile.ViewModels
                 }
             });
 
+        } 
+        public async void UserLogin()
+        {
+            bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
+
+            if (result == true)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+            }
         }
         public ObservableCollection<TablesAvailable> Tables
         {
@@ -165,6 +166,7 @@ namespace cleanTable_Mobile.ViewModels
                 {
                     _selectedIndexTable = value;
                     _tableChosen = value.TableId;
+                    _tableNum = value.VenueTableNumber;
                     OnPropertyChanged("SelectedIndexTable");
                 }
             }

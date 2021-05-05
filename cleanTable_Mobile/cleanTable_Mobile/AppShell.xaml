@@ -76,8 +76,8 @@
     -->
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Home" Route="Homepage" ContentTemplate="{DataTemplate local:Homepage}" />
-        <ShellContent Title="Account" Route="CreateAccountPage" ContentTemplate="{DataTemplate local:CreateAccountPage}"/>
-        <ShellContent Title="Bookings" Route="BookingsPage" ContentTemplate="{DataTemplate local:ViewBookingsPage}" />
+        <ShellContent Title="Account" Route="CreateCustomerPage" ContentTemplate="{DataTemplate local:CreateCustomerPage}"/>
+        <ShellContent Title="Bookings" Route="BookingsPage" ContentTemplate="{DataTemplate local:UpcomingHistory}" />
         <ShellContent Title="About" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
         <ShellContent Title="FAQ" ContentTemplate="{DataTemplate local:HelpPage}" />
         <ShellContent Title="Login" ContentTemplate="{DataTemplate local:LoginPage}" />

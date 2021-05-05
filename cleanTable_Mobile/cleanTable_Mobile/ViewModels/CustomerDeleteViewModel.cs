@@ -13,12 +13,13 @@ namespace cleanTable_Mobile.ViewModels
     {
         private HttpClient _client;
         private string _deleteCheck;
-        private int _customerID;
+        private bool _completeDelete;
+
         public CustomerDeleteViewModel()
         {
             Title = "Delete Customer";
             _client = new HttpClient();
-            _customerID = 90; //will be changed when account is logged in/created
+           
 
             DeleteAccount = new Command(async () =>
             {
@@ -26,7 +27,7 @@ namespace cleanTable_Mobile.ViewModels
                 "Confirm", "Cancel");
                 if (answer == true)
                 {
-                    DeleteCustomer(_customerID);
+                    DeleteCustomer();
                 }
                 else
                 {
@@ -34,22 +35,22 @@ namespace cleanTable_Mobile.ViewModels
                 }
             });
         }
-        private async void DeleteCustomer(int customerID)
+        private async void DeleteCustomer()
         {
             UriBuilder uri = new UriBuilder();
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/customers/delete";
-            uri.Query = "customerId=" + customerID; //will change when login sorted
+            uri.Query = "customerId=" + CustomerId; //will change when login sorted
             HttpResponseMessage message = await _client.DeleteAsync(uri.Uri);
 
             if (message.IsSuccessStatusCode)
             {
-                DeleteCheck = "Your Account has now been deleted";
+                DeleteCheck = "This Customer has been DELETED";
             }
             else
             {
-                DeleteCheck = "Your Account has not been deleted ";
+                DeleteCheck = "Error - Please Try Again";
             }
        
         }
@@ -64,6 +65,18 @@ namespace cleanTable_Mobile.ViewModels
             {
                 _deleteCheck = value;
                 OnPropertyChanged("DeleteCheck");
+            }
+        }
+        public bool CustomerDeleted
+        {
+            get
+            {
+                return _completeDelete;
+            }
+            set
+            {
+                _completeDelete = value;
+                OnPropertyChanged("CompleteDelete");
             }
         }
         public ICommand DeleteAccount { private set; get; }

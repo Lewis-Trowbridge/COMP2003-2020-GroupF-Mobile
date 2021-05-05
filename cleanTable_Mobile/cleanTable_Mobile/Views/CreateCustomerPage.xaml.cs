@@ -10,12 +10,15 @@ using Xamarin.Forms.Xaml;
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ViewBookingsPage : ContentPage
+    public partial class CreateCustomerPage : ContentPage
     {
-        public ViewBookingsPage()
+        public CreateCustomerPage()
         {
             InitializeComponent();
-
+        }
+        async void ButtonCancel(object sender, EventArgs e)
+        {
+            await Navigation.PopToRootAsync();
         }
     }
 }

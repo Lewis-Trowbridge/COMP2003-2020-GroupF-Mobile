@@ -1,4 +1,5 @@
 ﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,6 @@ using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
-using cleanTable_Mobile.Views;
 
 namespace cleanTable_Mobile.ViewModels
 {
@@ -16,38 +16,54 @@ namespace cleanTable_Mobile.ViewModels
     {
         public ObservableCollection<GetBookings> _histBookings;
         HttpClient _client;
+        
 
-        private  GetBookings _selectedItem;
-        private int _bookingChosen;
         public GetBookingsViewModel()
         {
-
             _histBookings = new ObservableCollection<GetBookings>();
             _client = new HttpClient();
             Title = "Your Bookings";
-            UpcomingBookings(CustomerId);
-          
-        GetHistoryBookings = new Command(async () =>
+            
+
+            if (CustomerId == 0)
             {
-                HistoricBookings(CustomerId);
+                UserLogin();
+            }
+            else
+            {
+                UpcomingBookings();
+            }
+
+            GetHistoryBookings = new Command(() =>
+            {
+                HistoricBookings();
             });
-            GetUpcomingBookings = new Command(async () =>
+            GetUpcomingBookings = new Command(() =>
             {
-                UpcomingBookings(CustomerId);
+                UpcomingBookings();
             });
         }
-        public async void NextPage()
+        public async void UserLogin()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new BookingView(_bookingChosen));
+            bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
+
+            if (result == true)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+            }
         }
-        public async void HistoricBookings(int customerid)
+        public async void HistoricBookings()
         {
             GetBookings.Clear();
             UriBuilder uri = new UriBuilder();
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/bookings/history";
-            uri.Query = "customerId=" + customerid;
+            uri.Query = "customerId=" + CustomerId;
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
@@ -60,14 +76,14 @@ namespace cleanTable_Mobile.ViewModels
                 GetBookings.Add(items);
             };
         }
-        public async void UpcomingBookings(int customerid)
+        public async void UpcomingBookings()
         {
             GetBookings.Clear();
             UriBuilder uri = new UriBuilder();
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/bookings/upcoming";
-            uri.Query = "customerId=" + customerid;
+            uri.Query = "customerId=" + CustomerId;
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
@@ -90,38 +106,5 @@ namespace cleanTable_Mobile.ViewModels
         }
         public ICommand GetHistoryBookings { private set; get; }
         public ICommand GetUpcomingBookings { private set; get; }
-        public GetBookings selectedBooking
-        {
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                if(_selectedItem !=value)
-                {
-                    _selectedItem = value;
-                    _bookingChosen = value.bookingId;
-                    NextPage();
-                }
-            }
-        }
-        public int BookingChosen
-        {
-            get
-            {
-                return _bookingChosen;
-            }
-            set
-            {
-                if (_bookingChosen!= value)
-                {
-                    _bookingChosen = value;
-                    OnPropertyChanged("BookingChosen");
-
-                }
-            }
-        }
-
     }
 }

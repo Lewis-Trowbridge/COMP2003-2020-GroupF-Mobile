@@ -35,15 +35,32 @@ namespace cleanTable_Mobile.ViewModels
             Title = "Venue Page";
             id = VenID;
             _client = new HttpClient();
-            Debug.WriteLine(id);
+            
             GetVenue(id);
 
+            if (CustomerId == 0)
+            {
+                UserLogin();
+            }
 
             SendRequest = new Command(async () =>
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new BookingPage(id));
             });
 
+        }
+        public async void UserLogin()
+        {
+            bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
+
+            if (result == true)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+            }
         }
         public async void GetVenue(int VenueID)
         {

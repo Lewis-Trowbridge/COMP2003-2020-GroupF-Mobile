@@ -26,8 +26,6 @@ namespace cleanTable_Mobile.Views
             displayLabel.Text = String.Format("Party Size: {0}", value);
         }
        
-        
-
          async void ButtonCancel(object sender, EventArgs e)
          {
              await Navigation.PopToRootAsync();

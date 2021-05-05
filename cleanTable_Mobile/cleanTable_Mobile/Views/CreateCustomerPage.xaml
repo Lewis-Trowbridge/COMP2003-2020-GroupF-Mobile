@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="cleanTable_Mobile.Views.CreateCustomerPage"
+             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels" xmlns:sys="clr-namespace:System;assembly=netstandard"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:CreateCustomerViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label Text="Create Account" 
+                   HorizontalOptions="Center" 
+                   TextColor="Black" 
+                   FontSize="20" 
+                   Margin="15,15,15,-10"/>
+
+            <Grid Padding="20">
+                <Label  Text="First Name:" Grid.Column="0" Grid.Row="0"
+                    HorizontalOptions="Center" 
+                    TextColor="Black" 
+                    FontSize="16"
+                        Margin="25"/>
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="0"
+                    HorizontalOptions="Center"  
+                    Placeholder="First Name" 
+                    PlaceholderColor="Gray"  
+                    Text="{Binding FirstName, Mode=TwoWay}" />
+
+                <Label Text="Last Name: " Grid.Column="0" Grid.Row="1"
+                   HorizontalOptions="Center" 
+                   TextColor="Black" 
+                   FontSize="16"  Margin="25"
+                  />
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="1"
+                    HorizontalOptions="Center" 
+                    Placeholder="Last Name" 
+                    PlaceholderColor="Gray" 
+                    Text="{Binding LastName, Mode=TwoWay}"/>
+
+                <Label Text="Contact Number: " Grid.Column="0" Grid.Row="2"
+                   HorizontalOptions="Center" 
+                   TextColor="Black" 
+                   FontSize="16" Margin="23"
+                  />
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="2"
+                    HorizontalOptions="Center" 
+                    Placeholder="Contact Number"
+                    PlaceholderColor="Gray" 
+                    MaxLength="11" 
+                    Text="{Binding ContactNumber, Mode=TwoWay}"/>
+
+                <Label Text="Username: " Grid.Column="0" Grid.Row="3"
+                   HorizontalOptions="Center" 
+                   TextColor="Black" 
+                   FontSize="16" Margin="23"
+                   />
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="3"
+                    HorizontalOptions="Center" 
+                    Placeholder="Username" 
+                    PlaceholderColor="Gray" 
+                    Text="{Binding UserName, Mode=TwoWay}"/>
+
+                <Label Text="Password: " Grid.Column="0" Grid.Row="4"
+                   HorizontalOptions="Center" 
+                   TextColor="Black"
+                   FontSize="16" Margin="25"
+                   />
+
+                <Entry  TextColor="Black" Grid.Column="1" Grid.Row="4"
+                    HorizontalOptions="Center" 
+                    Placeholder="Password" 
+                    PlaceholderColor="Gray"
+                    IsPassword="True" 
+                    Text="{Binding Password, Mode=TwoWay}"/>
+
+                <Button  Grid.Column="0" Grid.Row="5"
+                Text="Create Account" HorizontalOptions="Center"
+                FontSize="14"
+                TextColor="White"
+                Command="{Binding CreateRequest}" Margin="10"/>
+
+                <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="5"
+                Text="Cancel" HorizontalOptions="Center"
+                FontSize="14" Margin="10"
+                TextColor="White"
+                BackgroundColor="Red"
+                Clicked="ButtonCancel"/>
+
+            </Grid>
+            <Label Text="{Binding ErrorCheck}" 
+               FontSize="14"
+               TextColor="Red"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

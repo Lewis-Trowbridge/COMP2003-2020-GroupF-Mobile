@@ -79,7 +79,7 @@ namespace cleanTable_Mobile.ViewModels
                 VenueSearch();
             });
 
-       
+
         }
         public ObservableCollection<GetTopVenues> Venues
         {
@@ -95,7 +95,6 @@ namespace cleanTable_Mobile.ViewModels
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/venues/top";
-           // venue = JsonConvert.DeserializeObject<List<GetTopVenues>>(await message.Content.ReadAsStringAsync());
 
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
@@ -204,6 +203,35 @@ namespace cleanTable_Mobile.ViewModels
                 }
             }
 
+        }
+        public bool IsPullToRefreshEnabled { get; set; }
+
+
+        private Command _loadHomepage;
+
+        public Command LoadHomepage
+        {
+            get
+            {
+                return _loadHomepage ?? (_loadHomepage = new Command(RefreshHomepage, () =>
+                {
+                    return !IsBusy;
+                }));
+            }
+        }
+        private void RefreshHomepage()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            LoadHomepage.ChangeCanExecute();
+
+            Venues.Clear();
+            GetTopVenueList();
+
+            IsBusy = false;
+            LoadHomepage.ChangeCanExecute();
         }
 
         public ICommand SearchRequest { private set; get; }

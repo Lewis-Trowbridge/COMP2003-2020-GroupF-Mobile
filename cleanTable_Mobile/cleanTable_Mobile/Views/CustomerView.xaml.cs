@@ -11,13 +11,19 @@ using Xamarin.Forms.Xaml;
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomerDelete : ContentPage
+    public partial class CustomerView : ContentPage
     {
-        public CustomerDelete()
+        public CustomerView(int CustomerId)
         {
             InitializeComponent();
-            BindingContext = new CustomerDeleteViewModel();
+            BindingContext = new CustomerPageViewModel();
         }
+
+        async void ButtonEdit(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EditCustomer());
+        }
+
         async void ButtonCancel(object sender, EventArgs e)
         {
             await Navigation.PopToRootAsync();

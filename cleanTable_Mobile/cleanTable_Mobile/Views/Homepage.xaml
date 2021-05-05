@@ -15,13 +15,15 @@
               SeparatorColor="#EE6429"
               RowHeight="65" 
               IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding LoadHomepage}"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
               SelectedItem="{Binding SelectedVenue}">
               
         <ListView.Header>
             <Grid RowSpacing="0"
           ColumnSpacing="0"  Margin="0,0,0,-40">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -38,11 +40,15 @@
                 </Frame>
                 
                 <Button Text="Search" Grid.Row="0" Grid.Column="1" TextColor="White" Command="{Binding SearchRequest, Mode=TwoWay}"/>
-                
-                <Label Text="Select a Venue" Grid.Row="1" Grid.ColumnSpan="2" 
-                       TextColor="Black" FontSize="Large" 
+                <Label Text="Don't forget to login in or create an account" Grid.Row="1" Grid.ColumnSpan="2" 
+                       TextColor="Red" FontSize="Medium" 
                        HorizontalTextAlignment="Center"
                        Margin="0,10,0,0"/>
+                <Label Text="Select a Venue" Grid.Row="3" Grid.ColumnSpan="2" 
+                       TextColor="Black" FontSize="Large" 
+                       HorizontalTextAlignment="Center"
+                       Margin="0,-30,0,0"/>
+                
             </Grid>
         </ListView.Header>
         
