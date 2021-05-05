@@ -6,10 +6,14 @@
 
 
     <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-        <Label Text="{Binding DeleteCheck}" 
+        <Label Text="If you would like to DELETE your booking please click DELETE below, if you have changed your mind just click CANCEL" 
                FontSize="14"
                TextColor="Black"/>
 
+        <Label Text="{Binding DeleteCheck}" 
+               FontSize="14"
+               TextColor="Red"/>
+        
         <Button Margin="0,10,0,0" Text="Cancel"
                 Clicked="ButtonCancel"
                 BackgroundColor="{StaticResource Primary}"

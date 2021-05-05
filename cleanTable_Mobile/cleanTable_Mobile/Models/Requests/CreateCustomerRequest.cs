@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace cleanTable_Mobile.Models.Requests
+{
+    class CreateCustomerRequest
+    {
+        public string CustomerName { get; set; }
+        public string CustomerContactNumber { get; set; }
+        public string CustomerUserName { get; set; }
+        public string CustomerPassword { get; set; }
+
+    }
+}

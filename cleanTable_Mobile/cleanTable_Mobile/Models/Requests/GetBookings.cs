@@ -6,11 +6,11 @@ namespace cleanTable_Mobile.Models.Requests
 {
     class GetBookings
     {
-        public int bookingId { get; set; }
-        public DateTime bookingDateTime { get; set; }    
-        public int bookingSize { get; set; }
-        public string venueName { get; set; }
-        public string venuePostcode { get; set; }
+        public int BookingId { get; set; }
+        public DateTime BookingDateTime { get; set; }    
+        public int BookingSize { get; set; }
+        public string VenueName { get; set; }
+        public string VenuePostcode { get; set; }
 
     }
 }

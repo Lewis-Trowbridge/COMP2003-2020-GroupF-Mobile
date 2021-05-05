@@ -1,4 +1,5 @@
 ﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,24 +23,47 @@ namespace cleanTable_Mobile.ViewModels
             _histBookings = new ObservableCollection<GetBookings>();
             _client = new HttpClient();
             Title = "Your Bookings";
-            UpcomingBookings(CustomerId);
-            GetHistoryBookings = new Command(async () =>
+            
+
+            if (CustomerId == 0)
             {
-                HistoricBookings(CustomerId);
+                UserLogin();
+            }
+            else
+            {
+                UpcomingBookings();
+            }
+
+            GetHistoryBookings = new Command(() =>
+            {
+                HistoricBookings();
             });
-            GetUpcomingBookings = new Command(async () =>
+            GetUpcomingBookings = new Command(() =>
             {
-                UpcomingBookings(CustomerId);
+                UpcomingBookings();
             });
         }
-        public async void HistoricBookings(int customerid)
+        public async void UserLogin()
+        {
+            bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
+
+            if (result == true)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+            }
+        }
+        public async void HistoricBookings()
         {
             GetBookings.Clear();
             UriBuilder uri = new UriBuilder();
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/bookings/history";
-            uri.Query = "customerId=" + customerid;
+            uri.Query = "customerId=" + CustomerId;
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
@@ -52,14 +76,14 @@ namespace cleanTable_Mobile.ViewModels
                 GetBookings.Add(items);
             };
         }
-        public async void UpcomingBookings(int customerid)
+        public async void UpcomingBookings()
         {
             GetBookings.Clear();
             UriBuilder uri = new UriBuilder();
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/bookings/upcoming";
-            uri.Query = "customerId=" + customerid;
+            uri.Query = "customerId=" + CustomerId;
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 

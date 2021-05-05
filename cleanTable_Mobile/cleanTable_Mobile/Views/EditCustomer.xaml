@@ -1,18 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="cleanTable_Mobile.Views.CreateAccountPage"
-             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels" xmlns:sys="clr-namespace:System;assembly=netstandard"
-             Title="{Binding Title}">
-
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels"
+             x:Class="cleanTable_Mobile.Views.EditCustomer" Title="{Binding Title}">
     <ContentPage.BindingContext>
-        <vm:CreateAccountViewModel />
+        <vm:EditCustomerViewModel />
     </ContentPage.BindingContext>
-    
+
     <ContentPage.Content>
         <StackLayout>
 
-            <Label Text="Create Account" 
+            <Label Text="Edit Account" 
                    HorizontalOptions="Center" 
                    TextColor="Black" 
                    FontSize="20" 
@@ -86,12 +83,17 @@
                 FontSize="14"
                 TextColor="White"
                 Command="{Binding CreateRequest}" Margin="10"/>
+                
                 <Button  Grid.Column="1" Grid.Row="5" BackgroundColor="Red"
                 Text="Cancel" HorizontalOptions="Center"
                 FontSize="14"
                 TextColor="White"
                  Margin="10"/>
-</Grid>
+
+            </Grid>
+            <Label Text="{Binding ErrorCheck}" 
+               FontSize="Title"  HorizontalOptions="CenterAndExpand"
+               TextColor="red"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

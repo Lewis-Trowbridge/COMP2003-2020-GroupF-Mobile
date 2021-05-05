@@ -24,6 +24,12 @@
     <EmbeddedResource Update="Views\CustomerDelete.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\CustomerView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EditCustomer.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\HelpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -33,7 +39,7 @@
     <EmbeddedResource Update="Views\VenuePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ViewBookingsPage.xaml">
+    <EmbeddedResource Update="Views\UpcomingHistory.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -59,8 +65,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CreateCustomerPage.xaml.cs">
+      <DependentUpon>CreateCustomerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\CreateBooking.xaml.cs">
       <DependentUpon>CreateBooking.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UpcomingHistory.xaml.cs">
+      <DependentUpon>UpcomingHistory.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
