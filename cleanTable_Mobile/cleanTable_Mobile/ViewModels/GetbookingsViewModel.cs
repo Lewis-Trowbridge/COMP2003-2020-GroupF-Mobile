@@ -10,29 +10,24 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
+
 namespace cleanTable_Mobile.ViewModels
 {
     class GetBookingsViewModel: BaseViewModel
     {
         public ObservableCollection<GetBookings> _histBookings;
         HttpClient _client;
-        
+        private GetBookings _selectedItem;
+        private int _bookingChosen;
 
         public GetBookingsViewModel()
         {
             _histBookings = new ObservableCollection<GetBookings>();
             _client = new HttpClient();
             Title = "Your Bookings";
-            
 
-            if (CustomerId == 0)
-            {
-                UserLogin();
-            }
-            else
-            {
-                UpcomingBookings();
-            }
+        UpcomingBookings();
+            
 
             GetHistoryBookings = new Command(() =>
             {
@@ -42,20 +37,13 @@ namespace cleanTable_Mobile.ViewModels
             {
                 UpcomingBookings();
             });
+           
         }
-        public async void UserLogin()
+        public async void NextPage()
         {
-            bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
-
-            if (result == true)
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
-            }
-            else
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
-            }
+            await Application.Current.MainPage.Navigation.PushAsync(new BookingView(_bookingChosen));
         }
+       
         public async void HistoricBookings()
         {
             GetBookings.Clear();
@@ -106,5 +94,37 @@ namespace cleanTable_Mobile.ViewModels
         }
         public ICommand GetHistoryBookings { private set; get; }
         public ICommand GetUpcomingBookings { private set; get; }
+        public GetBookings selectedBooking
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    _bookingChosen = value.BookingId;
+                    NextPage();
+                }
+            }
+        }
+        public int BookingChosen
+        {
+            get
+            {
+                return _bookingChosen;
+            }
+            set
+            {
+                if (_bookingChosen != value)
+                {
+                    _bookingChosen = value;
+                    OnPropertyChanged("BookingChosen");
+
+                }
+            }
+        }
     }
 }
