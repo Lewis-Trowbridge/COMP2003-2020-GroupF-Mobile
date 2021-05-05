@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreateCustomer : ContentPage
+    public partial class CreateCustomerPage : ContentPage
     {
-        public CreateCustomer()
+        public CreateCustomerPage()
         {
             InitializeComponent();
         }

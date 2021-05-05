@@ -53,7 +53,7 @@ namespace cleanTable_Mobile.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomer());
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
             }
         }
         public async void HistoricBookings()

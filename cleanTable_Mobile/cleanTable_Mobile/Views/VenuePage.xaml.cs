@@ -7,10 +7,10 @@ using Xamarin.Forms.Xaml;
 namespace cleanTable_Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VenueView : ContentPage
+    public partial class VenuePage : ContentPage
     {
         
-        public VenueView(int VenueId)
+        public VenuePage(int VenueId)
         { 
             InitializeComponent();
             BindingContext = new VenuePageViewModel(VenueId);

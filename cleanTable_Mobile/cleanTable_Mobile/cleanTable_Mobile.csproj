@@ -39,7 +39,7 @@
     <EmbeddedResource Update="Views\Homepage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\VenueView.xaml">
+    <EmbeddedResource Update="Views\VenuePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\UpcomingHistory.xaml">
@@ -68,17 +68,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\CreateCustomer.xaml.cs">
-      <DependentUpon>CreateCustomer.xaml</DependentUpon>
+    <Compile Update="Views\CreateCustomerPage.xaml.cs">
+      <DependentUpon>CreateCustomerPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\CreateBooking.xaml.cs">
       <DependentUpon>CreateBooking.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\UpcomingHistory.xaml.cs">
       <DependentUpon>UpcomingHistory.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\VenueView.xaml.cs">
-      <DependentUpon>VenueView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
