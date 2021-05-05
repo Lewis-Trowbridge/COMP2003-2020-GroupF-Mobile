@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="cleanTable_Mobile.Views.BookingEdit"
+             xmlns:vm="clr-namespace:cleanTable_Mobile.ViewModels" xmlns:sys="clr-namespace:System;assembly=netstandard"
+             Title="{Binding Title}">
+
+
+    <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10" IsClippedToBounds="True">
+
+        <Label Text="Complete Your Booking" FontSize="Title" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
+
+        <Grid Padding="15">
+            <Label Grid.Column="0"  Grid.Row="0" Padding="0,27,0,0"
+               Text="Date: " HorizontalOptions="Center" FontAttributes="Bold"
+               FontSize="14" TextColor="Black"/>
+
+            <DatePicker MinimumDate="{x:Static sys:DateTime.Now}" Grid.Column="1" Grid.Row="0"
+                    MaximumDate="12/31/2021" 
+                    Format="dd/MM/yyyy" 
+                    HorizontalOptions="Start"
+                    TextColor="Black" 
+                    Date="{Binding SelectedDate, Mode=TwoWay}"/>
+
+            <Label Grid.Column="0"  Grid.Row="1" Padding="0,27,0,0"
+               Text="Time: " HorizontalOptions="Center" FontAttributes="Bold"
+               FontSize="14" TextColor="Black"/>
+
+            <TimePicker x:Name="tpkBookingTime" Grid.Column="1" Grid.Row="1"
+                    Format="HH:mm" Margin="15"
+                    TextColor="Black"
+                    Time="{Binding SelectedTime, Mode=TwoWay}"/>
+
+        </Grid>
+        <Grid>
+            <Label x:Name="displayLabel" Grid.ColumnSpan="2" Grid.Row="0" Padding="0,40,0,0"
+               Text="Party Size: " HorizontalOptions="Center" FontAttributes="Bold"
+               FontSize="14" TextColor="Black"/>
+
+            <Slider Minimum="0" Maximum="6" Grid.ColumnSpan="2" Grid.Row="1"
+                MinimumTrackColor="Black" MaximumTrackColor="Black"
+                    ValueChanged="OnSliderValueChanged" 
+                Value="{Binding NumberOfPeople, Mode=TwoWay}"/>
+
+            <Label  Grid.ColumnSpan="2" Grid.Row="2" Padding="0,30,0,0"
+               Text="Choose a Table: " HorizontalOptions="Center" FontAttributes="Bold"
+               FontSize="14" TextColor="Black"  IsVisible="{Binding CompleteBooking, Mode=TwoWay}"/>
+
+            <Picker Title="Choose a Table" TitleColor="Black" TextColor="Black" Grid.ColumnSpan="2" Grid.Row="3" 
+                ItemsSource="{Binding Tables}" Margin="0,-20,0,0"
+                ItemDisplayBinding="{Binding VenueTableNumber, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedIndexTable, Mode=TwoWay}" 
+                IsVisible="{Binding CompleteBooking, Mode=TwoWay}" />
+
+            <Label Text="This Table Seats:" FontSize="16" TextColor="Black" Grid.Column="0"  Grid.Row="4"  IsVisible="{Binding CompleteBooking, Mode=TwoWay}"/>
+
+            <Label Text="{Binding SelectedIndexTable.NumberOfSeats}" FontSize="16" TextColor="Black" Grid.Column="1"  Grid.Row="4" />
+
+            <Button Text="Choose Table" HorizontalOptions="Center" Grid.Column="0" Grid.Row="5"
+                FontSize="14"
+                TextColor="White"
+                Command="{Binding TableRequest}"
+                IsVisible="{Binding BookTable, Mode=TwoWay}"/>
+
+            <Button x:Name="btnSend" Grid.Column="0" Grid.Row="5"
+                Text="Complete Booking" HorizontalOptions="Center"
+                FontSize="14"
+                TextColor="White"
+                Command="{Binding SendRequest}"
+                IsVisible="{Binding CompleteBooking, Mode=TwoWay}"/>
+
+            <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="5"
+                Text="Cancel" HorizontalOptions="Center"
+                FontSize="14"
+                TextColor="White"
+                BackgroundColor="Red"
+                Clicked="ButtonCancel">
+            </Button>
+        </Grid>
+    </StackLayout>
+
+
+</ContentPage>
