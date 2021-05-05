@@ -14,27 +14,32 @@ namespace cleanTable_Mobile.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         public Command LoginCommand { get; }
+        public Command UserLoggedIn { get; }
         private HttpClient _client;
         private string _username;
         private string _password;
         private string _errorCheck;
+        private bool _viewAccount;
 
         public LoginViewModel()
         {
             
             Title = "Login";
             _client = new HttpClient();
-            LoggedIn();
+            ViewAccount = false;
+
+            if (CustomerId != 0)
+            {
+                LoggedIn();
+            }
+
             LoginCommand = new Command(OnLoginClicked);
 
-            
+            UserLoggedIn = new Command(LoggedIn);
         }
         public async void LoggedIn()
         {
-            if(CustomerId != 0)
-            {
                await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(CustomerId));
-            } 
         }
 
         private async void OnLoginClicked()
@@ -59,6 +64,7 @@ namespace cleanTable_Mobile.ViewModels
             CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
 
             CustomerId = result.Id;
+            ViewAccount = true;
 
             if (response.IsSuccessStatusCode)
             {
@@ -112,6 +118,18 @@ namespace cleanTable_Mobile.ViewModels
                     _password = value;
                     OnPropertyChanged("Password");
                 }
+            }
+        }
+        public bool ViewAccount
+        {
+            get
+            {
+                return _viewAccount;
+            }
+            set
+            {
+                _viewAccount = value;
+                OnPropertyChanged("ViewAccount");
             }
         }
     }
