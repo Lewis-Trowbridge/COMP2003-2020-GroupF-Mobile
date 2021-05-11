@@ -41,7 +41,7 @@ namespace cleanTable_Mobile.ViewModels
 
         public  async void CreateAccount()
         {
-            CreateCustomerRequest createAccount = new CreateCustomerRequest();
+            CreateCustomerModel createAccount = new CreateCustomerModel();
 
             createAccount.CustomerName = _firstName + " " + _lastName;
             createAccount.CustomerContactNumber = _contactNumber;
@@ -57,7 +57,7 @@ namespace cleanTable_Mobile.ViewModels
 
             HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
-            CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+            CreationResultModel result = JsonConvert.DeserializeObject<CreationResultModel>(await response.Content.ReadAsStringAsync());
             CustomerId = result.Id;
 
             if (response.IsSuccessStatusCode)

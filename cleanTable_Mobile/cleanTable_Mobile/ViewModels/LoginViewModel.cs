@@ -55,7 +55,7 @@ namespace cleanTable_Mobile.ViewModels
         }
         private async void OnLoginClicked()
         {
-            LoginUser login = new LoginUser();
+            LoginUserModel login = new LoginUserModel();
             login.CustomerUserName = _username;
             login.CustomerPassword = _password;
 
@@ -70,7 +70,7 @@ namespace cleanTable_Mobile.ViewModels
 
             HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
-            CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+            CreationResultModel result = JsonConvert.DeserializeObject<CreationResultModel>(await response.Content.ReadAsStringAsync());
 
             CustomerId = result.Id;
             UserLogin = true;

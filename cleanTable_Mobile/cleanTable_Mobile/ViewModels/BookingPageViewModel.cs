@@ -51,7 +51,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Query = "bookingId=" + BookingID + "&customerId=" + CustomerId;
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
             
-            GetBookingView book = JsonConvert.DeserializeObject<GetBookingView>(await message.Content.ReadAsStringAsync());
+            GetBookingViewModel book = JsonConvert.DeserializeObject<GetBookingViewModel>(await message.Content.ReadAsStringAsync());
             VenueId = book.VenueID;
             VenueName = book.VenueName;
             VenueAddress = book.AddLineOne + "\n"

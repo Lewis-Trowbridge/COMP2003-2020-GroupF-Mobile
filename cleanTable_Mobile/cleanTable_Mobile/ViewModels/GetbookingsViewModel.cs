@@ -15,14 +15,14 @@ namespace cleanTable_Mobile.ViewModels
 {
     class GetBookingsViewModel: BaseViewModel
     {
-        public ObservableCollection<GetBookings> _histBookings;
+        public ObservableCollection<GetBookingsModel> _histBookings;
         HttpClient _client;
-        private GetBookings _selectedItem;
+        private GetBookingsModel _selectedItem;
         private int _bookingChosen;
 
         public GetBookingsViewModel()
         {
-            _histBookings = new ObservableCollection<GetBookings>();
+            _histBookings = new ObservableCollection<GetBookingsModel>();
             _client = new HttpClient();
             Title = "Your Bookings";
 
@@ -55,9 +55,9 @@ namespace cleanTable_Mobile.ViewModels
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
-            List<GetBookings> histBookings = JsonConvert.DeserializeObject<List<GetBookings>>(await message.Content.ReadAsStringAsync());
+            List<GetBookingsModel> histBookings = JsonConvert.DeserializeObject<List<GetBookingsModel>>(await message.Content.ReadAsStringAsync());
 
-            foreach (GetBookings items in histBookings)
+            foreach (GetBookingsModel items in histBookings)
             {
                 GetBookings.Add(items);
             };
@@ -73,14 +73,14 @@ namespace cleanTable_Mobile.ViewModels
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
-            List<GetBookings> upcomingBookings = JsonConvert.DeserializeObject<List<GetBookings>>(await message.Content.ReadAsStringAsync());
+            List<GetBookingsModel> upcomingBookings = JsonConvert.DeserializeObject<List<GetBookingsModel>>(await message.Content.ReadAsStringAsync());
 
-            foreach (GetBookings items in upcomingBookings)
+            foreach (GetBookingsModel items in upcomingBookings)
             {
                 GetBookings.Add(items);
             };
         }
-        public ObservableCollection<GetBookings> GetBookings
+        public ObservableCollection<GetBookingsModel> GetBookings
         {
             get { return _histBookings; }
             set
@@ -90,7 +90,7 @@ namespace cleanTable_Mobile.ViewModels
         }
         public ICommand GetHistoryBookings { private set; get; }
         public ICommand GetUpcomingBookings { private set; get; }
-        public GetBookings selectedBooking
+        public GetBookingsModel selectedBooking
         {
             get
             {

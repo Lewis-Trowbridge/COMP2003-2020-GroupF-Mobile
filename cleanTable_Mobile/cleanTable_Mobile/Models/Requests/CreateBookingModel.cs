@@ -4,7 +4,7 @@ using System.Text;
 
 namespace cleanTable_Mobile.Models.Requests
 {
-    class CreateBookingRequest
+    class CreateBookingModel
     {
         
         public int VenueTableId { get; set; }

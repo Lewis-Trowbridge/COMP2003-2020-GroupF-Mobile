@@ -23,13 +23,13 @@ namespace cleanTable_Mobile.ViewModels
         private string _venueCity;
         private string _venuePostcode;
 
-        private GetTopVenues _selectedItem;
-        private List<GetTopVenues> venue = new List<GetTopVenues>();
-        private ObservableCollection<GetTopVenues> _venues;
+        private GetTopVenuesModel _selectedItem;
+        private List<GetTopVenuesModel> venue = new List<GetTopVenuesModel>();
+        private ObservableCollection<GetTopVenuesModel> _venues;
 
         private int _venueChosen;
 
-        public GetTopVenues SelectedVenue
+        public GetTopVenuesModel SelectedVenue
         {
             get { return _selectedItem; }
             set
@@ -71,7 +71,7 @@ namespace cleanTable_Mobile.ViewModels
             Title = "Homepage";
             _client = new HttpClient();
 
-            _venues = new ObservableCollection<GetTopVenues>();
+            _venues = new ObservableCollection<GetTopVenuesModel>();
 
             GetTopVenueList();
             SearchRequest = new Command(async () =>
@@ -81,7 +81,7 @@ namespace cleanTable_Mobile.ViewModels
 
 
         }
-        public ObservableCollection<GetTopVenues> Venues
+        public ObservableCollection<GetTopVenuesModel> Venues
         {
             get { return _venues; }
             set
@@ -99,9 +99,9 @@ namespace cleanTable_Mobile.ViewModels
 
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
-            venue = JsonConvert.DeserializeObject<List<GetTopVenues>>(await message.Content.ReadAsStringAsync());
+            venue = JsonConvert.DeserializeObject<List<GetTopVenuesModel>>(await message.Content.ReadAsStringAsync());
 
-            foreach (GetTopVenues item in venue)
+            foreach (GetTopVenuesModel item in venue)
             {
                 Venues.Add(item);
             };
@@ -118,9 +118,9 @@ namespace cleanTable_Mobile.ViewModels
             uri.Query = "searchString=" + _searchVenue;
 
             HttpResponseMessage response = await _client.GetAsync(uri.Uri);
-            List<GetTopVenues> venue = JsonConvert.DeserializeObject<List<GetTopVenues>>(await response.Content.ReadAsStringAsync());
+            List<GetTopVenuesModel> venue = JsonConvert.DeserializeObject<List<GetTopVenuesModel>>(await response.Content.ReadAsStringAsync());
 
-            foreach (GetTopVenues items in venue)
+            foreach (GetTopVenuesModel items in venue)
             {
                 Venues.Add(items);
             }

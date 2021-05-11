@@ -42,7 +42,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Query = "customerId=" + CustomerId;
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
-            GetCustomerView customer = JsonConvert.DeserializeObject<GetCustomerView>(await message.Content.ReadAsStringAsync());
+            GetCustomerViewModel customer = JsonConvert.DeserializeObject<GetCustomerViewModel>(await message.Content.ReadAsStringAsync());
             
             FullName = customer.CustomerName;
             ContactNumber = customer.CustomerContactNumber;
@@ -50,7 +50,7 @@ namespace cleanTable_Mobile.ViewModels
         }
         public async void EditCustomer()
         {
-            EditCustomers customer = new EditCustomers();
+            EditCustomerModel customer = new EditCustomerModel();
             customer.CustomerId = CustomerId;
             customer.CustomerName = _fullName;
             customer.CustomerContactNumber = _contactNumber;

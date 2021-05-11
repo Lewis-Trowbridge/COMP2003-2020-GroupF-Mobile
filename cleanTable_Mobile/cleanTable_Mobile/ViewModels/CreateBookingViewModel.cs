@@ -24,10 +24,10 @@ namespace cleanTable_Mobile.ViewModels
         private int _tableChosen;
         private bool _completeBooking;
         private bool _bookTable;
-        private ObservableCollection<TablesAvailable> _tables;
+        private ObservableCollection<TablesAvailableModel> _tables;
         private int _tableNum;
-        private TablesAvailable _selectedIndexTable { get; set; }
-        private List<TablesAvailable> TableList = new List<TablesAvailable>();
+        private TablesAvailableModel _selectedIndexTable { get; set; }
+        private List<TablesAvailableModel> TableList = new List<TablesAvailableModel>();
         
         public DateTime SelectedDate { get; set; }
 
@@ -36,7 +36,7 @@ namespace cleanTable_Mobile.ViewModels
             Title = "Bookings";
 
             _client = new HttpClient();
-            _tables = new ObservableCollection<TablesAvailable>();
+            _tables = new ObservableCollection<TablesAvailableModel>();
             _completeBooking = false;
             _bookTable = true;
 
@@ -54,9 +54,9 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Query = "venueId=" + VenueID + "&partySize=" + NumberOfPeople
                 + "&bookingTime=" + SelectedDate.Date.Add(_selectedTime).ToString("O");
                 HttpResponseMessage message = await _client.GetAsync(uri.Uri);
-                TableList = JsonConvert.DeserializeObject<List<TablesAvailable>>(await message.Content.ReadAsStringAsync());
+                TableList = JsonConvert.DeserializeObject<List<TablesAvailableModel>>(await message.Content.ReadAsStringAsync());
                 
-                foreach (TablesAvailable tables in TableList)
+                foreach (TablesAvailableModel tables in TableList)
                 {
                     Tables.Add(tables);
                 };
@@ -75,7 +75,7 @@ namespace cleanTable_Mobile.ViewModels
                 
                 if (answer == true)
                 {
-                    CreateBookingRequest booking = new CreateBookingRequest();
+                    CreateBookingModel booking = new CreateBookingModel();
                     booking.BookingSize = _numberOfPeople;
                     booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); 
                     booking.CustomerId = CustomerId; 
@@ -90,7 +90,7 @@ namespace cleanTable_Mobile.ViewModels
 
                     HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
-                    CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+                    CreationResultModel result = JsonConvert.DeserializeObject<CreationResultModel>(await response.Content.ReadAsStringAsync());
 
                     await Application.Current.MainPage.Navigation.PushAsync(new BookingView(result.Id));
                 }
@@ -114,7 +114,7 @@ namespace cleanTable_Mobile.ViewModels
                 await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomer());
             }
         }
-        public ObservableCollection<TablesAvailable> Tables
+        public ObservableCollection<TablesAvailableModel> Tables
         {
             get { return _tables; }
             set
@@ -149,7 +149,7 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
-        public TablesAvailable SelectedIndexTable
+        public TablesAvailableModel SelectedIndexTable
         {
             get { return _selectedIndexTable; }
             set

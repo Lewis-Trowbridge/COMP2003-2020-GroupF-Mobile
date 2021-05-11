@@ -71,7 +71,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Query = "venueId=" + VenueID;
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
-            GetVenueView venue = JsonConvert.DeserializeObject<GetVenueView>(await message.Content.ReadAsStringAsync());
+            GetVenueViewModel venue = JsonConvert.DeserializeObject<GetVenueViewModel>(await message.Content.ReadAsStringAsync());
             
             VenueName = venue.VenueName;
             VenueAddress = venue.AddLineOne + "\n"
