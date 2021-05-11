@@ -56,8 +56,6 @@ namespace cleanTable_Mobile.ViewModels
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
             List<GetBookings> histBookings = JsonConvert.DeserializeObject<List<GetBookings>>(await message.Content.ReadAsStringAsync());
-            Debug.WriteLine(await message.Content.ReadAsStringAsync());
-
 
             foreach (GetBookings items in histBookings)
             {
@@ -76,8 +74,6 @@ namespace cleanTable_Mobile.ViewModels
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
             List<GetBookings> upcomingBookings = JsonConvert.DeserializeObject<List<GetBookings>>(await message.Content.ReadAsStringAsync());
-            Debug.WriteLine(await message.Content.ReadAsStringAsync());
-
 
             foreach (GetBookings items in upcomingBookings)
             {

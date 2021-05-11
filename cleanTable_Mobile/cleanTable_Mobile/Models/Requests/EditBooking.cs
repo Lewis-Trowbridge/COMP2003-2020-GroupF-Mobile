@@ -6,9 +6,9 @@ namespace cleanTable_Mobile.Models.Requests
 {
     class EditBooking
     {
-        public int bookingId { get; set; }
-        public DateTime bookingTime { get; set; }
-        public int bookingSize { get; set; }
-        public int venueTableId { get; set; }
+        public int BookingId { get; set; }
+        public DateTime BookingTime { get; set; }
+        public int BookingSize { get; set; }
+        public int VenueTableId { get; set; }
     }
 }

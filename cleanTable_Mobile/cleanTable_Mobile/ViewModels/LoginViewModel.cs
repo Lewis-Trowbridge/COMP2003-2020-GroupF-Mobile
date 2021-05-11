@@ -15,18 +15,22 @@ namespace cleanTable_Mobile.ViewModels
     {
         public Command LoginCommand { get; }
         public Command UserLoggedIn { get; }
+        public Command LogOutCommand { get; }
+
         private HttpClient _client;
         private string _username;
         private string _password;
         private string _errorCheck;
-        private bool _viewAccount;
+        private bool _userLogin;
+        private bool _userLogOut;
 
         public LoginViewModel()
         {
             
             Title = "Login";
             _client = new HttpClient();
-            ViewAccount = false;
+            UserLogin = false;
+            UserLogOut = true;
 
             if (CustomerId != 0)
             {
@@ -34,7 +38,7 @@ namespace cleanTable_Mobile.ViewModels
             }
 
             LoginCommand = new Command(OnLoginClicked);
-
+            LogOutCommand = new Command(LoggedOut);
             UserLoggedIn = new Command(LoggedIn);
         }
         public async void LoggedIn()
@@ -42,6 +46,13 @@ namespace cleanTable_Mobile.ViewModels
                await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(CustomerId));
         }
 
+        public async void LoggedOut()
+        {
+            CustomerId = 0;
+            UserLogin = false;
+            UserLogOut = true;
+            await Shell.Current.GoToAsync($"//{nameof(Homepage)}");
+        }
         private async void OnLoginClicked()
         {
             LoginUser login = new LoginUser();
@@ -49,7 +60,7 @@ namespace cleanTable_Mobile.ViewModels
             login.CustomerPassword = _password;
 
 
-            string JsonData = JsonConvert.SerializeObject(login); //converts booking object to Json format
+            string JsonData = JsonConvert.SerializeObject(login); 
             StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
             UriBuilder uri = new UriBuilder();
 
@@ -59,12 +70,11 @@ namespace cleanTable_Mobile.ViewModels
 
             HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
-            Debug.WriteLine(await response.Content.ReadAsStringAsync());
-
             CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
 
             CustomerId = result.Id;
-            ViewAccount = true;
+            UserLogin = true;
+            UserLogOut = false;
 
             if (response.IsSuccessStatusCode)
             {
@@ -120,16 +130,28 @@ namespace cleanTable_Mobile.ViewModels
                 }
             }
         }
-        public bool ViewAccount
+        public bool UserLogin
         {
             get
             {
-                return _viewAccount;
+                return _userLogin;
             }
             set
             {
-                _viewAccount = value;
-                OnPropertyChanged("ViewAccount");
+                _userLogin = value;
+                OnPropertyChanged("UserLogin");
+            }
+        }
+        public bool UserLogOut
+        {
+            get
+            {
+                return _userLogOut;
+            }
+            set
+            {
+                _userLogOut = value;
+                OnPropertyChanged("UserLogOut");
             }
         }
     }

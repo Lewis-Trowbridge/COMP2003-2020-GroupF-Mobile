@@ -43,7 +43,6 @@ namespace cleanTable_Mobile.ViewModels
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
             GetCustomerView customer = JsonConvert.DeserializeObject<GetCustomerView>(await message.Content.ReadAsStringAsync());
-            Debug.WriteLine(await message.Content.ReadAsStringAsync());
             CustomerName = customer.CustomerName;
             CustomerNumber = customer.CustomerContactNumber;
             CustomerUsername = customer.CustomerUsername;

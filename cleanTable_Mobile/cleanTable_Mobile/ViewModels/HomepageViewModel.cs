@@ -63,7 +63,7 @@ namespace cleanTable_Mobile.ViewModels
 
         public async void NextPage()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new VenuePage(_venueChosen));
+            await Application.Current.MainPage.Navigation.PushAsync(new VenueView(_venueChosen));
         }
 
         public HomepageViewModel()
@@ -119,8 +119,6 @@ namespace cleanTable_Mobile.ViewModels
 
             HttpResponseMessage response = await _client.GetAsync(uri.Uri);
             List<GetTopVenues> venue = JsonConvert.DeserializeObject<List<GetTopVenues>>(await response.Content.ReadAsStringAsync());
-
-            Debug.WriteLine(await response.Content.ReadAsStringAsync());
 
             foreach (GetTopVenues items in venue)
             {

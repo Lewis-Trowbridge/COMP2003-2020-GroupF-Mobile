@@ -1,4 +1,5 @@
 ﻿using cleanTable_Mobile.Models.Requests;
+using cleanTable_Mobile.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace cleanTable_Mobile.ViewModels
                 if (answer == true)
                 {
                     DeleteCustomer();
+                    await Shell.Current.GoToAsync($"//{nameof(Homepage)}");
                 }
                 else
                 {
@@ -41,7 +43,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/customers/delete";
-            uri.Query = "customerId=" + CustomerId; //will change when login sorted
+            uri.Query = "customerId=" + CustomerId; 
             HttpResponseMessage message = await _client.DeleteAsync(uri.Uri);
 
             if (message.IsSuccessStatusCode)

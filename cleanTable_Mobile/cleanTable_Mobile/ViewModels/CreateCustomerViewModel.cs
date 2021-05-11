@@ -28,6 +28,11 @@ namespace cleanTable_Mobile.ViewModels
 
             _client = new HttpClient();
 
+            if(CustomerId != 0)
+            {
+                Application.Current.MainPage.Navigation.PushAsync(new CustomerView(CustomerId));
+            }
+
             CreateRequest = new Command(() =>
             {
                 CreateAccount();
@@ -43,23 +48,21 @@ namespace cleanTable_Mobile.ViewModels
             createAccount.CustomerUserName = _username;
             createAccount.CustomerPassword = _password;
 
-            string JsonData = JsonConvert.SerializeObject(createAccount); //converts booking object to Json format
+            string JsonData = JsonConvert.SerializeObject(createAccount);
             StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
             UriBuilder uri = new UriBuilder();
-
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "/COMP2003/COMP2003_F/api/api/customers/create";
 
             HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
-            Debug.WriteLine(await response.Content.ReadAsStringAsync());
-
             CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+            CustomerId = result.Id;
 
             if (response.IsSuccessStatusCode)
             {
-               await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(result.Id));
+               await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(CustomerId));
             }
             else
             {
@@ -67,6 +70,7 @@ namespace cleanTable_Mobile.ViewModels
             }
             
         }
+
         public bool IsSuccessStatusCode { get; }
         public string ErrorCheck
         {
@@ -157,7 +161,6 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
         public ICommand CreateRequest { private set; get; }
-
 
     }
 

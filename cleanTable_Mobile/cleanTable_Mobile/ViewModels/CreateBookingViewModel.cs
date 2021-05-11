@@ -31,8 +31,6 @@ namespace cleanTable_Mobile.ViewModels
         
         public DateTime SelectedDate { get; set; }
 
-
-
         public CreateBookingViewModel(int VenueID)
         {
             Title = "Bookings";
@@ -55,9 +53,7 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Path = "COMP2003/COMP2003_F/api/api/venues/tablesAvailable";
                 uri.Query = "venueId=" + VenueID + "&partySize=" + NumberOfPeople
                 + "&bookingTime=" + SelectedDate.Date.Add(_selectedTime).ToString("O");
-                // Debug.WriteLine(uri.Uri);
                 HttpResponseMessage message = await _client.GetAsync(uri.Uri);
-                //Debug.WriteLine(await message.Content.ReadAsStringAsync());
                 TableList = JsonConvert.DeserializeObject<List<TablesAvailable>>(await message.Content.ReadAsStringAsync());
                 
                 foreach (TablesAvailable tables in TableList)
@@ -81,22 +77,18 @@ namespace cleanTable_Mobile.ViewModels
                 {
                     CreateBookingRequest booking = new CreateBookingRequest();
                     booking.BookingSize = _numberOfPeople;
-
-                    booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
+                    booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); 
                     booking.CustomerId = CustomerId; 
                     booking.VenueTableId = _tableChosen;
 
-                    string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
+                    string JsonData = JsonConvert.SerializeObject(booking); 
                     StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
                     UriBuilder uri = new UriBuilder();
-
                     uri.Host = "web.socem.plymouth.ac.uk";
                     uri.Scheme = "http";
                     uri.Path = "/COMP2003/COMP2003_F/api/api/bookings/create/";
 
                     HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
-
-                    Debug.WriteLine(await response.Content.ReadAsStringAsync());
 
                     CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
 
@@ -119,7 +111,7 @@ namespace cleanTable_Mobile.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomer());
             }
         }
         public ObservableCollection<TablesAvailable> Tables

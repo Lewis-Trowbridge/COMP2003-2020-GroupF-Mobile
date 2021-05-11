@@ -21,12 +21,12 @@ namespace cleanTable_Mobile.Views
 
         async void ButtonEdit(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EditCustomer());
+            await Navigation.PushAsync(new CustomerEdit());
         }
 
         async void ButtonCancel(object sender, EventArgs e)
         {
-            await Navigation.PopToRootAsync();
+            await Shell.Current.GoToAsync($"//{nameof(Homepage)}");
         }
     }
 }
