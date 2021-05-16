@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cleanTable_Mobile.Views;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -17,7 +18,7 @@ namespace cleanTable_Mobile.ViewModels
 
             Title = "Delete Booking";
             _client = new HttpClient();
-            _bookingID = bookingId; //will be changed when account is logged in/created
+            _bookingID = bookingId; 
 
             DeleteAccount = new Command(async () =>
             {
@@ -26,6 +27,7 @@ namespace cleanTable_Mobile.ViewModels
                 if (answer == true)
                 {
                     DeleteBooking(_bookingID);
+                    await Shell.Current.GoToAsync($"//{nameof(Homepage)}");
                 }
                 else
                 {
@@ -39,7 +41,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/bookings/delete";
-            uri.Query = "bookingId=" + BookingID; //will change when login sorted
+            uri.Query = "bookingId=" + BookingID;
             HttpResponseMessage message = await _client.DeleteAsync(uri.Uri);
 
             if (message.IsSuccessStatusCode)

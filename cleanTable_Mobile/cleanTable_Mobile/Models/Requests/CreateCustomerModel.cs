@@ -4,12 +4,12 @@ using System.Text;
 
 namespace cleanTable_Mobile.Models.Requests
 {
-    class EditCustomers
+    class CreateCustomerModel
     {
-        public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string CustomerContactNumber { get; set; }
         public string CustomerUserName { get; set; }
         public string CustomerPassword { get; set; }
+
     }
 }

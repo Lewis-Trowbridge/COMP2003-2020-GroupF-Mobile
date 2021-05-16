@@ -59,7 +59,7 @@ namespace cleanTable_Mobile.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomer());
             }
         }
         public async void GetVenue(int VenueID)
@@ -68,10 +68,10 @@ namespace cleanTable_Mobile.ViewModels
             uri.Host = "web.socem.plymouth.ac.uk";
             uri.Scheme = "http";
             uri.Path = "COMP2003/COMP2003_F/api/api/venues/view";
-            uri.Query = "venueId=" + VenueID; //will change when Homepage is all up and running
+            uri.Query = "venueId=" + VenueID;
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
-            GetVenueView venue = JsonConvert.DeserializeObject<GetVenueView>(await message.Content.ReadAsStringAsync());
+            GetVenueViewModel venue = JsonConvert.DeserializeObject<GetVenueViewModel>(await message.Content.ReadAsStringAsync());
             
             VenueName = venue.VenueName;
             VenueAddress = venue.AddLineOne + "\n"

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace cleanTable_Mobile.Models.Responses
 {
-    class CreationResult
+    class CreationResultModel
     {
         public bool Success { get; set; }
         public int Id { get; set; }

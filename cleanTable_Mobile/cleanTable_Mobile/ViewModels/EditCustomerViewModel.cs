@@ -42,22 +42,22 @@ namespace cleanTable_Mobile.ViewModels
             uri.Query = "customerId=" + CustomerId;
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
 
-            GetCustomerView customer = JsonConvert.DeserializeObject<GetCustomerView>(await message.Content.ReadAsStringAsync());
-            Debug.WriteLine(await message.Content.ReadAsStringAsync());
-            FullName = customer.CustomerName; //need to change to one field not 2
+            GetCustomerViewModel customer = JsonConvert.DeserializeObject<GetCustomerViewModel>(await message.Content.ReadAsStringAsync());
+            
+            FullName = customer.CustomerName;
             ContactNumber = customer.CustomerContactNumber;
             UserName = customer.CustomerUsername;
         }
         public async void EditCustomer()
         {
-            EditCustomers customer = new EditCustomers();
+            EditCustomerModel customer = new EditCustomerModel();
             customer.CustomerId = CustomerId;
             customer.CustomerName = _fullName;
             customer.CustomerContactNumber = _contactNumber;
             customer.CustomerUserName = _username;
             customer.CustomerPassword = _password;
 
-            string JsonData = JsonConvert.SerializeObject(customer); //converts booking object to Json format
+            string JsonData = JsonConvert.SerializeObject(customer); 
             StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
             UriBuilder uri = new UriBuilder();
 
@@ -66,8 +66,6 @@ namespace cleanTable_Mobile.ViewModels
             uri.Path = "/COMP2003/COMP2003_F/api/api/customers/edit";
 
             HttpResponseMessage response = await _client.PutAsync(uri.Uri, content);
-
-           
 
             if (response.IsSuccessStatusCode)
             {

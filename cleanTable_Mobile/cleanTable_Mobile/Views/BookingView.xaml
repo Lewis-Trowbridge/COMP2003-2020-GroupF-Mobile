@@ -64,7 +64,7 @@
             <Button Margin="0,10,0,0" Text="Delete"
                 Command="{Binding SendRequest}"
                 Grid.Row="5" Grid.Column="2"
-                BackgroundColor="Red"
+                BackgroundColor="#dc3545"
                 TextColor="White" />
         </Grid>
     </StackLayout>

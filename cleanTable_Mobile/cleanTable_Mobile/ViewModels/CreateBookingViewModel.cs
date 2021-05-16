@@ -24,21 +24,19 @@ namespace cleanTable_Mobile.ViewModels
         private int _tableChosen;
         private bool _completeBooking;
         private bool _bookTable;
-        private ObservableCollection<TablesAvailable> _tables;
+        private ObservableCollection<TablesAvailableModel> _tables;
         private int _tableNum;
-        private TablesAvailable _selectedIndexTable { get; set; }
-        private List<TablesAvailable> TableList = new List<TablesAvailable>();
+        private TablesAvailableModel _selectedIndexTable { get; set; }
+        private List<TablesAvailableModel> TableList = new List<TablesAvailableModel>();
         
         public DateTime SelectedDate { get; set; }
-
-
 
         public CreateBookingViewModel(int VenueID)
         {
             Title = "Bookings";
 
             _client = new HttpClient();
-            _tables = new ObservableCollection<TablesAvailable>();
+            _tables = new ObservableCollection<TablesAvailableModel>();
             _completeBooking = false;
             _bookTable = true;
 
@@ -55,12 +53,10 @@ namespace cleanTable_Mobile.ViewModels
                 uri.Path = "COMP2003/COMP2003_F/api/api/venues/tablesAvailable";
                 uri.Query = "venueId=" + VenueID + "&partySize=" + NumberOfPeople
                 + "&bookingTime=" + SelectedDate.Date.Add(_selectedTime).ToString("O");
-                // Debug.WriteLine(uri.Uri);
                 HttpResponseMessage message = await _client.GetAsync(uri.Uri);
-                //Debug.WriteLine(await message.Content.ReadAsStringAsync());
-                TableList = JsonConvert.DeserializeObject<List<TablesAvailable>>(await message.Content.ReadAsStringAsync());
+                TableList = JsonConvert.DeserializeObject<List<TablesAvailableModel>>(await message.Content.ReadAsStringAsync());
                 
-                foreach (TablesAvailable tables in TableList)
+                foreach (TablesAvailableModel tables in TableList)
                 {
                     Tables.Add(tables);
                 };
@@ -79,26 +75,22 @@ namespace cleanTable_Mobile.ViewModels
                 
                 if (answer == true)
                 {
-                    CreateBookingRequest booking = new CreateBookingRequest();
+                    CreateBookingModel booking = new CreateBookingModel();
                     booking.BookingSize = _numberOfPeople;
-
-                    booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); //adds time to datetime 
+                    booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); 
                     booking.CustomerId = CustomerId; 
                     booking.VenueTableId = _tableChosen;
 
-                    string JsonData = JsonConvert.SerializeObject(booking); //converts booking object to Json format
+                    string JsonData = JsonConvert.SerializeObject(booking); 
                     StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
                     UriBuilder uri = new UriBuilder();
-
                     uri.Host = "web.socem.plymouth.ac.uk";
                     uri.Scheme = "http";
                     uri.Path = "/COMP2003/COMP2003_F/api/api/bookings/create/";
 
                     HttpResponseMessage response = await _client.PostAsync(uri.Uri, content);
 
-                    Debug.WriteLine(await response.Content.ReadAsStringAsync());
-
-                    CreationResult result = JsonConvert.DeserializeObject<CreationResult>(await response.Content.ReadAsStringAsync());
+                    CreationResultModel result = JsonConvert.DeserializeObject<CreationResultModel>(await response.Content.ReadAsStringAsync());
 
                     await Application.Current.MainPage.Navigation.PushAsync(new BookingView(result.Id));
                 }
@@ -119,10 +111,10 @@ namespace cleanTable_Mobile.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomerPage());
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomer());
             }
         }
-        public ObservableCollection<TablesAvailable> Tables
+        public ObservableCollection<TablesAvailableModel> Tables
         {
             get { return _tables; }
             set
@@ -157,7 +149,7 @@ namespace cleanTable_Mobile.ViewModels
             }
         }
 
-        public TablesAvailable SelectedIndexTable
+        public TablesAvailableModel SelectedIndexTable
         {
             get { return _selectedIndexTable; }
             set

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace cleanTable_Mobile.Models.Requests
 {
-    class GetCustomerView
+    class GetCustomerViewModel
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }

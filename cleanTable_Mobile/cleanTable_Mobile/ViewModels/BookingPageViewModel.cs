@@ -41,6 +41,7 @@ namespace cleanTable_Mobile.ViewModels
             });
 
         }           
+
         public async void GetBooking(int BookingID)
         {
             UriBuilder uri = new UriBuilder();
@@ -50,8 +51,7 @@ namespace cleanTable_Mobile.ViewModels
             uri.Query = "bookingId=" + BookingID + "&customerId=" + CustomerId;
             HttpResponseMessage message = await _client.GetAsync(uri.Uri);
             
-            GetBookingView book = JsonConvert.DeserializeObject<GetBookingView>(await message.Content.ReadAsStringAsync());
-            Debug.WriteLine(await message.Content.ReadAsStringAsync());
+            GetBookingViewModel book = JsonConvert.DeserializeObject<GetBookingViewModel>(await message.Content.ReadAsStringAsync());
             VenueId = book.VenueID;
             VenueName = book.VenueName;
             VenueAddress = book.AddLineOne + "\n"
@@ -64,6 +64,7 @@ namespace cleanTable_Mobile.ViewModels
             BookTable = book.VenueTableNum;
 
         }
+
         public int VenueId
         {
             get
@@ -76,6 +77,7 @@ namespace cleanTable_Mobile.ViewModels
                 OnPropertyChanged("VenueId");
             }
         }
+
         public string VenueName
         {
             get
@@ -88,6 +90,7 @@ namespace cleanTable_Mobile.ViewModels
                 OnPropertyChanged("VenueName");
             }
         }
+
         public string VenueAddress
         {
             get
@@ -136,6 +139,7 @@ namespace cleanTable_Mobile.ViewModels
                 OnPropertyChanged("BookTable");
             }
         }
+
         public ICommand SendRequest { private set; get; }
         public ICommand SendRequestEdit { private set; get; }
     }

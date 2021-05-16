@@ -26,15 +26,18 @@
         </Frame>
             <Grid Padding="15">
             <Button VerticalOptions="Center" Text="View Account" Command="{Binding UserLoggedIn}"
-                    Grid.ColumnSpan="2" Grid.Row="0" TextColor="White" Padding="15" IsVisible="{Binding ViewAccount}" />
-                
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}" 
-                    Grid.Column="0" Grid.Row="1" TextColor="White" Padding="15"/>
-            <Button Text="Create Account" Grid.Column="1" Grid.Row="1" Clicked="NewAccount" TextColor="White"/>
+                    Grid.Column="1" Grid.Row="0" TextColor="White" Padding="15" IsVisible="{Binding UserLogin}" />
+            <Button VerticalOptions="Center" Text="Log Out" Command="{Binding LogOutCommand}"
+                    Grid.Column="0" Grid.Row="0" TextColor="White" Padding="15" IsVisible="{Binding UserLogin}" /> 
+            
+                <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}" 
+                    Grid.Column="0" Grid.Row="0" TextColor="White" Padding="15" IsVisible="{Binding UserLogOut}" />
+            <Button Text="Create Account" Grid.Column="1" Grid.Row="0" Clicked="NewAccount"
+                    IsVisible="{Binding UserLogOut}" TextColor="White"/>
             </Grid>
         <Label Text="{Binding ErrorCheck}" 
                FontSize="Title"  HorizontalOptions="CenterAndExpand"
-               TextColor="red"/>
+               TextColor="#dc3545"/>
     </StackLayout>
     
 </ContentPage>

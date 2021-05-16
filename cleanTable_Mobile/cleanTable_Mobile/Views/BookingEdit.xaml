@@ -73,7 +73,7 @@
                 Text="Cancel" HorizontalOptions="Center"
                 FontSize="14"
                 TextColor="White"
-                BackgroundColor="Red"
+                BackgroundColor="#dc3545"
                 Clicked="ButtonCancel">
             </Button>
         </Grid>
