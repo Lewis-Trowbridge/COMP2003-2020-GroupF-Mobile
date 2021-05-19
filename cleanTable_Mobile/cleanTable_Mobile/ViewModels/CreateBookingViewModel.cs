@@ -79,7 +79,6 @@ namespace cleanTable_Mobile.ViewModels
                     booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); 
                     booking.CustomerId = CustomerId; 
                     booking.VenueTableId = _tableChosen;
-                    Debug.WriteLine(booking.ToString());
                     string JsonData = JsonConvert.SerializeObject(booking); 
                     StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
                     UriBuilder uri = new UriBuilder();
