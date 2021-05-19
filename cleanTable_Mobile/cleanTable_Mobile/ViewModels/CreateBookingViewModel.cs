@@ -66,8 +66,7 @@ namespace cleanTable_Mobile.ViewModels
             
             SendRequest = new Command(async () =>
             {
-                bool answer = await App.Current.MainPage.DisplayAlert("Question?", "Please Confirm your Booking" + "\n"
-                    + "Venue : Subway" + "\n"
+                bool answer = await App.Current.MainPage.DisplayAlert("Check Your Booking Below", "Please Confirm your Booking" + "\n"
                     + "Date & Time: " + SelectedDate.Date.Add(_selectedTime).ToString() + "\n"
                     + "Party Size : " + NumberOfPeople.ToString() + "\n"
                     + "Table Chosen : " + _tableNum.ToString(),
@@ -80,7 +79,7 @@ namespace cleanTable_Mobile.ViewModels
                     booking.BookingDateTime = SelectedDate.Date.Add(_selectedTime); 
                     booking.CustomerId = CustomerId; 
                     booking.VenueTableId = _tableChosen;
-
+                    Debug.WriteLine(booking.ToString());
                     string JsonData = JsonConvert.SerializeObject(booking); 
                     StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
                     UriBuilder uri = new UriBuilder();
@@ -159,6 +158,7 @@ namespace cleanTable_Mobile.ViewModels
                     _selectedIndexTable = value;
                     _tableChosen = value.TableId;
                     _tableNum = value.VenueTableNumber;
+                    
                     OnPropertyChanged("SelectedIndexTable");
                 }
             }
