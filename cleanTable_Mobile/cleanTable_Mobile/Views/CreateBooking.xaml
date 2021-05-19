@@ -19,7 +19,7 @@
                     MaximumDate="12/31/2021" 
                     Format="dd/MM/yyyy" 
                     HorizontalOptions="Start"
-                    TextColor="Black" 
+                    TextColor="Black"
                     Date="{Binding SelectedDate, Mode=TwoWay}"/>
             
             <Label Grid.Column="0"  Grid.Row="1" Padding="0,27,0,0"

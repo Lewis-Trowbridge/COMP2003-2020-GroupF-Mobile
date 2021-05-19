@@ -26,9 +26,16 @@ namespace cleanTable_Mobile.ViewModels
             _client = new HttpClient();
             Title = "Your Bookings";
 
-        UpcomingBookings();
-            
+            if (CustomerId == 0)
+            {
+                UserLogin();
+            }
+            else 
+            { 
+                UpcomingBookings();
+            }
 
+            
             GetHistoryBookings = new Command(() =>
             {
                 HistoricBookings();
@@ -38,6 +45,19 @@ namespace cleanTable_Mobile.ViewModels
                 UpcomingBookings();
             });
            
+        }
+        public async void UserLogin()
+        {
+            bool result = await Application.Current.MainPage.DisplayAlert("Question?", "Please log in? If you don't have an account please create one below", "Login", "Create Account");
+
+            if (result == true)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new CreateCustomer());
+            }
         }
         public async void NextPage()
         {
@@ -122,5 +142,6 @@ namespace cleanTable_Mobile.ViewModels
                 }
             }
         }
+
     }
 }
