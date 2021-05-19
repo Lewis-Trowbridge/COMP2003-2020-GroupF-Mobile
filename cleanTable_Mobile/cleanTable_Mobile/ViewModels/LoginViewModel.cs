@@ -26,7 +26,6 @@ namespace cleanTable_Mobile.ViewModels
 
         public LoginViewModel()
         {
-            
             Title = "Login";
             _client = new HttpClient();
             UserLogin = false;
@@ -34,6 +33,8 @@ namespace cleanTable_Mobile.ViewModels
 
             if (CustomerId != 0)
             {
+                UserLogin = true;
+                UserLogOut = false;
                 LoggedIn();
             }
 
@@ -73,11 +74,11 @@ namespace cleanTable_Mobile.ViewModels
             CreationResultModel result = JsonConvert.DeserializeObject<CreationResultModel>(await response.Content.ReadAsStringAsync());
 
             CustomerId = result.Id;
-            UserLogin = true;
-            UserLogOut = false;
-
+            
             if (response.IsSuccessStatusCode)
             {
+                UserLogin = true;
+                UserLogOut = false;
                await Application.Current.MainPage.Navigation.PushAsync(new CustomerView(CustomerId));
             }
             else
